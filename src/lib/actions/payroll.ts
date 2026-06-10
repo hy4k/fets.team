@@ -2,6 +2,7 @@
 
 import { createServerClient } from '@/lib/supabase/server'
 import { createGeneratedDocument } from './documents'
+import { calcGross, calcDeductions, calcNet } from '@/lib/utils/salary'
 
 export interface SalaryRecord {
   id: string
@@ -63,20 +64,6 @@ export interface StaffForPayroll {
   salary: number | null
 }
 
-function calcGross(r: Partial<SalaryRecord>) {
-  return (r.basic_salary || 0) + (r.hra || 0) + (r.transport_allowance || 0) +
-    (r.other_allowances || 0) + (r.incentives || 0) + (r.overtime || 0)
-}
-function calcDeductions(r: Partial<SalaryRecord>) {
-  return (r.pf_deduction || 0) + (r.esi_deduction || 0) + (r.leave_deduction || 0) +
-    (r.advance_deduction || 0) + (r.other_deductions || 0)
-}
-export function calcNet(r: Partial<SalaryRecord>) {
-  return calcGross(r) - calcDeductions(r)
-}
-export function calcGrossPublic(r: Partial<SalaryRecord>) { return calcGross(r) }
-export function calcDeductionsPublic(r: Partial<SalaryRecord>) { return calcDeductions(r) }
-
 export async function getSalaryRecords(filters?: {
   staffId?: string
   month?: number
@@ -127,17 +114,14 @@ export async function createSalaryRecord(input: CreateSalaryInput): Promise<{ id
     .single()
 
   if (existing) {
-    return { error: `Salary record already exists for this staff for ${MONTHS[input.month - 1]} ${input.year}` }
+    return { error: `Salary record already exists for ${MONTHS[input.month - 1]} ${input.year}` }
   }
 
   const { data: { user } } = await supabase.auth.getUser()
 
   const { data, error } = await (supabase as any)
     .from('salary_records')
-    .insert({
-      ...input,
-      generated_by: user?.id,
-    })
+    .insert({ ...input, generated_by: user?.id })
     .select('id')
     .single()
 
