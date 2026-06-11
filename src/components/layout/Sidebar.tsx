@@ -5,21 +5,21 @@ import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, Users, FileText, DollarSign, Award,
   Calendar, Settings, LogOut, ChevronLeft, Building2,
-  ClipboardList, Shield, Folder, ChevronRight, Archive
+  ClipboardList, Shield, Folder, Archive, ChevronRight,
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { cn } from '@/lib/utils'
 
 const navGroups = [
   {
-    label: 'Main',
+    label: 'Overview',
     items: [
       { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
       { href: '/staff', label: 'Staff', icon: Users },
     ],
   },
   {
-    label: 'HR',
+    label: 'HR & Compliance',
     items: [
       { href: '/leave', label: 'Leave & Attendance', icon: Calendar },
       { href: '/certifications', label: 'Certifications', icon: Award },
@@ -49,10 +49,7 @@ const navGroups = [
   },
 ]
 
-interface SidebarProps {
-  collapsed: boolean
-  onToggle: () => void
-}
+interface SidebarProps { collapsed: boolean; onToggle: () => void }
 
 export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
   const pathname = usePathname()
@@ -65,114 +62,136 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
   }
 
   return (
-    <aside
-      className={cn(
-        'fixed left-0 top-0 h-full bg-[#0D0D15] border-r border-[#1E1E2E] flex flex-col z-50 transition-all duration-300 ease-in-out',
-        collapsed ? 'w-[72px]' : 'w-[260px]'
-      )}
+    <aside className={cn(
+      'fixed left-0 top-0 h-full flex flex-col z-50 transition-all duration-300 ease-in-out',
+      'border-r border-[rgba(124,58,237,0.1)]',
+      collapsed ? 'w-[72px]' : 'w-[260px]'
+    )}
+      style={{
+        background: 'linear-gradient(180deg, #0C0A1F 0%, #09071A 50%, #07060E 100%)',
+        boxShadow: '4px 0 32px rgba(0,0,0,0.5), inset -1px 0 0 rgba(124,58,237,0.08)',
+      }}
     >
+
       {/* Logo */}
-      <div className="flex items-center h-16 px-4 border-b border-[#1E1E2E] shrink-0">
-        <div className="flex items-center gap-3 overflow-hidden min-w-0">
-          <div className="w-9 h-9 bg-[#F5C518] rounded-lg flex items-center justify-center shrink-0 shadow-md shadow-[#F5C518]/20">
-            <Shield className="w-[18px] h-[18px] text-[#0A0A0F]" />
+      <div className={cn(
+        'flex items-center h-16 shrink-0 border-b border-[rgba(124,58,237,0.08)]',
+        collapsed ? 'px-4 justify-center' : 'px-5 gap-3'
+      )}>
+        <div className="relative shrink-0">
+          <div className="w-9 h-9 rounded-xl flex items-center justify-center"
+            style={{
+              background: 'linear-gradient(135deg, #9B6DFF 0%, #6D28D9 100%)',
+              boxShadow: '0 4px 16px rgba(109,40,217,0.5), inset 0 1px 0 rgba(255,255,255,0.2)',
+            }}>
+            <Shield className="w-[18px] h-[18px] text-white" />
           </div>
-          {!collapsed && (
-            <div className="overflow-hidden">
-              <div className="text-[#F5C518] font-bold text-[15px] tracking-[0.18em] leading-none">FETS</div>
-              <div className="text-[#5A5A72] text-[9px] tracking-[0.15em] uppercase mt-1">Internal OS</div>
-            </div>
-          )}
+          <div className="absolute -inset-1 rounded-xl opacity-40"
+            style={{ background: 'radial-gradient(circle, rgba(124,58,237,0.4), transparent 70%)', zIndex: -1 }} />
         </div>
-        <button
-          onClick={onToggle}
-          className="ml-auto w-7 h-7 flex items-center justify-center rounded-md text-[#3A3A55] hover:text-[#F5C518] hover:bg-[#1E1E2E] transition-all shrink-0"
-          title={collapsed ? 'Expand' : 'Collapse'}
-        >
-          {collapsed
-            ? <ChevronRight className="w-4 h-4" />
-            : <ChevronLeft className="w-4 h-4" />
-          }
-        </button>
+        {!collapsed && (
+          <div className="overflow-hidden">
+            <p className="font-bold text-sm leading-tight"
+              style={{ background: 'linear-gradient(135deg, #F0EEF8, #C4B5FD)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+              FETS OS
+            </p>
+            <p className="text-[10px] font-medium tracking-wider uppercase"
+              style={{ color: 'var(--violet-600)' }}>
+              Operations Suite
+            </p>
+          </div>
+        )}
       </div>
 
-      {/* Navigation */}
-      <nav className="flex-1 overflow-y-auto py-3 px-2 space-y-0.5">
-        {navGroups.map((group) => (
-          <div key={group.label} className="mb-3">
+      {/* Toggle */}
+      <button onClick={onToggle}
+        className={cn(
+          'absolute top-[52px] flex items-center justify-center w-6 h-6 rounded-full z-10 transition-all duration-200',
+          collapsed ? '-right-3' : '-right-3'
+        )}
+        style={{
+          background: 'linear-gradient(135deg, #9B6DFF, #6D28D9)',
+          boxShadow: '0 2px 12px rgba(109,40,217,0.5)',
+          border: '1.5px solid rgba(155,109,255,0.4)',
+        }}>
+        {collapsed
+          ? <ChevronRight className="w-3.5 h-3.5 text-white" />
+          : <ChevronLeft className="w-3.5 h-3.5 text-white" />}
+      </button>
+
+      {/* Nav */}
+      <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-6">
+        {navGroups.map(group => (
+          <div key={group.label}>
             {!collapsed && (
-              <div className="text-[#3A3A55] text-[9px] font-semibold uppercase tracking-[0.15em] px-3 py-1 mb-1">
+              <p className="px-3 mb-2 text-[10px] font-700 tracking-[0.12em] uppercase"
+                style={{ color: 'var(--text-ghost)', letterSpacing: '0.14em' }}>
                 {group.label}
-              </div>
+              </p>
             )}
-            {collapsed && <div className="w-full h-px bg-[#1E1E2E] my-2" />}
-
-            {group.items.map((item) => {
-              const Icon = item.icon
-              const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
-
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  title={collapsed ? item.label : undefined}
-                  className={cn(
-                    'group relative flex items-center gap-3 rounded-lg transition-all duration-150 overflow-hidden',
-                    collapsed ? 'h-10 justify-center px-0 mx-1' : 'h-9 px-3',
-                    isActive
-                      ? 'bg-[#F5C518]/10 text-[#F5C518]'
-                      : 'text-[#5A5A72] hover:bg-[#1A1A28] hover:text-[#C0C0D0]'
-                  )}
-                >
-                  {/* Active indicator */}
-                  {isActive && (
-                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-[#F5C518] rounded-r-full" />
-                  )}
-
-                  <Icon
+            <div className="space-y-0.5">
+              {group.items.map(item => {
+                const isActive = pathname === item.href || (item.href !== '/dashboard' && pathname.startsWith(item.href))
+                return (
+                  <Link key={item.href} href={item.href}
+                    title={collapsed ? item.label : undefined}
                     className={cn(
-                      'w-[18px] h-[18px] shrink-0 transition-colors',
-                      isActive ? 'text-[#F5C518]' : 'text-[#3A3A55] group-hover:text-[#8B8BA0]',
-                      collapsed && 'mx-auto'
+                      'flex items-center gap-3 rounded-xl transition-all duration-200 group relative',
+                      collapsed ? 'px-2 py-2.5 justify-center' : 'px-3 py-2.5',
+                      isActive ? 'text-white' : 'text-[#5A567A] hover:text-[#9A96B8]'
                     )}
-                  />
-
-                  {!collapsed && (
-                    <span className={cn('text-[13px] font-medium truncate', isActive ? 'text-[#F5C518]' : '')}>
-                      {item.label}
-                    </span>
-                  )}
-
-                  {/* Tooltip for collapsed */}
-                  {collapsed && (
-                    <div className="absolute left-full ml-3 px-2.5 py-1.5 bg-[#1E1E2E] text-[#F0F0F5] text-xs rounded-lg border border-[#2A2A3E] opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50 shadow-xl transition-opacity">
-                      {item.label}
-                    </div>
-                  )}
-                </Link>
-              )
-            })}
+                    style={isActive ? {
+                      background: 'linear-gradient(135deg, rgba(124,58,237,0.2), rgba(109,40,217,0.1))',
+                      boxShadow: '0 4px 16px rgba(109,40,217,0.2), inset 0 1px 0 rgba(139,92,246,0.15)',
+                      border: '1px solid rgba(124,58,237,0.2)',
+                    } : {
+                      background: 'transparent',
+                      border: '1px solid transparent',
+                    }}
+                  >
+                    {isActive && (
+                      <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-4/5 rounded-full"
+                        style={{ background: 'linear-gradient(180deg, #C4B5FD, #7C3AED)' }} />
+                    )}
+                    <item.icon className={cn('shrink-0 transition-colors',
+                      collapsed ? 'w-5 h-5' : 'w-4.5 h-4.5',
+                      isActive ? 'text-[#C4B5FD]' : 'text-current'
+                    )} style={{ width: '18px', height: '18px' }} />
+                    {!collapsed && (
+                      <span className={cn('text-sm font-medium truncate',
+                        isActive ? 'text-white' : ''
+                      )}>
+                        {item.label}
+                      </span>
+                    )}
+                  </Link>
+                )
+              })}
+            </div>
           </div>
         ))}
       </nav>
 
-      {/* Footer */}
-      <div className="border-t border-[#1E1E2E] p-2 shrink-0">
-        <button
-          onClick={handleLogout}
+      {/* Bottom */}
+      <div className="shrink-0 p-3 border-t border-[rgba(124,58,237,0.08)]">
+        <button onClick={handleLogout}
           className={cn(
-            'group flex items-center gap-3 w-full rounded-lg transition-all duration-150 text-[#3A3A55] hover:text-red-400 hover:bg-red-500/8',
-            collapsed ? 'h-10 justify-center' : 'h-9 px-3'
+            'w-full flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all duration-200 group',
+            'text-[#5A567A] hover:text-[#FB7185]',
+            collapsed && 'justify-center px-2'
           )}
-          title={collapsed ? 'Sign Out' : undefined}
+          style={{ border: '1px solid transparent' }}
+          onMouseEnter={e => {
+            (e.currentTarget as HTMLElement).style.background = 'rgba(244,63,94,0.08)'
+            ;(e.currentTarget as HTMLElement).style.border = '1px solid rgba(244,63,94,0.15)'
+          }}
+          onMouseLeave={e => {
+            (e.currentTarget as HTMLElement).style.background = 'transparent'
+            ;(e.currentTarget as HTMLElement).style.border = '1px solid transparent'
+          }}
         >
-          <LogOut className="w-[18px] h-[18px] shrink-0 transition-colors" />
-          {!collapsed && <span className="text-[13px] font-medium">Sign Out</span>}
-          {collapsed && (
-            <div className="absolute left-full ml-3 px-2.5 py-1.5 bg-[#1E1E2E] text-[#F0F0F5] text-xs rounded-lg border border-[#2A2A3E] opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50 shadow-xl">
-              Sign Out
-            </div>
-          )}
+          <LogOut style={{ width: '18px', height: '18px' }} className="shrink-0 transition-colors" />
+          {!collapsed && <span className="text-sm font-medium">Sign Out</span>}
         </button>
       </div>
     </aside>
