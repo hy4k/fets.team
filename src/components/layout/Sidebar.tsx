@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, Users, FileText, DollarSign, Award,
   Calendar, Settings, LogOut, ChevronLeft, Building2,
-  ClipboardList, Shield, Folder, Archive, ChevronRight, Star,
+  ClipboardList, Shield, Folder, Archive, ChevronRight, Star, CalendarDays,
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { cn } from '@/lib/utils'
@@ -31,6 +31,7 @@ const ALL_NAV_GROUPS = [
     label: 'HR & Compliance',
     roles: ['super_admin', 'hr_admin', 'centre_manager'],
     items: [
+      { href: '/roster',         label: 'Operations Roster',  icon: CalendarDays },
       { href: '/leave',          label: 'Leave & Attendance', icon: Calendar },
       { href: '/certifications', label: 'Certifications',     icon: Award    },
     ],
