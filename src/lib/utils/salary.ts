@@ -1,5 +1,10 @@
 // Pure calculation helpers — importable by both server actions and client components
 
+export const MONTHS = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December',
+]
+
 export interface SalaryFields {
   basic_salary?: number | null
   hra?: number | null

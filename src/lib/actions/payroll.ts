@@ -2,7 +2,7 @@
 
 import { createClient } from '@/lib/supabase/server'
 import { createGeneratedDocument } from './documents'
-import { calcGross, calcDeductions, calcNet } from '@/lib/utils/salary'
+import { calcGross, calcDeductions, calcNet, MONTHS } from '@/lib/utils/salary'
 
 export interface SalaryRecord {
   id: string
@@ -213,11 +213,6 @@ export async function generatePayslipDoc(recordId: string): Promise<{ docId: str
   if ('error' in result) return { error: result.error }
   return { docId: result.id }
 }
-
-export const MONTHS = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
-]
 
 export async function getPayrollSummary(month: number, year: number) {
   const records = await getSalaryRecords({ month, year })

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { Suspense, useState, useEffect, useCallback } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { DOC_TYPES, getDocType, FieldDef } from '@/lib/templates/documentFields'
 import { renderDocument } from '@/lib/templates/documentRenderer'
@@ -199,8 +199,8 @@ function StaffSelector({ staff, selected, onSelect }: {
   )
 }
 
-// ─── Main page ────────────────────────────────────────────────
-export default function NewDocumentPage() {
+// ─── Inner page (uses useSearchParams — must be inside Suspense) ──
+function NewDocumentPageInner() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [step, setStep] = useState<'select' | 'fill'>('select')
@@ -460,5 +460,16 @@ export default function NewDocumentPage() {
         )}
       </div>
     </div>
+  )
+}
+
+// ─── Default export — wrapped in Suspense for useSearchParams ──
+export default function NewDocumentPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center h-64 text-[#5A5A72]">Loading…</div>
+    }>
+      <NewDocumentPageInner />
+    </Suspense>
   )
 }

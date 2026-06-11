@@ -6,10 +6,10 @@ import Header from '@/components/layout/Header'
 import {
   getSalaryRecords, createSalaryRecord, updateSalaryRecord,
   markAsPaid, deleteSalaryRecord, generatePayslipDoc,
-  getStaffForPayroll, MONTHS,
+  getStaffForPayroll,
   type SalaryRecord, type CreateSalaryInput, type StaffForPayroll
 } from '@/lib/actions/payroll'
-import { calcGross, calcDeductions, calcNet } from '@/lib/utils/salary'
+import { calcGross, calcDeductions, calcNet, MONTHS } from '@/lib/utils/salary'
 
 // ─── Helpers ──────────────────────────────────────────────────
 const fmtCur = (n: number) =>
