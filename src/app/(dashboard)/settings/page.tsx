@@ -159,7 +159,7 @@ function LeaveTypesTab({ onToast }: { onToast: (msg: string, ok: boolean) => voi
     const res = editing
       ? await updateLeaveType(editing.id, form)
       : await createLeaveType(form)
-    if ('error' in res) { onToast(res.error, false) }
+    if ('error' in res) { onToast(res.error ?? 'Error', false) }
     else { onToast(editing ? 'Leave type updated' : 'Leave type created', true); close(); load() }
   })
 
@@ -167,7 +167,7 @@ function LeaveTypesTab({ onToast }: { onToast: (msg: string, ok: boolean) => voi
     if (!confirm(`Delete "${name}"? This cannot be undone.`)) return
     startTx(async () => {
       const res = await deleteLeaveType(id)
-      if ('error' in res) onToast(res.error, false)
+      if ('error' in res) onToast(res.error ?? 'Error', false)
       else { onToast('Leave type deleted', true); load() }
     })
   }
@@ -257,7 +257,7 @@ function CentresTab({ onToast }: { onToast: (msg: string, ok: boolean) => void }
 
   const handleSave = () => startTx(async () => {
     const res = editing ? await updateCentre(editing.id, form) : await createCentre(form)
-    if ('error' in res) { onToast(res.error, false) }
+    if ('error' in res) { onToast(res.error ?? 'Error', false) }
     else { onToast(editing ? 'Centre updated' : 'Centre created', true); close(); load() }
   })
 
