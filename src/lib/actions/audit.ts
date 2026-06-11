@@ -73,7 +73,7 @@ export async function getAuditLogs(filters?: {
   const logs: AuditLog[] = (data || []) as AuditLog[]
 
   // Enrich with actor names from profiles
-  const userIds = [...new Set(logs.filter(l => l.user_id).map(l => l.user_id!))]
+  const userIds = Array.from(new Set(logs.filter(l => l.user_id).map(l => l.user_id!)))
   if (userIds.length > 0) {
     const { data: profiles } = await (supabase as any)
       .from('profiles')
