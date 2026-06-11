@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import QRCode from 'qrcode'
 import { getGeneratedDocument } from '@/lib/actions/documents'
 import { getDocTitle } from '@/lib/templates/documentFields'
 import DocumentActions from './DocumentActions'
@@ -31,9 +32,16 @@ export default async function DocumentViewPage({ params }: Props) {
   const title = getDocTitle(doc.doc_type)
   const staff = doc.staff
   const fv = doc.field_values
-
-  // Build field display list
   const displayFields = Object.entries(fv).filter(([k]) => k !== 'letter_date')
+
+  // Generate QR code pointing to the public verify URL
+  const verifyUrl = `https://fets.team/verify/${doc.verification_id}`
+  const qrDataUrl = await QRCode.toDataURL(verifyUrl, {
+    width: 160,
+    margin: 2,
+    color: { dark: '#1A0A3E', light: '#FFFFFF' },
+    errorCorrectionLevel: 'M',
+  })
 
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-5">
@@ -95,18 +103,38 @@ export default async function DocumentViewPage({ params }: Props) {
         </div>
       </div>
 
-      {/* Metadata */}
-      <div className="bg-[#12121A] border border-[#1E1E2E] rounded-xl p-5">
-        <h3 className="text-xs font-semibold text-[#5A5A72] uppercase tracking-wider mb-4">Metadata</h3>
-        <dl className="grid grid-cols-1 sm:grid-cols-2">
-          <Row label="Document Number" value={doc.doc_number} />
-          <Row label="Document Type" value={doc.doc_type.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())} />
-          <Row label="Status" value={doc.status} />
-          <Row label="Version" value={String(doc.version)} />
-          <Row label="Verification ID" value={doc.verification_id} />
-          {doc.approval_date && <Row label="Approved On" value={new Date(doc.approval_date).toLocaleString('en-IN')} />}
-          {doc.approval_remarks && <Row label="Remarks" value={doc.approval_remarks} />}
-        </dl>
+      {/* Metadata + QR verification */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <div className="lg:col-span-2 bg-[#12121A] border border-[#1E1E2E] rounded-xl p-5">
+          <h3 className="text-xs font-semibold text-[#5A5A72] uppercase tracking-wider mb-4">Metadata</h3>
+          <dl className="grid grid-cols-1 sm:grid-cols-2">
+            <Row label="Document Number" value={doc.doc_number} />
+            <Row label="Document Type" value={doc.doc_type.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())} />
+            <Row label="Status" value={doc.status} />
+            <Row label="Version" value={String(doc.version)} />
+            <Row label="Verification ID" value={doc.verification_id} />
+            {doc.approval_date && <Row label="Approved On" value={new Date(doc.approval_date).toLocaleString('en-IN')} />}
+            {doc.approval_remarks && <Row label="Remarks" value={doc.approval_remarks} />}
+          </dl>
+        </div>
+
+        {/* QR Widget */}
+        <div className="bg-[#12121A] border border-[#1E1E2E] rounded-xl p-5 flex flex-col items-center justify-center gap-3">
+          <h3 className="text-xs font-semibold text-[#5A5A72] uppercase tracking-wider self-start">Verify QR</h3>
+          <div style={{ background: '#fff', borderRadius: '12px', padding: '10px', display: 'inline-block' }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={qrDataUrl} alt="QR verification code" width={140} height={140} />
+          </div>
+          <p className="text-xs text-[#5A5A72] text-center leading-relaxed">
+            Scan to verify this document&apos;s authenticity
+          </p>
+          <a
+            href={verifyUrl} target="_blank" rel="noopener noreferrer"
+            className="text-xs text-[#7C3AED] hover:text-[#A78BFA] transition-colors truncate max-w-full"
+          >
+            fets.team/verify/…
+          </a>
+        </div>
       </div>
     </div>
   )
