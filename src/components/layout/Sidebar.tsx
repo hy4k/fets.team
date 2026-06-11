@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, Users, FileText, DollarSign, Award,
   Calendar, Settings, LogOut, ChevronLeft, Building2,
-  ClipboardList, Shield, Folder, ChevronRight
+  ClipboardList, Shield, Folder, ChevronRight, Archive
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { cn } from '@/lib/utils'
@@ -31,6 +31,7 @@ const navGroups = [
       { href: '/documents', label: 'Document Generator', icon: FileText },
       { href: '/templates', label: 'Template Library', icon: Folder },
       { href: '/document-history', label: 'Document History', icon: ClipboardList },
+      { href: '/vault', label: 'Document Vault', icon: Archive },
     ],
   },
   {
