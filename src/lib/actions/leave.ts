@@ -1,6 +1,7 @@
 'use server'
 
 import { createClient } from '@/lib/supabase/server'
+import { createAuditLog } from '@/lib/actions/audit'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -67,6 +68,7 @@ export async function createLeaveType(input: {
   const { data, error } = await (supabase as any)
     .from('leave_types').insert(input).select('id').single()
   if (error) return { error: error.message }
+  await createAuditLog({ action: 'create', entity_type: 'leave_type', entity_id: data.id, new_values: input })
   return { id: data.id }
 }
 
@@ -76,6 +78,7 @@ export async function updateLeaveType(
   const supabase = await createClient()
   const { error } = await (supabase as any).from('leave_types').update(updates).eq('id', id)
   if (error) return { error: error.message }
+  await createAuditLog({ action: 'update', entity_type: 'leave_type', entity_id: id, new_values: updates })
   return {}
 }
 
@@ -103,6 +106,10 @@ export async function applyLeave(
   const { data, error } = await (supabase as any)
     .from('leave_requests').insert(input).select('id').single()
   if (error) return { error: error.message }
+  await createAuditLog({
+    action: 'create', entity_type: 'leave_request', entity_id: data.id,
+    new_values: { staff_id: input.staff_id, from_date: input.from_date, to_date: input.to_date, days: input.days },
+  })
   return { id: data.id }
 }
 
@@ -114,6 +121,11 @@ export async function updateLeaveRequest(
   const { error } = await (supabase as any)
     .from('leave_requests').update({ ...updates, updated_at: new Date().toISOString() }).eq('id', id)
   if (error) return { error: error.message }
+  // Log approve / reject distinctly
+  const action = updates.status === 'approved' ? 'approve'
+               : updates.status === 'rejected' ? 'reject'
+               : 'update'
+  await createAuditLog({ action, entity_type: 'leave_request', entity_id: id, new_values: updates })
   return {}
 }
 
@@ -121,6 +133,7 @@ export async function deleteLeaveRequest(id: string): Promise<{ error?: string }
   const supabase = await createClient()
   const { error } = await (supabase as any).from('leave_requests').delete().eq('id', id)
   if (error) return { error: error.message }
+  await createAuditLog({ action: 'delete', entity_type: 'leave_request', entity_id: id })
   return {}
 }
 
