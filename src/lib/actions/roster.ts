@@ -93,7 +93,7 @@ export async function getLiveStaffProfiles(): Promise<LiveStaffProfile[]> {
     console.error('[roster] getLiveStaffProfiles:', error.message)
     return []
   }
-  return (data ?? []) as LiveStaffProfile[]
+  return (data ?? []) as unknown as LiveStaffProfile[]
 }
 
 export async function getRosterSchedules(
@@ -117,7 +117,7 @@ export async function getRosterSchedules(
     console.error('[roster] getRosterSchedules:', error.message)
     return []
   }
-  return (data ?? []) as RosterSchedule[]
+  return (data ?? []) as unknown as RosterSchedule[]
 }
 
 export async function getAttendanceRecords(
@@ -138,7 +138,7 @@ export async function getAttendanceRecords(
     console.error('[roster] getAttendanceRecords:', error.message)
     return []
   }
-  return (data ?? []) as AttendanceRecord[]
+  return (data ?? []) as unknown as AttendanceRecord[]
 }
 
 export async function getOTClaims(
@@ -163,7 +163,7 @@ export async function getOTClaims(
     console.error('[roster] getOTClaims:', error.message)
     return []
   }
-  return (data ?? []) as OTClaim[]
+  return (data ?? []) as unknown as OTClaim[]
 }
 
 export async function getLeaveRequests(
@@ -189,7 +189,7 @@ export async function getLeaveRequests(
     console.error('[roster] getLeaveRequests:', error.message)
     return []
   }
-  return (data ?? []) as LeaveRequest[]
+  return (data ?? []) as unknown as LeaveRequest[]
 }
 
 // ─── Mutations (write back to fets.live) ─────────────────────────────────────
