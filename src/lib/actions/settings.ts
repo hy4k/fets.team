@@ -106,7 +106,7 @@ export async function getStaffForLinking() {
   const supabase = await createClient()
   const { data } = await (supabase as any)
     .from('staff')
-    .select('id, staff_id, full_name, user_id, designation_text, centre:centre_id(name), status')
+    .select('id, staff_id, full_name, user_id, email, designation_text, centre:centre_id(name), status')
     .order('full_name')
   return data ?? []
 }

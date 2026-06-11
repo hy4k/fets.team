@@ -4,7 +4,7 @@ import { useEffect, useState, useTransition } from 'react'
 import {
   Building2, FileText, Calendar, MapPin, Users, Save,
   Plus, Pencil, Trash2, X, Check, CheckCircle, AlertCircle,
-  RefreshCw, Link2, Unlink, ChevronDown, ChevronUp,
+  RefreshCw, Link2, Unlink, ChevronDown, ChevronUp, Zap,
 } from 'lucide-react'
 import {
   getAdminSettings, upsertAdminSettings,
@@ -12,6 +12,7 @@ import {
   getCentres, createCentre, updateCentre, CentreInput,
   getStaffForLinking, linkStaffToUser, unlinkStaffUser,
 } from '@/lib/actions/settings'
+import { syncUserToFetsLive } from '@/lib/actions/sync-to-fets-live'
 
 type Tab = 'org' | 'docs' | 'leave' | 'centres' | 'users'
 
@@ -316,11 +317,14 @@ function CentresTab({ onToast }: { onToast: (msg: string, ok: boolean) => void }
 
 // ── User Accounts Tab ─────────────────────────────────────────────────────────
 
+type SyncState = 'idle' | 'loading' | 'done' | 'exists' | 'error'
+
 function UsersTab({ onToast }: { onToast: (msg: string, ok: boolean) => void }) {
   const [staff, setStaff]       = useState<any[]>([])
   const [loading, setLoading]   = useState(true)
   const [linking, setLinking]   = useState<string | null>(null)  // staffId being linked
   const [emailInput, setEmailInput] = useState('')
+  const [syncState, setSyncState] = useState<Record<string, SyncState>>({})
   const [busy, startTx]         = useTransition()
 
   const load = () => { setLoading(true); getStaffForLinking().then(setStaff).finally(() => setLoading(false)) }
@@ -340,6 +344,38 @@ function UsersTab({ onToast }: { onToast: (msg: string, ok: boolean) => void }) 
       if (!res.ok) onToast(res.error ?? 'Unlink failed', false)
       else { onToast('Account unlinked', true); load() }
     })
+  }
+
+  const handleSync = (s: any) => {
+    setSyncState(st => ({ ...st, [s.id]: 'loading' }))
+    syncUserToFetsLive({
+      email: s.email ?? null,
+      full_name: s.full_name,
+      designation: s.designation_text ?? null,
+      centre_name: s.centre?.name ?? null,
+    }).then(res => {
+      if (res.ok) {
+        setSyncState(st => ({ ...st, [s.id]: res.status === 'already_exists' ? 'exists' : 'done' }))
+        onToast(res.message, true)
+      } else {
+        setSyncState(st => ({ ...st, [s.id]: 'error' }))
+        onToast(res.message, false)
+      }
+    })
+  }
+
+  const syncLabel = (state: SyncState) => {
+    if (state === 'loading') return <><RefreshCw className="w-3 h-3 animate-spin" /> Syncing…</>
+    if (state === 'done')    return <><Check className="w-3 h-3" /> Synced</>
+    if (state === 'exists')  return <><CheckCircle className="w-3 h-3" /> On fets.live</>
+    if (state === 'error')   return <><AlertCircle className="w-3 h-3" /> Failed</>
+    return <><Zap className="w-3 h-3" /> Sync to fets.live</>
+  }
+
+  const syncColor = (state: SyncState): React.CSSProperties => {
+    if (state === 'done' || state === 'exists') return { background: 'rgba(16,185,129,0.12)', color: '#34D399', border: '1px solid rgba(16,185,129,0.25)' }
+    if (state === 'error')  return { background: 'rgba(244,63,94,0.1)', color: '#FB7185', border: '1px solid rgba(244,63,94,0.2)' }
+    return { background: 'rgba(234,179,8,0.1)', color: '#FCD34D', border: '1px solid rgba(234,179,8,0.25)' }
   }
 
   const linked   = staff.filter(s => s.user_id)
@@ -379,7 +415,7 @@ function UsersTab({ onToast }: { onToast: (msg: string, ok: boolean) => void }) 
                     {s.user_id && <span className="ml-2 font-mono text-[10px]">{s.user_id.slice(0, 8)}…</span>}
                   </div>
                 </div>
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-1.5 flex-wrap justify-end">
                   {s.user_id
                     ? <button onClick={() => handleUnlink(s.id, s.full_name)} disabled={busy}
                         className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-medium hover:opacity-80 disabled:opacity-40"
@@ -392,6 +428,15 @@ function UsersTab({ onToast }: { onToast: (msg: string, ok: boolean) => void }) 
                         <Link2 className="w-3 h-3" /> Link Account
                       </button>
                   }
+                  <button
+                    onClick={() => handleSync(s)}
+                    disabled={syncState[s.id] === 'loading' || syncState[s.id] === 'done' || syncState[s.id] === 'exists'}
+                    className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-medium hover:opacity-80 disabled:opacity-50"
+                    style={syncColor(syncState[s.id] ?? 'idle')}
+                    title={s.email ? `Sync ${s.email} to fets.live` : 'No email on file'}
+                  >
+                    {syncLabel(syncState[s.id] ?? 'idle')}
+                  </button>
                 </div>
               </div>
               {linking === s.id && (
