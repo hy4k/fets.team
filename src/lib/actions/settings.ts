@@ -45,7 +45,7 @@ export async function createLeaveType(input: LeaveTypeInput): Promise<{ id: stri
     const { data, error } = await (supabase as any)
       .from('leave_types').insert(input).select('id').single()
     if (error) return { error: error.message }
-    await createAuditLog({ action: 'create', entity_type: 'leave_type', entity_id: data.id, new_values: input as Record<string, unknown> })
+    await createAuditLog({ action: 'create', entity_type: 'leave_type', entity_id: data.id, new_values: input as unknown as Record<string, unknown> })
     return { id: data.id }
   } catch (e: any) { return { error: e.message } }
 }
@@ -55,7 +55,7 @@ export async function updateLeaveType(id: string, input: LeaveTypeInput): Promis
     const supabase = await createClient()
     const { error } = await (supabase as any).from('leave_types').update(input).eq('id', id)
     if (error) return { ok: false, error: error.message }
-    await createAuditLog({ action: 'update', entity_type: 'leave_type', entity_id: id, new_values: input as Record<string, unknown> })
+    await createAuditLog({ action: 'update', entity_type: 'leave_type', entity_id: id, new_values: input as unknown as Record<string, unknown> })
     return { ok: true }
   } catch (e: any) { return { ok: false, error: e.message } }
 }
@@ -85,7 +85,7 @@ export async function createCentre(input: CentreInput): Promise<{ id: string } |
     const supabase = await createClient()
     const { data, error } = await (supabase as any).from('centres').insert(input).select('id').single()
     if (error) return { error: error.message }
-    await createAuditLog({ action: 'create', entity_type: 'centre', entity_id: data.id, new_values: input as Record<string, unknown> })
+    await createAuditLog({ action: 'create', entity_type: 'centre', entity_id: data.id, new_values: input as unknown as Record<string, unknown> })
     return { id: data.id }
   } catch (e: any) { return { error: e.message } }
 }
@@ -95,7 +95,7 @@ export async function updateCentre(id: string, input: CentreInput): Promise<{ ok
     const supabase = await createClient()
     const { error } = await (supabase as any).from('centres').update(input).eq('id', id)
     if (error) return { ok: false, error: error.message }
-    await createAuditLog({ action: 'update', entity_type: 'centre', entity_id: id, new_values: input as Record<string, unknown> })
+    await createAuditLog({ action: 'update', entity_type: 'centre', entity_id: id, new_values: input as unknown as Record<string, unknown> })
     return { ok: true }
   } catch (e: any) { return { ok: false, error: e.message } }
 }
