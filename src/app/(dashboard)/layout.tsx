@@ -1,27 +1,16 @@
-'use client'
+import { createClient } from '@/lib/supabase/server'
+import ClientLayout from '@/components/layout/ClientLayout'
 
-import { useState } from 'react'
-import Sidebar from '@/components/layout/Sidebar'
-import { cn } from '@/lib/utils'
+export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  const [collapsed, setCollapsed] = useState(false)
+  let role = 'staff'
+  if (user) {
+    const { data } = await (supabase as any)
+      .from('profiles').select('role').eq('id', user.id).single()
+    role = data?.role ?? 'staff'
+  }
 
-  return (
-    <div className="min-h-screen bg-[#0A0A0F]">
-      <Sidebar collapsed={collapsed} onToggle={() => setCollapsed(!collapsed)} />
-      <main
-        className={cn(
-          'transition-all duration-300 ease-in-out min-h-screen',
-          collapsed ? 'ml-[72px]' : 'ml-[260px]'
-        )}
-      >
-        {children}
-      </main>
-    </div>
-  )
+  return <ClientLayout role={role}>{children}</ClientLayout>
 }

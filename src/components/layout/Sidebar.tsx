@@ -10,62 +10,72 @@ import {
 import { createClient } from '@/lib/supabase/client'
 import { cn } from '@/lib/utils'
 
-const navGroups = [
+// All nav groups — visibility controlled by role below
+const ALL_NAV_GROUPS = [
   {
     label: 'Overview',
+    roles: ['super_admin', 'hr_admin', 'centre_manager', 'accountant', 'viewer'],
     items: [
       { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-      { href: '/staff', label: 'Staff', icon: Users },
+      { href: '/staff',     label: 'Staff',     icon: Users },
     ],
   },
   {
     label: 'Self Service',
+    roles: ['super_admin', 'hr_admin', 'centre_manager', 'accountant', 'staff', 'viewer'],
     items: [
       { href: '/self-service', label: 'My Portal', icon: Star },
     ],
   },
   {
     label: 'HR & Compliance',
+    roles: ['super_admin', 'hr_admin', 'centre_manager'],
     items: [
-      { href: '/leave', label: 'Leave & Attendance', icon: Calendar },
-      { href: '/certifications', label: 'Certifications', icon: Award },
+      { href: '/leave',          label: 'Leave & Attendance', icon: Calendar },
+      { href: '/certifications', label: 'Certifications',     icon: Award    },
     ],
   },
   {
     label: 'Documents',
+    roles: ['super_admin', 'hr_admin', 'centre_manager'],
     items: [
-      { href: '/documents', label: 'Document Generator', icon: FileText },
-      { href: '/templates', label: 'Template Library', icon: Folder },
-      { href: '/document-history', label: 'Document History', icon: ClipboardList },
-      { href: '/vault', label: 'Document Vault', icon: Archive },
+      { href: '/documents',        label: 'Document Generator', icon: FileText     },
+      { href: '/templates',        label: 'Template Library',   icon: Folder       },
+      { href: '/document-history', label: 'Document History',   icon: ClipboardList },
+      { href: '/vault',            label: 'Document Vault',     icon: Archive      },
     ],
   },
   {
     label: 'Finance',
+    roles: ['super_admin', 'hr_admin', 'accountant'],
     items: [
       { href: '/payroll', label: 'Payroll & Payslips', icon: DollarSign },
     ],
   },
   {
     label: 'System',
+    roles: ['super_admin'],
     items: [
       { href: '/settings', label: 'Admin Settings', icon: Settings },
-      { href: '/audit', label: 'Audit Log', icon: Shield },
+      { href: '/audit',    label: 'Audit Log',      icon: Shield   },
     ],
   },
 ]
 
-interface SidebarProps { collapsed: boolean; onToggle: () => void }
+interface SidebarProps { collapsed: boolean; onToggle: () => void; role: string }
 
-export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
+export default function Sidebar({ collapsed, onToggle, role }: SidebarProps) {
   const pathname = usePathname()
-  const router = useRouter()
+  const router   = useRouter()
   const supabase = createClient()
 
   const handleLogout = async () => {
     await supabase.auth.signOut()
     router.push('/login')
   }
+
+  // Filter groups by role
+  const navGroups = ALL_NAV_GROUPS.filter(g => g.roles.includes(role))
 
   return (
     <aside className={cn(
@@ -78,7 +88,6 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
         boxShadow: '4px 0 32px rgba(0,0,0,0.5), inset -1px 0 0 rgba(124,58,237,0.08)',
       }}
     >
-
       {/* Logo */}
       <div className={cn(
         'flex items-center h-16 shrink-0 border-b border-[rgba(124,58,237,0.08)]',
@@ -86,10 +95,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
       )}>
         <div className="relative shrink-0">
           <div className="w-9 h-9 rounded-xl flex items-center justify-center"
-            style={{
-              background: 'linear-gradient(135deg, #9B6DFF 0%, #6D28D9 100%)',
-              boxShadow: '0 4px 16px rgba(109,40,217,0.5), inset 0 1px 0 rgba(255,255,255,0.2)',
-            }}>
+            style={{ background: 'linear-gradient(135deg, #9B6DFF 0%, #6D28D9 100%)', boxShadow: '0 4px 16px rgba(109,40,217,0.5), inset 0 1px 0 rgba(255,255,255,0.2)' }}>
             <Shield className="w-[18px] h-[18px] text-white" />
           </div>
           <div className="absolute -inset-1 rounded-xl opacity-40"
@@ -101,8 +107,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
               style={{ background: 'linear-gradient(135deg, #F0EEF8, #C4B5FD)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
               FETS OS
             </p>
-            <p className="text-[10px] font-medium tracking-wider uppercase"
-              style={{ color: 'var(--violet-600)' }}>
+            <p className="text-[10px] font-medium tracking-wider uppercase" style={{ color: 'var(--violet-600)' }}>
               Operations Suite
             </p>
           </div>
@@ -111,18 +116,9 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
 
       {/* Toggle */}
       <button onClick={onToggle}
-        className={cn(
-          'absolute top-[52px] flex items-center justify-center w-6 h-6 rounded-full z-10 transition-all duration-200',
-          collapsed ? '-right-3' : '-right-3'
-        )}
-        style={{
-          background: 'linear-gradient(135deg, #9B6DFF, #6D28D9)',
-          boxShadow: '0 2px 12px rgba(109,40,217,0.5)',
-          border: '1.5px solid rgba(155,109,255,0.4)',
-        }}>
-        {collapsed
-          ? <ChevronRight className="w-3.5 h-3.5 text-white" />
-          : <ChevronLeft className="w-3.5 h-3.5 text-white" />}
+        className={cn('absolute top-[52px] flex items-center justify-center w-6 h-6 rounded-full z-10 transition-all duration-200', collapsed ? '-right-3' : '-right-3')}
+        style={{ background: 'linear-gradient(135deg, #9B6DFF, #6D28D9)', boxShadow: '0 2px 12px rgba(109,40,217,0.5)', border: '1.5px solid rgba(155,109,255,0.4)' }}>
+        {collapsed ? <ChevronRight className="w-3.5 h-3.5 text-white" /> : <ChevronLeft className="w-3.5 h-3.5 text-white" />}
       </button>
 
       {/* Nav */}
@@ -150,25 +146,16 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
                       background: 'linear-gradient(135deg, rgba(124,58,237,0.2), rgba(109,40,217,0.1))',
                       boxShadow: '0 4px 16px rgba(109,40,217,0.2), inset 0 1px 0 rgba(139,92,246,0.15)',
                       border: '1px solid rgba(124,58,237,0.2)',
-                    } : {
-                      background: 'transparent',
-                      border: '1px solid transparent',
-                    }}
+                    } : { background: 'transparent', border: '1px solid transparent' }}
                   >
                     {isActive && (
                       <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-4/5 rounded-full"
                         style={{ background: 'linear-gradient(180deg, #C4B5FD, #7C3AED)' }} />
                     )}
-                    <item.icon className={cn('shrink-0 transition-colors',
-                      collapsed ? 'w-5 h-5' : 'w-4.5 h-4.5',
-                      isActive ? 'text-[#C4B5FD]' : 'text-current'
-                    )} style={{ width: '18px', height: '18px' }} />
+                    <item.icon className={cn('shrink-0 transition-colors', isActive ? 'text-[#C4B5FD]' : 'text-current')}
+                      style={{ width: '18px', height: '18px' }} />
                     {!collapsed && (
-                      <span className={cn('text-sm font-medium truncate',
-                        isActive ? 'text-white' : ''
-                      )}>
-                        {item.label}
-                      </span>
+                      <span className={cn('text-sm font-medium truncate', isActive ? 'text-white' : '')}>{item.label}</span>
                     )}
                   </Link>
                 )
@@ -178,23 +165,22 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
         ))}
       </nav>
 
-      {/* Bottom */}
-      <div className="shrink-0 p-3 border-t border-[rgba(124,58,237,0.08)]">
+      {/* Role badge + Sign Out */}
+      <div className="shrink-0 p-3 border-t border-[rgba(124,58,237,0.08)] space-y-1">
+        {!collapsed && (
+          <div className="px-3 py-1.5 rounded-xl mb-1"
+            style={{ background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.1)' }}>
+            <p className="text-[10px] uppercase tracking-wider font-semibold"
+              style={{ color: 'var(--violet-400)' }}>
+              {role.replace(/_/g, ' ')}
+            </p>
+          </div>
+        )}
         <button onClick={handleLogout}
-          className={cn(
-            'w-full flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all duration-200 group',
-            'text-[#5A567A] hover:text-[#FB7185]',
-            collapsed && 'justify-center px-2'
-          )}
+          className={cn('w-full flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all duration-200', 'text-[#5A567A] hover:text-[#FB7185]', collapsed && 'justify-center px-2')}
           style={{ border: '1px solid transparent' }}
-          onMouseEnter={e => {
-            (e.currentTarget as HTMLElement).style.background = 'rgba(244,63,94,0.08)'
-            ;(e.currentTarget as HTMLElement).style.border = '1px solid rgba(244,63,94,0.15)'
-          }}
-          onMouseLeave={e => {
-            (e.currentTarget as HTMLElement).style.background = 'transparent'
-            ;(e.currentTarget as HTMLElement).style.border = '1px solid transparent'
-          }}
+          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(244,63,94,0.08)'; (e.currentTarget as HTMLElement).style.border = '1px solid rgba(244,63,94,0.15)' }}
+          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'transparent'; (e.currentTarget as HTMLElement).style.border = '1px solid transparent' }}
         >
           <LogOut style={{ width: '18px', height: '18px' }} className="shrink-0 transition-colors" />
           {!collapsed && <span className="text-sm font-medium">Sign Out</span>}
