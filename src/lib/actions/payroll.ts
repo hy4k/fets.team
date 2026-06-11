@@ -1,6 +1,6 @@
 'use server'
 
-import { createServerClient } from '@/lib/supabase/server'
+import { createClient } from '@/lib/supabase/server'
 import { createGeneratedDocument } from './documents'
 import { calcGross, calcDeductions, calcNet } from '@/lib/utils/salary'
 
@@ -71,7 +71,7 @@ export async function getSalaryRecords(filters?: {
   isPaid?: boolean
   limit?: number
 }): Promise<SalaryRecord[]> {
-  const supabase = createServerClient()
+  const supabase = await createClient()
   let q = (supabase as any)
     .from('salary_records')
     .select(`*, staff:staff_id(full_name, staff_id, designation_text, bank_account, centre:centre_id(name), department:department_id(name))`)
@@ -91,7 +91,7 @@ export async function getSalaryRecords(filters?: {
 }
 
 export async function getSalaryRecord(id: string): Promise<SalaryRecord | null> {
-  const supabase = createServerClient()
+  const supabase = await createClient()
   const { data, error } = await (supabase as any)
     .from('salary_records')
     .select(`*, staff:staff_id(full_name, staff_id, designation_text, bank_account, centre:centre_id(name), department:department_id(name))`)
@@ -102,7 +102,7 @@ export async function getSalaryRecord(id: string): Promise<SalaryRecord | null> 
 }
 
 export async function createSalaryRecord(input: CreateSalaryInput): Promise<{ id: string } | { error: string }> {
-  const supabase = createServerClient()
+  const supabase = await createClient()
 
   // Check for duplicate month/year for this staff
   const { data: existing } = await (supabase as any)
@@ -130,7 +130,7 @@ export async function createSalaryRecord(input: CreateSalaryInput): Promise<{ id
 }
 
 export async function updateSalaryRecord(id: string, updates: Partial<CreateSalaryInput>): Promise<{ error?: string }> {
-  const supabase = createServerClient()
+  const supabase = await createClient()
   const { error } = await (supabase as any)
     .from('salary_records')
     .update({ ...updates, updated_at: new Date().toISOString() })
@@ -140,7 +140,7 @@ export async function updateSalaryRecord(id: string, updates: Partial<CreateSala
 }
 
 export async function markAsPaid(id: string, paymentDate: string, paymentMode: string): Promise<{ error?: string }> {
-  const supabase = createServerClient()
+  const supabase = await createClient()
   const { error } = await (supabase as any)
     .from('salary_records')
     .update({ is_paid: true, payment_date: paymentDate, payment_mode: paymentMode, updated_at: new Date().toISOString() })
@@ -150,14 +150,14 @@ export async function markAsPaid(id: string, paymentDate: string, paymentMode: s
 }
 
 export async function deleteSalaryRecord(id: string): Promise<{ error?: string }> {
-  const supabase = createServerClient()
+  const supabase = await createClient()
   const { error } = await (supabase as any).from('salary_records').delete().eq('id', id)
   if (error) return { error: error.message }
   return {}
 }
 
 export async function getStaffForPayroll(): Promise<StaffForPayroll[]> {
-  const supabase = createServerClient()
+  const supabase = await createClient()
   const { data } = await (supabase as any)
     .from('staff')
     .select('id, staff_id, full_name, salary')
