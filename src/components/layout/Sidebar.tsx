@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, Users, FileText, DollarSign, Award,
   Calendar, Settings, LogOut, ChevronLeft, Building2,
-  ClipboardList, Shield, Folder, Archive, ChevronRight,
+  ClipboardList, Shield, Folder, Archive, ChevronRight, Star,
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { cn } from '@/lib/utils'
@@ -16,6 +16,12 @@ const navGroups = [
     items: [
       { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
       { href: '/staff', label: 'Staff', icon: Users },
+    ],
+  },
+  {
+    label: 'Self Service',
+    items: [
+      { href: '/self-service', label: 'My Portal', icon: Star },
     ],
   },
   {
