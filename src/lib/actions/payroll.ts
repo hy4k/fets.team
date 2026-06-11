@@ -211,6 +211,14 @@ export async function generatePayslipDoc(recordId: string): Promise<{ docId: str
   })
 
   if ('error' in result) return { error: result.error }
+
+  // Save the generated document ID back to the salary record
+  const supabase2 = await createClient()
+  await (supabase2 as any)
+    .from('salary_records')
+    .update({ payslip_doc_id: result.id, updated_at: new Date().toISOString() })
+    .eq('id', recordId)
+
   return { docId: result.id }
 }
 
