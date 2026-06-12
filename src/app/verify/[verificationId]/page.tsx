@@ -61,11 +61,11 @@ function BrandHeader({ orgName }: { orgName: string }) {
       <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.75rem' }}>
         <div style={{
           width: 38, height: 38, borderRadius: '10px',
-          background: 'linear-gradient(135deg, #7C3AED, #4F46E5)',
+          background: 'linear-gradient(135deg, #14B8A6, #4F46E5)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontSize: '1.1rem', fontWeight: 900, color: '#fff',
         }}>F</div>
-        <span style={{ color: '#A78BFA', fontWeight: 800, fontSize: '1.1rem', letterSpacing: '-0.02em' }}>{orgName}</span>
+        <span style={{ color: '#5EEAD4', fontWeight: 800, fontSize: '1.1rem', letterSpacing: '-0.02em' }}>{orgName}</span>
       </div>
       <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.78rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
         Document Verification Portal
@@ -145,8 +145,8 @@ function ValidPage({ doc, orgName }: {
 
           <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', margin: '1.25rem 0' }} />
 
-          <div style={{ background: 'rgba(124,58,237,0.06)', border: '1px solid rgba(124,58,237,0.15)', borderRadius: '10px', padding: '0.7rem 0.9rem' }}>
-            <p style={{ fontSize: '0.65rem', fontWeight: 700, color: '#A78BFA', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.3rem' }}>
+          <div style={{ background: 'rgba(201,163,92,0.06)', border: '1px solid rgba(201,163,92,0.15)', borderRadius: '10px', padding: '0.7rem 0.9rem' }}>
+            <p style={{ fontSize: '0.65rem', fontWeight: 700, color: '#5EEAD4', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.3rem' }}>
               Verification ID
             </p>
             <p style={{ fontFamily: 'monospace', fontSize: '0.72rem', color: 'rgba(255,255,255,0.5)', wordBreak: 'break-all' }}>

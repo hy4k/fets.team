@@ -34,10 +34,10 @@ const ICONS = {
 // ─── Stat card ────────────────────────────────────────────────
 function StatCard({ label, value, sub, color }: { label: string; value: string; sub?: string; color: string }) {
   return (
-    <div className="bg-[#12121A] border border-[#1E1E2E] rounded-xl p-4">
-      <div className="text-[11px] text-[#5A5A72] uppercase tracking-widest mb-2">{label}</div>
-      <div className="text-2xl font-bold" style={{ color }}>{value}</div>
-      {sub && <div className="text-[11px] text-[#5A5A72] mt-1">{sub}</div>}
+    <div className="card-glass rounded-xl p-4">
+      <div className="text-[11px] text-[#66756A] uppercase tracking-widest mb-2">{label}</div>
+      <div className="font-display text-2xl font-bold" style={{ color }}>{value}</div>
+      {sub && <div className="text-[11px] text-[#66756A] mt-1">{sub}</div>}
     </div>
   )
 }
@@ -56,31 +56,31 @@ function SalaryRow({ record, onEdit, onDelete, onPayslip, onMarkPaid }: {
   const staff = record.staff
 
   return (
-    <div className="flex items-center gap-4 px-4 py-3 bg-[#12121A] border border-[#1E1E2E] rounded-xl hover:border-[#2E2E3E] transition-all group">
+    <div className="flex items-center gap-4 px-4 py-3 card-glass rounded-xl hover:border-[#2C3D32] transition-all group">
       <div className="flex items-center gap-3 w-48 shrink-0">
-        <div className="w-8 h-8 rounded-full bg-[#F5C518] flex items-center justify-center text-black font-bold text-xs shrink-0">
+        <div className="w-8 h-8 rounded-full bg-[#C9A35C] flex items-center justify-center text-black font-bold text-xs shrink-0">
           {staff?.full_name?.charAt(0) || '?'}
         </div>
         <div className="min-w-0">
           <div className="text-sm font-medium text-white truncate">{staff?.full_name || '—'}</div>
-          <div className="text-[10px] text-[#5A5A72]">{staff?.staff_id}</div>
+          <div className="text-[10px] text-[#66756A]">{staff?.staff_id}</div>
         </div>
       </div>
       <div className="w-28 shrink-0">
         <div className="text-sm text-white font-medium">{MONTHS[record.month - 1]}</div>
-        <div className="text-[10px] text-[#5A5A72]">{record.year}</div>
+        <div className="text-[10px] text-[#66756A]">{record.year}</div>
       </div>
       <div className="w-28 shrink-0 text-right">
-        <div className="text-xs text-[#5A5A72]">Gross</div>
+        <div className="text-xs text-[#66756A]">Gross</div>
         <div className="text-sm text-white font-mono">{fmtCur(gross)}</div>
       </div>
       <div className="w-28 shrink-0 text-right">
-        <div className="text-xs text-[#5A5A72]">Deductions</div>
+        <div className="text-xs text-[#66756A]">Deductions</div>
         <div className="text-sm text-red-400 font-mono">-{fmtCur(deductions)}</div>
       </div>
       <div className="w-32 shrink-0 text-right">
-        <div className="text-xs text-[#5A5A72]">Net Pay</div>
-        <div className="text-base font-bold text-[#F5C518] font-mono">{fmtCur(net)}</div>
+        <div className="text-xs text-[#66756A]">Net Pay</div>
+        <div className="text-base font-bold text-[#C9A35C] font-mono">{fmtCur(net)}</div>
       </div>
       <div className="flex-1 flex justify-center">
         {record.is_paid ? (
@@ -95,21 +95,21 @@ function SalaryRow({ record, onEdit, onDelete, onPayslip, onMarkPaid }: {
       </div>
       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
         <button onClick={onPayslip} title="Generate Payslip"
-          className="p-1.5 rounded-lg text-[#5A5A72] hover:text-[#F5C518] hover:bg-[#1E1E2E] transition-colors">
+          className="p-1.5 rounded-lg text-[#66756A] hover:text-[#C9A35C] hover:bg-[#1B2A22] transition-colors">
           <Icon path={ICONS.printer} />
         </button>
         {!record.is_paid && (
           <button onClick={onMarkPaid} title="Mark as Paid"
-            className="p-1.5 rounded-lg text-[#5A5A72] hover:text-emerald-400 hover:bg-[#1E1E2E] transition-colors">
+            className="p-1.5 rounded-lg text-[#66756A] hover:text-emerald-400 hover:bg-[#1B2A22] transition-colors">
             <Icon path={ICONS.check} />
           </button>
         )}
         <button onClick={onEdit} title="Edit"
-          className="p-1.5 rounded-lg text-[#5A5A72] hover:text-white hover:bg-[#1E1E2E] transition-colors">
+          className="p-1.5 rounded-lg text-[#66756A] hover:text-white hover:bg-[#1B2A22] transition-colors">
           <Icon path={ICONS.edit} />
         </button>
         <button onClick={onDelete} title="Delete"
-          className="p-1.5 rounded-lg text-[#5A5A72] hover:text-red-400 hover:bg-[#1E1E2E] transition-colors">
+          className="p-1.5 rounded-lg text-[#66756A] hover:text-red-400 hover:bg-[#1B2A22] transition-colors">
           <Icon path={ICONS.trash} />
         </button>
       </div>
@@ -123,14 +123,14 @@ function CurrencyInput({ label, value, onChange, hint }: {
 }) {
   return (
     <div className="space-y-1">
-      <label className="block text-[11px] font-medium text-[#8A8AA0] uppercase tracking-wider">{label}</label>
+      <label className="block text-[11px] font-medium text-[#A3B1A5] uppercase tracking-wider">{label}</label>
       <div className="relative">
-        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#5A5A72] text-sm">₹</span>
+        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#66756A] text-sm">₹</span>
         <input type="number" min="0" step="0.01"
-          className="w-full bg-[#0A0A0F] border border-[#1E1E2E] rounded-lg pl-7 pr-3 py-2 text-sm text-white focus:outline-none focus:border-[#F5C518] transition-colors"
+          className="w-full bg-[#040A08] border border-[#1B2A22] rounded-lg pl-7 pr-3 py-2 text-sm text-white focus:outline-none focus:border-[#C9A35C] transition-colors"
           placeholder="0.00" value={value} onChange={e => onChange(e.target.value)} />
       </div>
-      {hint && <p className="text-[10px] text-[#5A5A72]">{hint}</p>}
+      {hint && <p className="text-[10px] text-[#66756A]">{hint}</p>}
     </div>
   )
 }
@@ -239,18 +239,18 @@ function PayrollModal({ editRecord, staffList, onClose, onSaved }: {
     onSaved()
   }
 
-  const inp = 'w-full bg-[#0A0A0F] border border-[#1E1E2E] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#F5C518] transition-colors'
+  const inp = 'w-full bg-[#040A08] border border-[#1B2A22] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#C9A35C] transition-colors'
 
   return (
     <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="bg-[#0D0D15] border border-[#1E1E2E] rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl"
+      <div className="bg-[#0A130F] border border-[#1B2A22] rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl"
         onClick={e => e.stopPropagation()}>
-        <div className="sticky top-0 flex items-center justify-between px-6 py-4 border-b border-[#1E1E2E] bg-[#0D0D15]">
+        <div className="sticky top-0 flex items-center justify-between px-6 py-4 border-b border-[#1B2A22] bg-[#0A130F]">
           <div>
             <h2 className="text-white font-bold text-lg">{editRecord ? 'Edit Salary Record' : 'New Salary Entry'}</h2>
-            <p className="text-[#5A5A72] text-xs mt-0.5">Net pay calculates automatically as you type</p>
+            <p className="text-[#66756A] text-xs mt-0.5">Net pay calculates automatically as you type</p>
           </div>
-          <button onClick={onClose} className="p-2 hover:bg-[#1E1E2E] rounded-lg text-[#5A5A72] hover:text-white transition-colors">
+          <button onClick={onClose} className="p-2 hover:bg-[#1B2A22] rounded-lg text-[#66756A] hover:text-white transition-colors">
             <Icon path={ICONS.x} />
           </button>
         </div>
@@ -258,25 +258,25 @@ function PayrollModal({ editRecord, staffList, onClose, onSaved }: {
         <form onSubmit={handleSubmit} className="p-6 space-y-5">
           <div className="grid grid-cols-2 gap-4">
             <div className="col-span-2 space-y-1">
-              <label className="block text-[11px] font-medium text-[#8A8AA0] uppercase tracking-wider">Staff Member *</label>
+              <label className="block text-[11px] font-medium text-[#A3B1A5] uppercase tracking-wider">Staff Member *</label>
               <select className={inp} value={form.staff_id} onChange={e => handleStaffChange(e.target.value)} required>
                 <option value="">Select staff member</option>
                 {staffList.map(s => <option key={s.id} value={s.id}>{s.full_name} ({s.staff_id})</option>)}
               </select>
             </div>
             <div className="space-y-1">
-              <label className="block text-[11px] font-medium text-[#8A8AA0] uppercase tracking-wider">Month *</label>
+              <label className="block text-[11px] font-medium text-[#A3B1A5] uppercase tracking-wider">Month *</label>
               <select className={inp} value={form.month} onChange={e => set('month')(e.target.value)} required>
                 {MONTHS.map((m, i) => <option key={m} value={String(i + 1)}>{m}</option>)}
               </select>
             </div>
             <div className="space-y-1">
-              <label className="block text-[11px] font-medium text-[#8A8AA0] uppercase tracking-wider">Year *</label>
+              <label className="block text-[11px] font-medium text-[#A3B1A5] uppercase tracking-wider">Year *</label>
               <input type="number" className={inp} value={form.year} onChange={e => set('year')(e.target.value)} min="2020" max="2040" required />
             </div>
           </div>
 
-          <div className="bg-[#12121A] border border-[#1E1E2E] rounded-xl p-4 space-y-3">
+          <div className="card-glass rounded-xl p-4 space-y-3">
             <h3 className="text-xs font-semibold text-emerald-400 uppercase tracking-wider">Earnings</h3>
             <div className="grid grid-cols-2 gap-3">
               <CurrencyInput label="Basic Salary *" value={form.basic_salary} onChange={set('basic_salary')} />
@@ -288,7 +288,7 @@ function PayrollModal({ editRecord, staffList, onClose, onSaved }: {
             </div>
           </div>
 
-          <div className="bg-[#12121A] border border-[#1E1E2E] rounded-xl p-4 space-y-3">
+          <div className="card-glass rounded-xl p-4 space-y-3">
             <h3 className="text-xs font-semibold text-red-400 uppercase tracking-wider">Deductions</h3>
             <div className="grid grid-cols-2 gap-3">
               <CurrencyInput label="PF Deduction" value={form.pf_deduction} onChange={set('pf_deduction')} hint="Employee PF contribution" />
@@ -300,26 +300,26 @@ function PayrollModal({ editRecord, staffList, onClose, onSaved }: {
           </div>
 
           {/* Live net calc */}
-          <div className="bg-[#0A0A0F] border border-[#F5C518]/20 rounded-xl p-4">
+          <div className="bg-[#040A08] border border-[#C9A35C]/20 rounded-xl p-4">
             <div className="grid grid-cols-3 gap-4 text-center">
               <div>
-                <div className="text-[10px] text-[#5A5A72] uppercase tracking-wider mb-1">Gross Pay</div>
+                <div className="text-[10px] text-[#66756A] uppercase tracking-wider mb-1">Gross Pay</div>
                 <div className="text-lg font-bold text-emerald-400 font-mono">{fmtCur(liveGross(form))}</div>
               </div>
               <div>
-                <div className="text-[10px] text-[#5A5A72] uppercase tracking-wider mb-1">Deductions</div>
+                <div className="text-[10px] text-[#66756A] uppercase tracking-wider mb-1">Deductions</div>
                 <div className="text-lg font-bold text-red-400 font-mono">-{fmtCur(liveDed(form))}</div>
               </div>
               <div>
-                <div className="text-[10px] text-[#F5C518] uppercase tracking-wider mb-1">Net Pay</div>
-                <div className="text-2xl font-bold text-[#F5C518] font-mono">{fmtCur(liveCalc(form))}</div>
+                <div className="text-[10px] text-[#C9A35C] uppercase tracking-wider mb-1">Net Pay</div>
+                <div className="font-display text-2xl font-bold text-[#C9A35C] font-mono">{fmtCur(liveCalc(form))}</div>
               </div>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="block text-[11px] font-medium text-[#8A8AA0] uppercase tracking-wider">Payment Mode</label>
+              <label className="block text-[11px] font-medium text-[#A3B1A5] uppercase tracking-wider">Payment Mode</label>
               <select className={inp} value={form.payment_mode} onChange={e => set('payment_mode')(e.target.value)}>
                 <option value="bank_transfer">Bank Transfer</option>
                 <option value="cash">Cash</option>
@@ -328,7 +328,7 @@ function PayrollModal({ editRecord, staffList, onClose, onSaved }: {
               </select>
             </div>
             <div className="space-y-1">
-              <label className="block text-[11px] font-medium text-[#8A8AA0] uppercase tracking-wider">Admin Notes</label>
+              <label className="block text-[11px] font-medium text-[#A3B1A5] uppercase tracking-wider">Admin Notes</label>
               <input type="text" className={inp} placeholder="Optional notes…"
                 value={form.admin_notes} onChange={e => set('admin_notes')(e.target.value)} />
             </div>
@@ -340,11 +340,11 @@ function PayrollModal({ editRecord, staffList, onClose, onSaved }: {
 
           <div className="flex gap-3 pt-1">
             <button type="button" onClick={onClose}
-              className="flex-1 py-2.5 bg-[#1E1E2E] text-[#8A8AA0] hover:text-white rounded-lg text-sm transition-colors">
+              className="flex-1 py-2.5 bg-[#1B2A22] text-[#A3B1A5] hover:text-white rounded-lg text-sm transition-colors">
               Cancel
             </button>
             <button type="submit" disabled={saving}
-              className="flex-1 py-2.5 bg-[#F5C518] text-black font-semibold rounded-lg text-sm hover:bg-[#E0B416] disabled:opacity-50 transition-colors">
+              className="flex-1 py-2.5 bg-[#C9A35C] text-black font-semibold rounded-lg text-sm hover:bg-[#B08D4A] disabled:opacity-50 transition-colors">
               {saving ? 'Saving…' : (editRecord ? 'Update Record' : 'Save Salary Entry')}
             </button>
           </div>
@@ -362,7 +362,7 @@ function MarkPaidModal({ record, onClose, onDone }: {
   const [mode, setMode] = useState(record.payment_mode || 'bank_transfer')
   const [saving, setSaving] = useState(false)
   const net = calcNet(record)
-  const inp = 'w-full bg-[#0A0A0F] border border-[#1E1E2E] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#F5C518] transition-colors'
+  const inp = 'w-full bg-[#040A08] border border-[#1B2A22] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#C9A35C] transition-colors'
 
   async function handleConfirm() {
     setSaving(true)
@@ -372,18 +372,18 @@ function MarkPaidModal({ record, onClose, onDone }: {
 
   return (
     <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="bg-[#0D0D15] border border-[#1E1E2E] rounded-2xl w-full max-w-sm p-6 shadow-2xl" onClick={e => e.stopPropagation()}>
+      <div className="bg-[#0A130F] border border-[#1B2A22] rounded-2xl w-full max-w-sm p-6 shadow-2xl" onClick={e => e.stopPropagation()}>
         <h2 className="text-white font-bold text-lg mb-1">Confirm Payment</h2>
-        <p className="text-[#5A5A72] text-xs mb-4">
-          {record.staff?.full_name} · {MONTHS[record.month - 1]} {record.year} · Net: <span className="text-[#F5C518] font-semibold">{fmtCur(net)}</span>
+        <p className="text-[#66756A] text-xs mb-4">
+          {record.staff?.full_name} · {MONTHS[record.month - 1]} {record.year} · Net: <span className="text-[#C9A35C] font-semibold">{fmtCur(net)}</span>
         </p>
         <div className="space-y-3 mb-5">
           <div className="space-y-1">
-            <label className="block text-[11px] font-medium text-[#8A8AA0] uppercase tracking-wider">Payment Date</label>
+            <label className="block text-[11px] font-medium text-[#A3B1A5] uppercase tracking-wider">Payment Date</label>
             <input type="date" className={`${inp} [color-scheme:dark]`} value={date} onChange={e => setDate(e.target.value)} />
           </div>
           <div className="space-y-1">
-            <label className="block text-[11px] font-medium text-[#8A8AA0] uppercase tracking-wider">Payment Mode</label>
+            <label className="block text-[11px] font-medium text-[#A3B1A5] uppercase tracking-wider">Payment Mode</label>
             <select className={inp} value={mode} onChange={e => setMode(e.target.value)}>
               <option value="bank_transfer">Bank Transfer</option>
               <option value="cash">Cash</option>
@@ -393,7 +393,7 @@ function MarkPaidModal({ record, onClose, onDone }: {
           </div>
         </div>
         <div className="flex gap-3">
-          <button onClick={onClose} className="flex-1 py-2.5 bg-[#1E1E2E] text-[#8A8AA0] hover:text-white rounded-lg text-sm transition-colors">Cancel</button>
+          <button onClick={onClose} className="flex-1 py-2.5 bg-[#1B2A22] text-[#A3B1A5] hover:text-white rounded-lg text-sm transition-colors">Cancel</button>
           <button onClick={handleConfirm} disabled={saving}
             className="flex-1 py-2.5 bg-emerald-500 text-white font-semibold rounded-lg text-sm hover:bg-emerald-600 disabled:opacity-50 transition-colors">
             {saving ? 'Saving…' : 'Mark as Paid'}
@@ -470,7 +470,7 @@ export default function PayrollPage() {
         subtitle="Monthly salary entries, auto net calculation, payslip generation"
         actions={
           <button onClick={() => { setEditRecord(null); setShowModal(true) }}
-            className="flex items-center gap-2 px-4 py-2 bg-[#F5C518] text-black font-semibold rounded-lg text-sm hover:bg-[#E0B416] transition-colors">
+            className="flex items-center gap-2 px-4 py-2 bg-[#C9A35C] text-black font-semibold rounded-lg text-sm hover:bg-[#B08D4A] transition-colors">
             <Icon path={ICONS.plus} />
             New Salary Entry
           </button>
@@ -480,9 +480,9 @@ export default function PayrollPage() {
       <div className="p-6 max-w-[1400px] mx-auto space-y-6">
         {/* Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <StatCard label="Total Records" value={String(filtered.length)} color="#F0F0F5" />
-          <StatCard label="Total Gross" value={fmtCur(totalGross)} color="#A78BFA" />
-          <StatCard label="Total Net Pay" value={fmtCur(totalNet)} color="#F5C518" />
+          <StatCard label="Total Records" value={String(filtered.length)} color="#EDEFE9" />
+          <StatCard label="Total Gross" value={fmtCur(totalGross)} color="#5EEAD4" />
+          <StatCard label="Total Net Pay" value={fmtCur(totalNet)} color="#C9A35C" />
           <StatCard label="Paid / Unpaid" value={`${totalPaid} / ${totalUnpaid}`}
             sub={totalUnpaid > 0 ? `${totalUnpaid} pending` : 'All settled'}
             color={totalUnpaid > 0 ? '#FB923C' : '#34D399'} />
@@ -491,27 +491,27 @@ export default function PayrollPage() {
         {/* Filters */}
         <div className="flex flex-wrap items-center gap-3">
           <div className="relative flex-1 min-w-[200px]">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#5A5A72] pointer-events-none">
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#66756A] pointer-events-none">
               <Icon path={ICONS.search} size={14} />
             </span>
             <input type="text" placeholder="Search by staff name or ID…"
-              className="w-full pl-9 pr-4 py-2 bg-[#12121A] border border-[#1E1E2E] rounded-lg text-sm text-white placeholder-[#5A5A72] focus:outline-none focus:border-[#F5C518] transition-colors"
+              className="w-full pl-9 pr-4 py-2 card-glass rounded-lg text-sm text-white placeholder-[#66756A] focus:outline-none focus:border-[#C9A35C] transition-colors"
               value={search} onChange={e => setSearch(e.target.value)} />
           </div>
-          <select className="px-3 py-2 bg-[#12121A] border border-[#1E1E2E] rounded-lg text-sm text-white focus:outline-none focus:border-[#F5C518]"
+          <select className="px-3 py-2 card-glass rounded-lg text-sm text-white focus:outline-none focus:border-[#C9A35C]"
             value={filterMonth} onChange={e => setFilterMonth(e.target.value)}>
             <option value="">All Months</option>
             {MONTHS.map((m, i) => <option key={m} value={String(i + 1)}>{m}</option>)}
           </select>
-          <select className="px-3 py-2 bg-[#12121A] border border-[#1E1E2E] rounded-lg text-sm text-white focus:outline-none focus:border-[#F5C518]"
+          <select className="px-3 py-2 card-glass rounded-lg text-sm text-white focus:outline-none focus:border-[#C9A35C]"
             value={filterYear} onChange={e => setFilterYear(e.target.value)}>
             <option value="">All Years</option>
             {years.map(y => <option key={y} value={y}>{y}</option>)}
           </select>
-          <div className="flex rounded-lg overflow-hidden border border-[#1E1E2E]">
+          <div className="flex rounded-lg overflow-hidden border border-[#1B2A22]">
             {(['all', 'paid', 'unpaid'] as const).map(s => (
               <button key={s} onClick={() => setFilterStatus(s)}
-                className={`px-3 py-2 text-xs font-medium capitalize transition-colors ${filterStatus === s ? 'bg-[#F5C518] text-black' : 'bg-[#12121A] text-[#8A8AA0] hover:text-white'}`}>
+                className={`px-3 py-2 text-xs font-medium capitalize transition-colors ${filterStatus === s ? 'bg-[#C9A35C] text-black' : 'bg-[#0C1A16] text-[#A3B1A5] hover:text-white'}`}>
                 {s}
               </button>
             ))}
@@ -520,22 +520,22 @@ export default function PayrollPage() {
 
         {/* Records */}
         {loading ? (
-          <div className="flex items-center justify-center h-32 text-[#5A5A72]">Loading payroll records…</div>
+          <div className="flex items-center justify-center h-32 text-[#66756A]">Loading payroll records…</div>
         ) : filtered.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-48 text-center">
             <div className="text-4xl mb-3">💰</div>
             <div className="text-white font-semibold">No salary records found</div>
-            <div className="text-[#5A5A72] text-sm mt-1">Click &quot;New Salary Entry&quot; to add the first record</div>
+            <div className="text-[#66756A] text-sm mt-1">Click &quot;New Salary Entry&quot; to add the first record</div>
           </div>
         ) : (
           <div className="space-y-2">
             <div className="flex items-center gap-4 px-4 pb-1">
-              <div className="w-48 shrink-0 text-[10px] text-[#3A3A55] uppercase tracking-wider">Staff</div>
-              <div className="w-28 shrink-0 text-[10px] text-[#3A3A55] uppercase tracking-wider">Period</div>
-              <div className="w-28 shrink-0 text-right text-[10px] text-[#3A3A55] uppercase tracking-wider">Gross</div>
-              <div className="w-28 shrink-0 text-right text-[10px] text-[#3A3A55] uppercase tracking-wider">Deductions</div>
-              <div className="w-32 shrink-0 text-right text-[10px] text-[#3A3A55] uppercase tracking-wider">Net Pay</div>
-              <div className="flex-1 text-center text-[10px] text-[#3A3A55] uppercase tracking-wider">Status</div>
+              <div className="w-48 shrink-0 text-[10px] text-[#3D4B42] uppercase tracking-wider">Staff</div>
+              <div className="w-28 shrink-0 text-[10px] text-[#3D4B42] uppercase tracking-wider">Period</div>
+              <div className="w-28 shrink-0 text-right text-[10px] text-[#3D4B42] uppercase tracking-wider">Gross</div>
+              <div className="w-28 shrink-0 text-right text-[10px] text-[#3D4B42] uppercase tracking-wider">Deductions</div>
+              <div className="w-32 shrink-0 text-right text-[10px] text-[#3D4B42] uppercase tracking-wider">Net Pay</div>
+              <div className="flex-1 text-center text-[10px] text-[#3D4B42] uppercase tracking-wider">Status</div>
             </div>
             {filtered.map(record => (
               <SalaryRow key={record.id} record={record}
@@ -562,10 +562,10 @@ export default function PayrollPage() {
 
       {generatingId && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
-          <div className="bg-[#12121A] border border-[#1E1E2E] rounded-xl px-8 py-6 text-center">
-            <div className="text-[#F5C518] text-3xl mb-3">⚙️</div>
+          <div className="card-glass rounded-xl px-8 py-6 text-center">
+            <div className="text-[#C9A35C] text-3xl mb-3">⚙️</div>
             <div className="text-white font-semibold">Generating payslip…</div>
-            <div className="text-[#5A5A72] text-sm mt-1">Opening print view in new tab</div>
+            <div className="text-[#66756A] text-sm mt-1">Opening print view in new tab</div>
           </div>
         </div>
       )}

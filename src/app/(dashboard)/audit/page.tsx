@@ -38,10 +38,10 @@ const ACTION_META: Record<string, { label: string; color: string; bg: string; bo
   approve: { label: 'Approve', color: '#34D399', bg: 'rgba(16,185,129,0.15)',  border: 'rgba(52,211,153,0.3)',   icon: CheckCircle },
   reject:  { label: 'Reject',  color: '#FB7185', bg: 'rgba(251,113,133,0.12)', border: 'rgba(251,113,133,0.25)', icon: XCircle },
   delete:  { label: 'Delete',  color: '#FB7185', bg: 'rgba(244,63,94,0.12)',   border: 'rgba(244,63,94,0.25)',   icon: Trash2 },
-  login:   { label: 'Login',   color: '#A78BFA', bg: 'rgba(139,92,246,0.12)', border: 'rgba(139,92,246,0.25)',  icon: LogIn },
+  login:   { label: 'Login',   color: '#5EEAD4', bg: 'rgba(226,194,133,0.12)', border: 'rgba(226,194,133,0.25)',  icon: LogIn },
 }
 const DEFAULT_ACTION_META = {
-  label: '—', color: '#9A96B8', bg: 'rgba(90,86,122,0.12)', border: 'rgba(90,86,122,0.2)', icon: Activity,
+  label: '—', color: '#A9B5A9', bg: 'rgba(90,86,122,0.12)', border: 'rgba(90,86,122,0.2)', icon: Activity,
 }
 
 function ActionBadge({ action }: { action: string }) {
@@ -64,17 +64,17 @@ function ActionBadge({ action }: { action: string }) {
 // ── Entity Type Pill ───────────────────────────────────────────────────────────
 
 const ENTITY_META: Record<string, { label: string; color: string }> = {
-  staff:         { label: 'Staff',         color: '#A78BFA' },
+  staff:         { label: 'Staff',         color: '#5EEAD4' },
   leave_request: { label: 'Leave',         color: '#FBBF24' },
   leave_type:    { label: 'Leave Type',    color: '#60A5FA' },
   attendance:    { label: 'Attendance',    color: '#34D399' },
-  certification: { label: 'Certification', color: '#F0CC6A' },
+  certification: { label: 'Certification', color: '#E2C285' },
   document:      { label: 'Document',      color: '#38BDF8' },
   payroll:       { label: 'Payroll',       color: '#FB7185' },
 }
 
 function EntityPill({ type }: { type: string }) {
-  const meta = ENTITY_META[type] ?? { label: type, color: '#9A96B8' }
+  const meta = ENTITY_META[type] ?? { label: type, color: '#A9B5A9' }
   return (
     <span style={{
       display: 'inline-block',
@@ -177,7 +177,7 @@ export default function AuditPage() {
   })
 
   const statCards = [
-    { label: 'Total Events',   value: stats.total,        cls: 'card-clay-violet', icon: Activity,  color: '#A78BFA' },
+    { label: 'Total Events',   value: stats.total,        cls: 'card-clay-violet', icon: Activity,  color: '#5EEAD4' },
     { label: "Today's Events", value: stats.today,        cls: 'card-clay-sky',    icon: Clock,     color: '#38BDF8' },
     { label: 'Staff Changes',  value: stats.staffChanges, cls: 'card-clay-gold',   icon: Users,     color: '#FBBF24' },
     { label: 'Leave Actions',  value: stats.leaveActions, cls: 'card-clay-emerald',icon: Calendar,  color: '#34D399' },
@@ -190,9 +190,9 @@ export default function AuditPage() {
       <div className="page-header" style={{ marginBottom: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <div style={{ padding: '0.8rem', borderRadius: '16px',
-            background: 'linear-gradient(135deg, rgba(124,58,237,0.2), rgba(109,40,217,0.1))',
-            border: '1px solid rgba(124,58,237,0.2)' }}>
-            <Shield size={22} color="#A78BFA" />
+            background: 'linear-gradient(135deg, rgba(201,163,92,0.2), rgba(168,127,61,0.1))',
+            border: '1px solid rgba(201,163,92,0.2)' }}>
+            <Shield size={22} color="#5EEAD4" />
           </div>
           <div>
             <h1 className="text-gradient-violet" style={{ fontSize: '1.85rem', fontWeight: 800, marginBottom: '0.2rem' }}>
@@ -331,9 +331,9 @@ export default function AuditPage() {
                         </td>
                         <td>
                           {hasDiff ? (
-                            <span style={{ fontSize: '0.78rem', color: 'var(--violet-400)',
-                              background: 'rgba(124,58,237,0.08)', padding: '0.2rem 0.55rem', borderRadius: '6px',
-                              border: '1px solid rgba(124,58,237,0.15)' }}>
+                            <span style={{ fontSize: '0.78rem', color: 'var(--aurora-400)',
+                              background: 'rgba(201,163,92,0.08)', padding: '0.2rem 0.55rem', borderRadius: '6px',
+                              border: '1px solid rgba(201,163,92,0.15)' }}>
                               {log.old_values && log.new_values ? 'Modified' : log.new_values ? 'Created' : 'Removed'}
                             </span>
                           ) : (
@@ -358,7 +358,7 @@ export default function AuditPage() {
                       </tr>
                       {expanded && hasDiff && (
                         <tr key={log.id + '-expanded'}>
-                          <td colSpan={7} style={{ padding: '0 1.25rem 1rem', background: 'rgba(124,58,237,0.03)' }}>
+                          <td colSpan={7} style={{ padding: '0 1.25rem 1rem', background: 'rgba(201,163,92,0.03)' }}>
                             <JsonDiff old_values={log.old_values} new_values={log.new_values} />
                           </td>
                         </tr>

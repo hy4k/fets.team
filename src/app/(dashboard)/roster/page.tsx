@@ -30,7 +30,7 @@ const SHIFT_META: Record<string, { label: string; bg: string; text: string }> = 
 }
 
 function shiftMeta(code: string) {
-  return SHIFT_META[code?.toUpperCase()] ?? { label: code || '-', bg: 'rgba(124,58,237,0.1)', text: '#a78bfa' }
+  return SHIFT_META[code?.toUpperCase()] ?? { label: code || '-', bg: 'rgba(201,163,92,0.1)', text: '#5EEAD4' }
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -216,7 +216,7 @@ export default function RosterPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
+          <h1 className="font-display text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
             Operations Roster
           </h1>
           <p className="text-sm mt-0.5" style={{ color: 'var(--text-secondary)' }}>
@@ -228,9 +228,9 @@ export default function RosterPage() {
           disabled={loading}
           className="flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-all"
           style={{
-            background: 'rgba(124,58,237,0.1)',
-            border: '1px solid rgba(124,58,237,0.2)',
-            color: '#a78bfa',
+            background: 'rgba(201,163,92,0.1)',
+            border: '1px solid rgba(201,163,92,0.2)',
+            color: '#5EEAD4',
           }}
         >
           <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
@@ -242,23 +242,23 @@ export default function RosterPage() {
       <div className="flex items-center gap-3">
         <button onClick={prevMonth}
           className="rounded-xl p-2 transition-all"
-          style={{ background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.15)', color: '#a78bfa' }}>
+          style={{ background: 'rgba(201,163,92,0.08)', border: '1px solid rgba(201,163,92,0.15)', color: '#5EEAD4' }}>
           <ChevronLeft className="w-4 h-4" />
         </button>
         <div className="rounded-xl px-5 py-2 font-semibold text-base"
-          style={{ background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.15)', color: 'var(--text-primary)', minWidth: 160, textAlign: 'center' }}>
+          style={{ background: 'rgba(201,163,92,0.08)', border: '1px solid rgba(201,163,92,0.15)', color: 'var(--text-primary)', minWidth: 160, textAlign: 'center' }}>
           {MONTHS[month - 1]} {year}
         </div>
         <button onClick={nextMonth}
           className="rounded-xl p-2 transition-all"
-          style={{ background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.15)', color: '#a78bfa' }}>
+          style={{ background: 'rgba(201,163,92,0.08)', border: '1px solid rgba(201,163,92,0.15)', color: '#5EEAD4' }}>
           <ChevronRight className="w-4 h-4" />
         </button>
       </div>
 
       {/* Tabs */}
       <div className="flex flex-wrap gap-1 rounded-2xl p-1 w-fit"
-        style={{ background: 'rgba(124,58,237,0.06)', border: '1px solid rgba(124,58,237,0.1)' }}>
+        style={{ background: 'rgba(201,163,92,0.06)', border: '1px solid rgba(201,163,92,0.1)' }}>
         {([
           { id: 'roster' as Tab,     label: 'Roster',  icon: CalendarDays },
           { id: 'attendance' as Tab, label: 'Attendance', icon: Users },
@@ -270,7 +270,7 @@ export default function RosterPage() {
             onClick={() => setTab(t.id)}
             className="flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition-all"
             style={tab === t.id
-              ? { background: 'rgba(124,58,237,0.2)', color: 'var(--text-primary)', border: '1px solid rgba(124,58,237,0.3)' }
+              ? { background: 'rgba(201,163,92,0.2)', color: 'var(--text-primary)', border: '1px solid rgba(201,163,92,0.3)' }
               : { background: 'transparent', color: 'var(--text-secondary)', border: '1px solid transparent' }}
           >
             <t.icon className="w-4 h-4" />
@@ -282,21 +282,21 @@ export default function RosterPage() {
       {/* Loading */}
       {loading ? (
         <div className="flex items-center justify-center py-24">
-          <Loader2 className="w-8 h-8 animate-spin" style={{ color: '#a78bfa' }} />
+          <Loader2 className="w-8 h-8 animate-spin" style={{ color: '#5EEAD4' }} />
         </div>
       ) : (
 
         /* ── Roster Calendar ───────────────────────────────────────────────── */
         tab === 'roster' ? (
           <div className="rounded-2xl overflow-hidden"
-            style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(124,58,237,0.12)' }}>
+            style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(201,163,92,0.12)' }}>
             {staff.length === 0 ? (
               <EmptyState text="No active staff found. Check FETS_LIVE_SERVICE_ROLE_KEY is set on the server." />
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full border-collapse text-xs" style={{ minWidth: `${days * 44 + 180}px` }}>
                   <thead>
-                    <tr style={{ borderBottom: '1px solid rgba(124,58,237,0.15)' }}>
+                    <tr style={{ borderBottom: '1px solid rgba(201,163,92,0.15)' }}>
                       <th className="sticky left-0 z-10 text-left px-4 py-3 font-semibold text-[11px] uppercase tracking-wider"
                         style={{ background: 'rgba(12,10,31,0.98)', color: 'var(--text-secondary)', width: 180, minWidth: 180 }}>
                         Staff
@@ -307,8 +307,8 @@ export default function RosterPage() {
                         return (
                           <th key={d} className="text-center px-1 py-2 font-semibold"
                             style={{
-                              color: isWeekend ? '#a78bfa' : 'var(--text-secondary)',
-                              background: isWeekend ? 'rgba(124,58,237,0.06)' : 'transparent',
+                              color: isWeekend ? '#5EEAD4' : 'var(--text-secondary)',
+                              background: isWeekend ? 'rgba(201,163,92,0.06)' : 'transparent',
                               width: 44, minWidth: 44,
                             }}>
                             <div className="text-[10px] uppercase" style={{ color: 'var(--text-ghost)' }}>
@@ -322,7 +322,7 @@ export default function RosterPage() {
                   </thead>
                   <tbody>
                     {staff.map((s, si) => (
-                      <tr key={s.id} style={{ borderBottom: '1px solid rgba(124,58,237,0.06)', background: si % 2 === 0 ? 'transparent' : 'rgba(124,58,237,0.02)' }}>
+                      <tr key={s.id} style={{ borderBottom: '1px solid rgba(201,163,92,0.06)', background: si % 2 === 0 ? 'transparent' : 'rgba(201,163,92,0.02)' }}>
                         <td className="sticky left-0 z-10 px-4 py-2"
                           style={{ background: si % 2 === 0 ? 'rgba(12,10,31,0.98)' : 'rgba(15,12,36,0.98)' }}>
                           <div className="font-medium truncate" style={{ color: 'var(--text-primary)', maxWidth: 160 }}>
@@ -338,7 +338,7 @@ export default function RosterPage() {
                           const isWeekend = dow === 0 || dow === 6
                           return (
                             <td key={d} className="text-center px-1 py-1.5"
-                              style={{ background: isWeekend ? 'rgba(124,58,237,0.04)' : 'transparent' }}>
+                              style={{ background: isWeekend ? 'rgba(201,163,92,0.04)' : 'transparent' }}>
                               {sched
                                 ? <ShiftPill code={sched.shift_code} ot={sched.overtime_hours} />
                                 : <span style={{ color: 'var(--text-ghost)', opacity: 0.3 }}>&#183;</span>
@@ -353,7 +353,7 @@ export default function RosterPage() {
               </div>
             )}
             {/* Legend */}
-            <div className="flex flex-wrap gap-3 px-4 py-3 border-t" style={{ borderColor: 'rgba(124,58,237,0.1)' }}>
+            <div className="flex flex-wrap gap-3 px-4 py-3 border-t" style={{ borderColor: 'rgba(201,163,92,0.1)' }}>
               {Object.entries(SHIFT_META).map(([, m]) => (
                 <div key={m.label} className="flex items-center gap-1.5">
                   <div className="w-2 h-2 rounded-full" style={{ background: m.text }} />
@@ -366,14 +366,14 @@ export default function RosterPage() {
         /* ── Attendance ────────────────────────────────────────────────────── */
         ) : tab === 'attendance' ? (
           <div className="rounded-2xl overflow-hidden"
-            style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(124,58,237,0.12)' }}>
+            style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(201,163,92,0.12)' }}>
             {attendance.length === 0 ? (
               <EmptyState text="No attendance records for this month." />
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full border-collapse text-sm" style={{ minWidth: 700 }}>
                   <thead>
-                    <tr style={{ borderBottom: '1px solid rgba(124,58,237,0.15)', background: 'rgba(124,58,237,0.04)' }}>
+                    <tr style={{ borderBottom: '1px solid rgba(201,163,92,0.15)', background: 'rgba(201,163,92,0.04)' }}>
                       {['Date','Staff','Branch','Check In','Check Out','Status','Notes'].map(h => (
                         <th key={h} className="px-4 py-3 text-left text-[11px] font-semibold uppercase tracking-wider"
                           style={{ color: 'var(--text-secondary)' }}>{h}</th>
@@ -384,7 +384,7 @@ export default function RosterPage() {
                     {attendance.map((a, i) => {
                       const staffName = staff.find(s => s.id === a.staff_id)?.full_name ?? a.staff_name ?? '-'
                       return (
-                        <tr key={a.id} style={{ borderBottom: '1px solid rgba(124,58,237,0.06)', background: i % 2 === 0 ? 'transparent' : 'rgba(124,58,237,0.02)' }}>
+                        <tr key={a.id} style={{ borderBottom: '1px solid rgba(201,163,92,0.06)', background: i % 2 === 0 ? 'transparent' : 'rgba(201,163,92,0.02)' }}>
                           <td className="px-4 py-3 font-mono text-xs" style={{ color: 'var(--text-secondary)' }}>{fmt(a.date)}</td>
                           <td className="px-4 py-3 font-medium" style={{ color: 'var(--text-primary)' }}>{staffName}</td>
                           <td className="px-4 py-3 capitalize text-xs" style={{ color: 'var(--text-secondary)' }}>{a.branch_location ?? '-'}</td>
@@ -405,14 +405,14 @@ export default function RosterPage() {
         ) : tab === 'ot' ? (
           <div className="space-y-3">
             {otClaims.length === 0 ? (
-              <div className="rounded-2xl" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(124,58,237,0.12)' }}>
+              <div className="rounded-2xl" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(201,163,92,0.12)' }}>
                 <EmptyState text="No OT / TOIL claims for this month." />
               </div>
             ) : otClaims.map(c => {
               const isBusy = busy === c.id
               return (
                 <div key={c.id} className="rounded-2xl p-4 flex items-start gap-4"
-                  style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(124,58,237,0.12)' }}>
+                  style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(201,163,92,0.12)' }}>
                   <div className="flex-1 min-w-0 grid grid-cols-2 md:grid-cols-4 gap-3">
                     <Field label="Staff"    value={c.staff?.full_name ?? '-'} />
                     <Field label="Date"     value={fmt(c.date)} />
@@ -443,7 +443,7 @@ export default function RosterPage() {
         ) : (
           <div className="space-y-3">
             {leaves.length === 0 ? (
-              <div className="rounded-2xl" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(124,58,237,0.12)' }}>
+              <div className="rounded-2xl" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(201,163,92,0.12)' }}>
                 <EmptyState text="No leave requests for this month." />
               </div>
             ) : leaves.map(l => {
@@ -451,7 +451,7 @@ export default function RosterPage() {
               const typeLabel = l.request_type === 'shift_swap' ? 'Shift Swap' : l.request_type === 'toil' ? 'TOIL Redemption' : 'Leave'
               return (
                 <div key={l.id} className="rounded-2xl p-4 flex items-start gap-4"
-                  style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(124,58,237,0.12)' }}>
+                  style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(201,163,92,0.12)' }}>
                   <div className="flex-1 min-w-0 grid grid-cols-2 md:grid-cols-3 gap-3">
                     <Field label="Requestor" value={l.requestor?.full_name ?? '-'} />
                     <Field label="Type"      value={typeLabel} />
@@ -512,7 +512,7 @@ function ActionBtn({ label, color, busy, onClick }: { label: string; color: stri
 function EmptyState({ text }: { text: string }) {
   return (
     <div className="flex flex-col items-center justify-center py-16 text-center px-4">
-      <CalendarDays className="w-12 h-12 mb-3 opacity-20" style={{ color: '#a78bfa' }} />
+      <CalendarDays className="w-12 h-12 mb-3 opacity-20" style={{ color: '#5EEAD4' }} />
       <p className="text-sm" style={{ color: 'var(--text-ghost)' }}>{text}</p>
     </div>
   )

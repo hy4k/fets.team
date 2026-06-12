@@ -30,11 +30,11 @@ const CAT_COLORS: Record<string, string> = {
   'Separation':    '#EF4444',
   'Recognition':   '#F59E0B',
   'Leave':         '#10B981',
-  'Finance':       '#8B5CF6',
+  'Finance':       '#2DD4BF',
   'Authorization': '#06B6D4',
   'ID & Assets':   '#F97316',
   'Training':      '#EC4899',
-  'Legal':         '#6366F1',
+  'Legal':         '#2DD4BF',
   'Certification': '#14B8A6',
 }
 
@@ -44,11 +44,11 @@ function FormField({ field, value, onChange }: {
   value: string
   onChange: (val: string) => void
 }) {
-  const base = 'w-full bg-[#0A0A0F] border border-[#1E1E2E] rounded-lg px-3 py-2.5 text-sm text-white placeholder-[#3A3A4E] focus:outline-none focus:border-[#F5C518] transition-colors'
+  const base = 'w-full bg-[#040A08] border border-[#1B2A22] rounded-lg px-3 py-2.5 text-sm text-white placeholder-[#33473A] focus:outline-none focus:border-[#C9A35C] transition-colors'
 
   return (
     <div className="space-y-1.5">
-      <label className="block text-xs font-medium text-[#8A8AA0] uppercase tracking-wider">
+      <label className="block text-xs font-medium text-[#A3B1A5] uppercase tracking-wider">
         {field.label}
         {field.required && <span className="text-[#EF4444] ml-1">*</span>}
       </label>
@@ -81,7 +81,7 @@ function FormField({ field, value, onChange }: {
         />
       ) : field.type === 'currency' ? (
         <div className="relative">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8A8AA0] text-sm">₹</span>
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#A3B1A5] text-sm">₹</span>
           <input
             type="number"
             className={`${base} pl-7`}
@@ -109,7 +109,7 @@ function FormField({ field, value, onChange }: {
       )}
 
       {field.hint && (
-        <p className="text-[10px] text-[#5A5A72]">{field.hint}</p>
+        <p className="text-[10px] text-[#66756A]">{field.hint}</p>
       )}
     </div>
   )
@@ -131,43 +131,43 @@ function StaffSelector({ staff, selected, onSelect }: {
 
   return (
     <div className="relative">
-      <label className="block text-xs font-medium text-[#8A8AA0] uppercase tracking-wider mb-1.5">
-        Staff Member <span className="text-[#5A5A72] normal-case">(optional — for auto-fill)</span>
+      <label className="block text-xs font-medium text-[#A3B1A5] uppercase tracking-wider mb-1.5">
+        Staff Member <span className="text-[#66756A] normal-case">(optional — for auto-fill)</span>
       </label>
       <div
-        className="flex items-center gap-2 bg-[#0A0A0F] border border-[#1E1E2E] rounded-lg px-3 py-2.5 cursor-pointer hover:border-[#2E2E3E] transition-colors"
+        className="flex items-center gap-2 bg-[#040A08] border border-[#1B2A22] rounded-lg px-3 py-2.5 cursor-pointer hover:border-[#2C3D32] transition-colors"
         onClick={() => setOpen(o => !o)}
       >
         {selected ? (
           <>
-            <div className="w-7 h-7 rounded-full bg-[#F5C518] flex items-center justify-center text-black font-bold text-xs flex-shrink-0">
+            <div className="w-7 h-7 rounded-full bg-[#C9A35C] flex items-center justify-center text-black font-bold text-xs flex-shrink-0">
               {selected.full_name.charAt(0)}
             </div>
             <div className="flex-1 min-w-0">
               <div className="text-sm text-white font-medium truncate">{selected.full_name}</div>
-              <div className="text-[10px] text-[#5A5A72]">{selected.staff_id} · {selected.designation_text || ''}</div>
+              <div className="text-[10px] text-[#66756A]">{selected.staff_id} · {selected.designation_text || ''}</div>
             </div>
             <button
-              className="text-[#5A5A72] hover:text-white ml-auto"
+              className="text-[#66756A] hover:text-white ml-auto"
               onClick={e => { e.stopPropagation(); onSelect(null); setQuery('') }}
             >×</button>
           </>
         ) : (
           <>
             <Icon path={ICONS.search} size={15} />
-            <span className="text-[#3A3A4E] text-sm">Search staff by name or ID…</span>
+            <span className="text-[#33473A] text-sm">Search staff by name or ID…</span>
           </>
         )}
         <Icon path={ICONS.chevron} size={14} />
       </div>
 
       {open && (
-        <div className="absolute z-50 top-full mt-1 left-0 right-0 bg-[#12121A] border border-[#1E1E2E] rounded-lg shadow-xl overflow-hidden">
-          <div className="p-2 border-b border-[#1E1E2E]">
+        <div className="absolute z-50 top-full mt-1 left-0 right-0 card-glass rounded-lg shadow-xl overflow-hidden">
+          <div className="p-2 border-b border-[#1B2A22]">
             <input
               autoFocus
               type="text"
-              className="w-full bg-[#0A0A0F] border border-[#1E1E2E] rounded px-3 py-1.5 text-sm text-white placeholder-[#3A3A4E] focus:outline-none focus:border-[#F5C518]"
+              className="w-full bg-[#040A08] border border-[#1B2A22] rounded px-3 py-1.5 text-sm text-white placeholder-[#33473A] focus:outline-none focus:border-[#C9A35C]"
               placeholder="Search…"
               value={query}
               onChange={e => setQuery(e.target.value)}
@@ -176,19 +176,19 @@ function StaffSelector({ staff, selected, onSelect }: {
           </div>
           <div className="max-h-52 overflow-y-auto">
             {filtered.length === 0 ? (
-              <div className="px-4 py-3 text-sm text-[#5A5A72]">No staff found</div>
+              <div className="px-4 py-3 text-sm text-[#66756A]">No staff found</div>
             ) : filtered.map(s => (
               <div
                 key={s.id}
-                className="flex items-center gap-3 px-3 py-2.5 hover:bg-[#1E1E2E] cursor-pointer"
+                className="flex items-center gap-3 px-3 py-2.5 hover:bg-[#1B2A22] cursor-pointer"
                 onClick={() => { onSelect(s); setOpen(false); setQuery('') }}
               >
-                <div className="w-7 h-7 rounded-full bg-[#F5C518] flex items-center justify-center text-black font-bold text-xs flex-shrink-0">
+                <div className="w-7 h-7 rounded-full bg-[#C9A35C] flex items-center justify-center text-black font-bold text-xs flex-shrink-0">
                   {s.full_name.charAt(0)}
                 </div>
                 <div>
                   <div className="text-sm text-white">{s.full_name}</div>
-                  <div className="text-[10px] text-[#5A5A72]">{s.staff_id} · {s.designation_text || (s.designation?.title || '')}</div>
+                  <div className="text-[10px] text-[#66756A]">{s.staff_id} · {s.designation_text || (s.designation?.title || '')}</div>
                 </div>
               </div>
             ))}
@@ -311,12 +311,12 @@ function NewDocumentPageInner() {
     return (
       <div className="p-6 max-w-6xl mx-auto">
         <div className="flex items-center gap-3 mb-6">
-          <button onClick={() => router.back()} className="p-2 hover:bg-[#1E1E2E] rounded-lg text-[#8A8AA0] hover:text-white transition-colors">
+          <button onClick={() => router.back()} className="p-2 hover:bg-[#1B2A22] rounded-lg text-[#A3B1A5] hover:text-white transition-colors">
             <Icon path={ICONS.back} />
           </button>
           <div>
-            <h1 className="text-2xl font-bold text-white">Generate Document</h1>
-            <p className="text-sm text-[#5A5A72] mt-0.5">Select a document type to get started</p>
+            <h1 className="font-display text-2xl font-bold text-white">Generate Document</h1>
+            <p className="text-sm text-[#66756A] mt-0.5">Select a document type to get started</p>
           </div>
         </div>
 
@@ -324,14 +324,14 @@ function NewDocumentPageInner() {
         <div className="flex flex-wrap gap-2 mb-5">
           <button
             onClick={() => setCatFilter(null)}
-            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${!catFilter ? 'bg-[#F5C518] text-black' : 'bg-[#1E1E2E] text-[#8A8AA0] hover:text-white'}`}
+            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${!catFilter ? 'bg-[#C9A35C] text-black' : 'bg-[#1B2A22] text-[#A3B1A5] hover:text-white'}`}
           >All</button>
           {categories.map(cat => (
             <button
               key={cat}
               onClick={() => setCatFilter(cat === catFilter ? null : cat)}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${catFilter === cat ? 'text-black' : 'bg-[#1E1E2E] text-[#8A8AA0] hover:text-white'}`}
-              style={catFilter === cat ? { backgroundColor: CAT_COLORS[cat] || '#F5C518' } : {}}
+              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${catFilter === cat ? 'text-black' : 'bg-[#1B2A22] text-[#A3B1A5] hover:text-white'}`}
+              style={catFilter === cat ? { backgroundColor: CAT_COLORS[cat] || '#C9A35C' } : {}}
             >{cat}</button>
           ))}
         </div>
@@ -342,17 +342,17 @@ function NewDocumentPageInner() {
             <button
               key={doc.key}
               onClick={() => handleSelectType(doc.key)}
-              className="text-left p-4 bg-[#12121A] border border-[#1E1E2E] rounded-xl hover:border-[#2E2E3E] hover:bg-[#16161F] transition-all group"
+              className="text-left p-4 card-glass rounded-xl hover:border-[#2C3D32] hover:bg-[#16161F] transition-all group"
             >
               <div
                 className="w-8 h-8 rounded-lg flex items-center justify-center mb-3 text-sm font-bold"
-                style={{ backgroundColor: (CAT_COLORS[doc.category] || '#F5C518') + '22', color: CAT_COLORS[doc.category] || '#F5C518' }}
+                style={{ backgroundColor: (CAT_COLORS[doc.category] || '#C9A35C') + '22', color: CAT_COLORS[doc.category] || '#C9A35C' }}
               >
                 {doc.name.charAt(0)}
               </div>
-              <div className="text-sm font-semibold text-white group-hover:text-[#F5C518] transition-colors leading-tight mb-1">{doc.name}</div>
-              <div className="text-[10px] text-[#5A5A72]">{doc.category}</div>
-              <div className="text-[10px] text-[#3A3A4E] mt-1.5 leading-relaxed">{doc.description}</div>
+              <div className="text-sm font-semibold text-white group-hover:text-[#C9A35C] transition-colors leading-tight mb-1">{doc.name}</div>
+              <div className="text-[10px] text-[#66756A]">{doc.category}</div>
+              <div className="text-[10px] text-[#33473A] mt-1.5 leading-relaxed">{doc.description}</div>
             </button>
           ))}
         </div>
@@ -364,23 +364,23 @@ function NewDocumentPageInner() {
   return (
     <div className="h-[calc(100vh-64px)] flex flex-col">
       {/* Top bar */}
-      <div className="flex items-center justify-between px-6 py-3 border-b border-[#1E1E2E] bg-[#0D0D15]">
+      <div className="flex items-center justify-between px-6 py-3 border-b border-[#1B2A22] bg-[#0A130F]">
         <div className="flex items-center gap-3">
           <button
             onClick={() => setStep('select')}
-            className="p-2 hover:bg-[#1E1E2E] rounded-lg text-[#8A8AA0] hover:text-white transition-colors"
+            className="p-2 hover:bg-[#1B2A22] rounded-lg text-[#A3B1A5] hover:text-white transition-colors"
           >
             <Icon path={ICONS.back} />
           </button>
           <div>
             <h2 className="text-white font-semibold">{docDef?.name}</h2>
-            <p className="text-xs text-[#5A5A72]">{docDef?.category}</p>
+            <p className="text-xs text-[#66756A]">{docDef?.category}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={() => setShowPreview(p => !p)}
-            className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors ${showPreview ? 'bg-[#F5C518] text-black' : 'bg-[#1E1E2E] text-[#8A8AA0] hover:text-white'}`}
+            className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors ${showPreview ? 'bg-[#C9A35C] text-black' : 'bg-[#1B2A22] text-[#A3B1A5] hover:text-white'}`}
           >
             <Icon path={ICONS.eye} size={15} />
             {showPreview ? 'Hide Preview' : 'Preview'}
@@ -388,7 +388,7 @@ function NewDocumentPageInner() {
           <button
             onClick={() => handleSave(true)}
             disabled={saving}
-            className="flex items-center gap-2 px-3 py-2 bg-[#1E1E2E] text-[#8A8AA0] hover:text-white rounded-lg text-sm transition-colors disabled:opacity-50"
+            className="flex items-center gap-2 px-3 py-2 bg-[#1B2A22] text-[#A3B1A5] hover:text-white rounded-lg text-sm transition-colors disabled:opacity-50"
           >
             <Icon path={ICONS.print} size={15} />
             Save & Print
@@ -396,7 +396,7 @@ function NewDocumentPageInner() {
           <button
             onClick={() => handleSave(false)}
             disabled={saving}
-            className="flex items-center gap-2 px-4 py-2 bg-[#F5C518] text-black rounded-lg text-sm font-semibold hover:bg-[#E0B416] transition-colors disabled:opacity-50"
+            className="flex items-center gap-2 px-4 py-2 bg-[#C9A35C] text-black rounded-lg text-sm font-semibold hover:bg-[#B08D4A] transition-colors disabled:opacity-50"
           >
             <Icon path={ICONS.save} size={15} />
             {saving ? 'Saving…' : 'Save Document'}
@@ -405,18 +405,18 @@ function NewDocumentPageInner() {
       </div>
 
       {/* Content area */}
-      <div className={`flex-1 overflow-hidden flex ${showPreview ? 'divide-x divide-[#1E1E2E]' : ''}`}>
+      <div className={`flex-1 overflow-hidden flex ${showPreview ? 'divide-x divide-[#1B2A22]' : ''}`}>
         {/* Form panel */}
         <div className={`overflow-y-auto p-6 space-y-5 ${showPreview ? 'w-1/2' : 'max-w-2xl mx-auto w-full'}`}>
           {/* Staff selector */}
-          <div className="bg-[#12121A] border border-[#1E1E2E] rounded-xl p-4">
+          <div className="card-glass rounded-xl p-4">
             <StaffSelector
               staff={staffList}
               selected={selectedStaff}
               onSelect={setSelectedStaff}
             />
             {selectedStaff && (
-              <p className="text-[10px] text-[#F5C518] mt-2">
+              <p className="text-[10px] text-[#C9A35C] mt-2">
                 ✓ Auto-filled {docDef?.fields.filter(f => f.prefillFromStaff).length || 0} fields from staff record
               </p>
             )}
@@ -424,8 +424,8 @@ function NewDocumentPageInner() {
 
           {/* Document fields */}
           {docDef && (
-            <div className="bg-[#12121A] border border-[#1E1E2E] rounded-xl p-4 space-y-4">
-              <h3 className="text-xs font-semibold text-[#8A8AA0] uppercase tracking-wider">Document Details</h3>
+            <div className="card-glass rounded-xl p-4 space-y-4">
+              <h3 className="text-xs font-semibold text-[#A3B1A5] uppercase tracking-wider">Document Details</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {docDef.fields.map(field => (
                   <div key={field.key} className={field.type === 'textarea' ? 'col-span-full' : ''}>
@@ -443,8 +443,8 @@ function NewDocumentPageInner() {
 
         {/* Live preview panel */}
         {showPreview && (
-          <div className="w-1/2 overflow-y-auto bg-[#0A0A0F] p-4">
-            <div className="text-xs text-[#5A5A72] mb-3 font-medium uppercase tracking-wider">Live Preview — A4</div>
+          <div className="w-1/2 overflow-y-auto bg-[#040A08] p-4">
+            <div className="text-xs text-[#66756A] mb-3 font-medium uppercase tracking-wider">Live Preview — A4</div>
             <div
               className="bg-white rounded-lg shadow-xl mx-auto overflow-hidden"
               style={{ width: '210mm', minHeight: '297mm', transformOrigin: 'top left', transform: 'scale(0.6)', marginBottom: '-40%' }}
@@ -467,7 +467,7 @@ function NewDocumentPageInner() {
 export default function NewDocumentPage() {
   return (
     <Suspense fallback={
-      <div className="flex items-center justify-center h-64 text-[#5A5A72]">Loading…</div>
+      <div className="flex items-center justify-center h-64 text-[#66756A]">Loading…</div>
     }>
       <NewDocumentPageInner />
     </Suspense>

@@ -1,6 +1,6 @@
 'use client'
 
-import { Bell, Search, Menu } from 'lucide-react'
+import { Bell, Command } from 'lucide-react'
 
 interface HeaderProps {
   title: string
@@ -11,34 +11,62 @@ interface HeaderProps {
 
 export default function Header({ title, subtitle, actions, action }: HeaderProps) {
   const headerActions = actions ?? action
-  return (
-    <header className="h-16 border-b border-[#1E1E2E] flex items-center px-6 gap-4 bg-[#0A0A0F]/80 backdrop-blur-sm sticky top-0 z-40">
-      <div className="flex-1 min-w-0">
-        <h1 className="text-[15px] font-semibold text-[#F0F0F5] truncate">{title}</h1>
-        {subtitle && (
-          <p className="text-xs text-[#5A5A72] mt-0.5 truncate">{subtitle}</p>
-        )}
-      </div>
 
-      <div className="flex items-center gap-2.5 shrink-0">
-        {/* Search */}
-        <div className="relative hidden lg:flex items-center">
-          <Search className="w-3.5 h-3.5 absolute left-3 text-[#3A3A55]" />
-          <input
-            type="text"
-            placeholder="Quick search..."
-            className="pl-8 pr-4 py-1.5 bg-[#12121A] border border-[#1E1E2E] rounded-lg text-sm text-[#F0F0F5] placeholder-[#3A3A55] focus:outline-none focus:border-[#F5C518]/50 w-44 transition-all"
-          />
+  const openPalette = () => {
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true }))
+  }
+
+  return (
+    <header className="sticky top-0 z-40 px-6 pt-4 pb-3"
+      style={{
+        background: 'linear-gradient(180deg, rgba(4,10,8,0.88) 60%, rgba(4,10,8,0))',
+        backdropFilter: 'blur(14px) saturate(1.2)',
+        WebkitBackdropFilter: 'blur(14px) saturate(1.2)',
+      }}>
+      <div className="flex items-center gap-4 max-w-[1600px] mx-auto">
+        {/* Brand mark */}
+        <div className="hidden sm:flex w-9 h-9 rounded-xl items-center justify-center shrink-0"
+          style={{
+            background: 'linear-gradient(135deg, #E2C285 0%, #A87F3D 100%)',
+            boxShadow: '0 4px 16px rgba(201,163,92,0.4), inset 0 1px 0 rgba(255,255,255,0.25)',
+          }}>
+          <span className="font-display font-semibold text-[13px]" style={{ color: '#120D04' }}>F</span>
         </div>
 
-        {/* Custom actions */}
-        {headerActions}
+        <div className="flex-1 min-w-0">
+          <h1 className="font-display text-lg font-semibold text-[#EDEFE9] truncate leading-tight">{title}</h1>
+          {subtitle && (
+            <p className="text-xs text-[#66756A] mt-0.5 truncate">{subtitle}</p>
+          )}
+        </div>
 
-        {/* Notifications */}
-        <button className="relative w-8 h-8 flex items-center justify-center rounded-lg bg-[#12121A] border border-[#1E1E2E] text-[#3A3A55] hover:text-[#F0F0F5] hover:border-[#2A2A3E] transition-all">
-          <Bell className="w-3.5 h-3.5" />
-          <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-[#F5C518] rounded-full" />
-        </button>
+        <div className="flex items-center gap-2.5 shrink-0">
+          {/* Palette trigger */}
+          <button onClick={openPalette}
+            className="hidden lg:flex items-center gap-2 pl-3 pr-2 py-1.5 rounded-xl text-sm transition-all"
+            style={{
+              background: 'rgba(226,194,133,0.04)',
+              border: '1px solid rgba(226,194,133,0.10)',
+              color: 'var(--text-muted)',
+            }}>
+            <Command className="w-3.5 h-3.5" />
+            <span className="text-xs">Jump to…</span>
+            <span className="kbd-hint">Ctrl K</span>
+          </button>
+
+          {headerActions}
+
+          <button className="relative w-8 h-8 flex items-center justify-center rounded-xl transition-all"
+            style={{
+              background: 'rgba(226,194,133,0.04)',
+              border: '1px solid rgba(226,194,133,0.10)',
+              color: 'var(--text-muted)',
+            }}>
+            <Bell className="w-3.5 h-3.5" />
+            <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full"
+              style={{ background: 'var(--brass-400)', boxShadow: '0 0 6px var(--brass-glow)' }} />
+          </button>
+        </div>
       </div>
     </header>
   )

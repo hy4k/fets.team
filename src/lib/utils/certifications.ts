@@ -21,7 +21,7 @@ export const STATUS_LABELS: Record<string, string> = {
 }
 
 export const STATUS_COLORS: Record<string, string> = {
-  not_started: 'text-[#5A5A72] bg-[#1A1A28]',
+  not_started: 'text-[#66756A] bg-[#12231C]',
   in_progress: 'text-blue-400 bg-blue-500/10',
   passed: 'text-green-400 bg-green-500/10',
   failed: 'text-red-400 bg-red-500/10',

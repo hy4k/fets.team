@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
-import Sidebar from '@/components/layout/Sidebar'
-import { cn } from '@/lib/utils'
+import { useEffect, useState } from 'react'
+import CommandDock from '@/components/layout/CommandDock'
+import CommandPalette from '@/components/layout/CommandPalette'
 
 interface ClientLayoutProps {
   children: React.ReactNode
@@ -10,17 +10,28 @@ interface ClientLayoutProps {
 }
 
 export default function ClientLayout({ children, role }: ClientLayoutProps) {
-  const [collapsed, setCollapsed] = useState(false)
+  const [paletteOpen, setPaletteOpen] = useState(false)
+
+  // Global Ctrl/Cmd+K
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault()
+        setPaletteOpen(o => !o)
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
 
   return (
-    <div className="min-h-screen bg-[#0A0A0F]">
-      <Sidebar collapsed={collapsed} onToggle={() => setCollapsed(!collapsed)} role={role} />
-      <main className={cn(
-        'transition-all duration-300 ease-in-out min-h-screen',
-        collapsed ? 'ml-[72px]' : 'ml-[260px]'
-      )}>
+    <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
+      <div className="aurora-veil" aria-hidden />
+      <main className="relative z-10 min-h-screen pb-28">
         {children}
       </main>
+      <CommandDock role={role} onOpenPalette={() => setPaletteOpen(true)} />
+      <CommandPalette role={role} open={paletteOpen} onClose={() => setPaletteOpen(false)} />
     </div>
   )
 }

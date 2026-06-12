@@ -64,8 +64,8 @@ function Field({ label, required, error, children }: {
 }) {
   return (
     <div className="space-y-1.5">
-      <label className="block text-xs font-medium text-[#A0A0B8]">
-        {label} {required && <span className="text-[#F5C518]">*</span>}
+      <label className="block text-xs font-medium text-[#A9B5A9]">
+        {label} {required && <span className="text-[#C9A35C]">*</span>}
       </label>
       {children}
       {error && <p className="text-xs text-rose-400 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{error}</p>}
@@ -83,7 +83,7 @@ function Input({ value, onChange, placeholder, type = 'text', disabled }: {
       onChange={e => onChange(e.target.value)}
       placeholder={placeholder}
       disabled={disabled}
-      className="w-full px-3.5 py-2.5 bg-[#0D0D15] border border-[#1E1E2E] rounded-lg text-sm text-[#F0F0F5] placeholder-[#3A3A55] focus:outline-none focus:border-[#F5C518]/40 disabled:opacity-50 transition-colors"
+      className="w-full px-3.5 py-2.5 bg-[#0A130F] border border-[#1B2A22] rounded-lg text-sm text-[#EDEFE9] placeholder-[#3D4B42] focus:outline-none focus:border-[#C9A35C]/40 disabled:opacity-50 transition-colors"
     />
   )
 }
@@ -95,7 +95,7 @@ function Select({ value, onChange, children }: {
     <select
       value={value}
       onChange={e => onChange(e.target.value)}
-      className="w-full px-3.5 py-2.5 bg-[#0D0D15] border border-[#1E1E2E] rounded-lg text-sm text-[#F0F0F5] focus:outline-none focus:border-[#F5C518]/40 transition-colors"
+      className="w-full px-3.5 py-2.5 bg-[#0A130F] border border-[#1B2A22] rounded-lg text-sm text-[#EDEFE9] focus:outline-none focus:border-[#C9A35C]/40 transition-colors"
     >
       {children}
     </select>
@@ -198,7 +198,7 @@ export default function AddStaffPage() {
     }
   }
 
-  const sectionLabel = 'text-xs font-semibold text-[#5A5A72] uppercase tracking-wider mb-4 mt-6 first:mt-0'
+  const sectionLabel = 'text-xs font-semibold text-[#66756A] uppercase tracking-wider mb-4 mt-6 first:mt-0'
 
   return (
     <div className="animate-fade-in">
@@ -207,7 +207,7 @@ export default function AddStaffPage() {
         subtitle="Fill in staff details to create a new profile"
         action={
           <button onClick={() => router.push('/staff')}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-[#5A5A72] hover:text-[#F0F0F5] border border-[#1E1E2E] rounded-lg transition-colors">
+            className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-[#66756A] hover:text-[#EDEFE9] border border-[#1B2A22] rounded-lg transition-colors">
             <ArrowLeft className="w-4 h-4" />
             Back
           </button>
@@ -227,23 +227,23 @@ export default function AddStaffPage() {
                   onClick={() => i < step && setStep(i)}
                   className={cn(
                     'flex items-center gap-2.5 px-3 py-2 rounded-lg transition-all text-sm font-medium flex-shrink-0',
-                    current && 'bg-[#F5C518]/10 text-[#F5C518]',
+                    current && 'bg-[#C9A35C]/10 text-[#C9A35C]',
                     done    && 'text-emerald-400 cursor-pointer hover:bg-emerald-400/5',
-                    !current && !done && 'text-[#5A5A72]'
+                    !current && !done && 'text-[#66756A]'
                   )}
                 >
                   <div className={cn(
                     'w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border',
-                    current && 'bg-[#F5C518] text-[#0A0A0F] border-[#F5C518]',
+                    current && 'bg-[#C9A35C] text-[#040A08] border-[#C9A35C]',
                     done    && 'bg-emerald-400/20 text-emerald-400 border-emerald-400/40',
-                    !current && !done && 'bg-[#12121A] text-[#5A5A72] border-[#1E1E2E]'
+                    !current && !done && 'bg-[#0C1A16] text-[#66756A] border-[#1B2A22]'
                   )}>
                     {done ? '✓' : i + 1}
                   </div>
                   <span className="hidden sm:block">{s.title}</span>
                 </button>
                 {i < STEPS.length - 1 && (
-                  <div className={cn('flex-1 h-px mx-2', i < step ? 'bg-emerald-400/30' : 'bg-[#1E1E2E]')} />
+                  <div className={cn('flex-1 h-px mx-2', i < step ? 'bg-emerald-400/30' : 'bg-[#1B2A22]')} />
                 )}
               </div>
             )
@@ -251,13 +251,13 @@ export default function AddStaffPage() {
         </div>
 
         {/* Form card */}
-        <div className="bg-[#12121A] border border-[#1E1E2E] rounded-2xl p-7">
+        <div className="card-glass rounded-2xl p-7">
 
           {/* ─── Step 0: Personal Info ─────────────────────────────── */}
           {step === 0 && (
             <div>
-              <h2 className="text-base font-semibold text-[#F0F0F5] mb-1">Personal Information</h2>
-              <p className="text-sm text-[#5A5A72] mb-6">Basic details and contact information</p>
+              <h2 className="text-base font-semibold text-[#EDEFE9] mb-1">Personal Information</h2>
+              <p className="text-sm text-[#66756A] mb-6">Basic details and contact information</p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Field label="Full Name" required error={errors.full_name}>
@@ -326,8 +326,8 @@ export default function AddStaffPage() {
           {/* ─── Step 1: Employment ────────────────────────────────── */}
           {step === 1 && (
             <div>
-              <h2 className="text-base font-semibold text-[#F0F0F5] mb-1">Employment Details</h2>
-              <p className="text-sm text-[#5A5A72] mb-6">Role, centre assignment and salary</p>
+              <h2 className="text-base font-semibold text-[#EDEFE9] mb-1">Employment Details</h2>
+              <p className="text-sm text-[#66756A] mb-6">Role, centre assignment and salary</p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Field label="Centre" required error={errors.centre_id}>
@@ -387,9 +387,9 @@ export default function AddStaffPage() {
                 </Field>
               </div>
 
-              <div className="mt-5 p-4 bg-[#0D0D15] border border-[#1E1E2E] rounded-xl">
-                <p className="text-xs text-[#5A5A72]">
-                  <span className="text-[#F5C518] font-medium">Staff ID</span> will be auto-generated in FETS#### format (e.g., FETS0018) after submission.
+              <div className="mt-5 p-4 bg-[#0A130F] border border-[#1B2A22] rounded-xl">
+                <p className="text-xs text-[#66756A]">
+                  <span className="text-[#C9A35C] font-medium">Staff ID</span> will be auto-generated in FETS#### format (e.g., FETS0018) after submission.
                 </p>
               </div>
             </div>
@@ -398,8 +398,8 @@ export default function AddStaffPage() {
           {/* ─── Step 2: Bank & Docs ───────────────────────────────── */}
           {step === 2 && (
             <div>
-              <h2 className="text-base font-semibold text-[#F0F0F5] mb-1">Bank Account & Documents</h2>
-              <p className="text-sm text-[#5A5A72] mb-6">Bank details and identity documents</p>
+              <h2 className="text-base font-semibold text-[#EDEFE9] mb-1">Bank Account & Documents</h2>
+              <p className="text-sm text-[#66756A] mb-6">Bank details and identity documents</p>
 
               <p className={sectionLabel}>Bank Account</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -430,8 +430,8 @@ export default function AddStaffPage() {
                 </Field>
               </div>
 
-              <div className="mt-5 p-4 bg-[#0D0D15] border border-[#1E1E2E] rounded-xl">
-                <p className="text-xs text-[#5A5A72]">
+              <div className="mt-5 p-4 bg-[#0A130F] border border-[#1B2A22] rounded-xl">
+                <p className="text-xs text-[#66756A]">
                   Photo and document uploads (Aadhaar, resume, appointment letter) are available on the staff profile page after creation.
                 </p>
               </div>
@@ -441,8 +441,8 @@ export default function AddStaffPage() {
           {/* ─── Step 3: Review ────────────────────────────────────── */}
           {step === 3 && (
             <div>
-              <h2 className="text-base font-semibold text-[#F0F0F5] mb-1">Review & Submit</h2>
-              <p className="text-sm text-[#5A5A72] mb-6">Confirm all details before adding the staff member</p>
+              <h2 className="text-base font-semibold text-[#EDEFE9] mb-1">Review & Submit</h2>
+              <p className="text-sm text-[#66756A] mb-6">Confirm all details before adding the staff member</p>
 
               <div className="space-y-5">
                 {[
@@ -478,15 +478,15 @@ export default function AddStaffPage() {
                     ]
                   }
                 ].map(section => (
-                  <div key={section.title} className="bg-[#0D0D15] border border-[#1E1E2E] rounded-xl overflow-hidden">
-                    <div className="px-4 py-2.5 border-b border-[#1E1E2E] bg-[#12121A]">
-                      <span className="text-xs font-semibold text-[#5A5A72] uppercase tracking-wider">{section.title}</span>
+                  <div key={section.title} className="bg-[#0A130F] border border-[#1B2A22] rounded-xl overflow-hidden">
+                    <div className="px-4 py-2.5 border-b border-[#1B2A22] bg-[#0C1A16]">
+                      <span className="text-xs font-semibold text-[#66756A] uppercase tracking-wider">{section.title}</span>
                     </div>
-                    <div className="divide-y divide-[#1A1A28]">
+                    <div className="divide-y divide-[#12231C]">
                       {section.rows.map(([label, value]) => (
                         <div key={label} className="flex items-center justify-between px-4 py-2.5">
-                          <span className="text-xs text-[#5A5A72]">{label}</span>
-                          <span className="text-sm text-[#F0F0F5]">{value}</span>
+                          <span className="text-xs text-[#66756A]">{label}</span>
+                          <span className="text-sm text-[#EDEFE9]">{value}</span>
                         </div>
                       ))}
                     </div>
@@ -504,10 +504,10 @@ export default function AddStaffPage() {
           )}
 
           {/* Navigation */}
-          <div className="flex items-center justify-between mt-8 pt-5 border-t border-[#1E1E2E]">
+          <div className="flex items-center justify-between mt-8 pt-5 border-t border-[#1B2A22]">
             <button
               onClick={step === 0 ? () => router.push('/staff') : back}
-              className="flex items-center gap-2 px-4 py-2 text-sm text-[#A0A0B8] hover:text-[#F0F0F5] border border-[#1E1E2E] rounded-lg transition-colors"
+              className="flex items-center gap-2 px-4 py-2 text-sm text-[#A9B5A9] hover:text-[#EDEFE9] border border-[#1B2A22] rounded-lg transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
               {step === 0 ? 'Cancel' : 'Back'}
@@ -516,7 +516,7 @@ export default function AddStaffPage() {
             {step < 3 ? (
               <button
                 onClick={next}
-                className="flex items-center gap-2 px-5 py-2 bg-[#F5C518] text-[#0A0A0F] rounded-lg text-sm font-semibold hover:bg-[#F5C518]/90 transition-all"
+                className="flex items-center gap-2 px-5 py-2 bg-[#C9A35C] text-[#040A08] rounded-lg text-sm font-semibold hover:bg-[#C9A35C]/90 transition-all"
               >
                 Next
                 <ArrowRight className="w-4 h-4" />
@@ -525,7 +525,7 @@ export default function AddStaffPage() {
               <button
                 onClick={handleSubmit}
                 disabled={submitting}
-                className="flex items-center gap-2 px-6 py-2 bg-[#F5C518] text-[#0A0A0F] rounded-lg text-sm font-semibold hover:bg-[#F5C518]/90 disabled:opacity-60 transition-all"
+                className="flex items-center gap-2 px-6 py-2 bg-[#C9A35C] text-[#040A08] rounded-lg text-sm font-semibold hover:bg-[#C9A35C]/90 disabled:opacity-60 transition-all"
               >
                 {submitting ? (
                   <><Loader2 className="w-4 h-4 animate-spin" />Creating…</>

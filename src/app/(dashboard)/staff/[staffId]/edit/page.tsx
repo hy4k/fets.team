@@ -41,8 +41,8 @@ interface FormState {
 function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
   return (
     <div className="space-y-1.5">
-      <label className="block text-xs font-medium text-[#A0A0B8]">
-        {label} {required && <span className="text-[#F5C518]">*</span>}
+      <label className="block text-xs font-medium text-[#A9B5A9]">
+        {label} {required && <span className="text-[#C9A35C]">*</span>}
       </label>
       {children}
     </div>
@@ -58,7 +58,7 @@ function Input({ value, onChange, placeholder, type = 'text' }: {
       value={value}
       onChange={e => onChange(e.target.value)}
       placeholder={placeholder}
-      className="w-full px-3.5 py-2.5 bg-[#0D0D15] border border-[#1E1E2E] rounded-lg text-sm text-[#F0F0F5] placeholder-[#3A3A55] focus:outline-none focus:border-[#F5C518]/40 transition-colors"
+      className="w-full px-3.5 py-2.5 bg-[#0A130F] border border-[#1B2A22] rounded-lg text-sm text-[#EDEFE9] placeholder-[#3D4B42] focus:outline-none focus:border-[#C9A35C]/40 transition-colors"
     />
   )
 }
@@ -70,7 +70,7 @@ function Select({ value, onChange, children }: {
     <select
       value={value}
       onChange={e => onChange(e.target.value)}
-      className="w-full px-3.5 py-2.5 bg-[#0D0D15] border border-[#1E1E2E] rounded-lg text-sm text-[#F0F0F5] focus:outline-none focus:border-[#F5C518]/40 transition-colors"
+      className="w-full px-3.5 py-2.5 bg-[#0A130F] border border-[#1B2A22] rounded-lg text-sm text-[#EDEFE9] focus:outline-none focus:border-[#C9A35C]/40 transition-colors"
     >
       {children}
     </select>
@@ -79,8 +79,8 @@ function Select({ value, onChange, children }: {
 
 function Section({ title }: { title: string }) {
   return (
-    <div className="col-span-full pt-4 pb-2 border-t border-[#1E1E2E] first:border-t-0 first:pt-0">
-      <h3 className="text-xs font-semibold text-[#5A5A72] uppercase tracking-wider">{title}</h3>
+    <div className="col-span-full pt-4 pb-2 border-t border-[#1B2A22] first:border-t-0 first:pt-0">
+      <h3 className="text-xs font-semibold text-[#66756A] uppercase tracking-wider">{title}</h3>
     </div>
   )
 }
@@ -197,8 +197,8 @@ export default function EditStaffPage() {
   if (loading) {
     return (
       <div className="p-6 max-w-[900px] mx-auto animate-pulse space-y-4">
-        <div className="h-8 w-48 bg-[#1E1E2E] rounded" />
-        <div className="h-96 bg-[#12121A] border border-[#1E1E2E] rounded-xl" />
+        <div className="h-8 w-48 bg-[#1B2A22] rounded" />
+        <div className="h-96 card-glass rounded-xl" />
       </div>
     )
   }
@@ -210,7 +210,7 @@ export default function EditStaffPage() {
         subtitle="Update staff profile details"
         action={
           <button onClick={() => router.push(`/staff/${staffId}`)}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-[#5A5A72] hover:text-[#F0F0F5] border border-[#1E1E2E] rounded-lg transition-colors">
+            className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-[#66756A] hover:text-[#EDEFE9] border border-[#1B2A22] rounded-lg transition-colors">
             <ArrowLeft className="w-4 h-4" />
             Back
           </button>
@@ -231,7 +231,7 @@ export default function EditStaffPage() {
           </div>
         )}
 
-        <div className="bg-[#12121A] border border-[#1E1E2E] rounded-2xl p-6">
+        <div className="card-glass rounded-2xl p-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
             <Section title="Personal Information" />
@@ -359,17 +359,17 @@ export default function EditStaffPage() {
             </Field>
           </div>
 
-          <div className="flex items-center justify-end gap-3 mt-7 pt-5 border-t border-[#1E1E2E]">
+          <div className="flex items-center justify-end gap-3 mt-7 pt-5 border-t border-[#1B2A22]">
             <button
               onClick={() => router.push(`/staff/${staffId}`)}
-              className="px-4 py-2 text-sm text-[#A0A0B8] border border-[#1E1E2E] rounded-lg hover:text-[#F0F0F5] transition-colors"
+              className="px-4 py-2 text-sm text-[#A9B5A9] border border-[#1B2A22] rounded-lg hover:text-[#EDEFE9] transition-colors"
             >
               Cancel
             </button>
             <button
               onClick={handleSave}
               disabled={saving || saved}
-              className="flex items-center gap-2 px-5 py-2 bg-[#F5C518] text-[#0A0A0F] rounded-lg text-sm font-semibold hover:bg-[#F5C518]/90 disabled:opacity-60 transition-all"
+              className="flex items-center gap-2 px-5 py-2 bg-[#C9A35C] text-[#040A08] rounded-lg text-sm font-semibold hover:bg-[#C9A35C]/90 disabled:opacity-60 transition-all"
             >
               {saving ? <><Loader2 className="w-4 h-4 animate-spin" />Saving…</> :
                saved  ? <><CheckCircle2 className="w-4 h-4" />Saved!</> :

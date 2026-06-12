@@ -36,7 +36,7 @@ const statusConfig: Record<string, { label: string; color: string; icon: React.E
   active:     { label: 'Active',      color: 'text-emerald-400 bg-emerald-400/10 border-emerald-400/20', icon: CheckCircle },
   on_leave:   { label: 'On Leave',    color: 'text-amber-400  bg-amber-400/10  border-amber-400/20',     icon: Clock },
   probation:  { label: 'Probation',   color: 'text-blue-400   bg-blue-400/10   border-blue-400/20',      icon: Clock },
-  resigned:   { label: 'Resigned',    color: 'text-[#5A5A72]  bg-[#1E1E2E]     border-[#2A2A3E]',        icon: UserX },
+  resigned:   { label: 'Resigned',    color: 'text-[#66756A]  bg-[#1B2A22]     border-[#27392E]',        icon: UserX },
   terminated: { label: 'Terminated',  color: 'text-rose-400   bg-rose-400/10   border-rose-400/20',      icon: XCircle },
 }
 
@@ -103,7 +103,7 @@ export default function StaffPage() {
         action={
           <button
             onClick={() => router.push('/staff/new')}
-            className="flex items-center gap-2 px-4 py-2 bg-[#F5C518] text-[#0A0A0F] rounded-lg font-semibold text-sm hover:bg-[#F5C518]/90 transition-all"
+            className="flex items-center gap-2 px-4 py-2 bg-[#C9A35C] text-[#040A08] rounded-lg font-semibold text-sm hover:bg-[#C9A35C]/90 transition-all"
           >
             <Plus className="w-4 h-4" />
             Add Staff
@@ -116,14 +116,14 @@ export default function StaffPage() {
         {/* Stats row */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {[
-            { label: 'Total Staff',  value: counts.total,     color: 'text-[#F0F0F5]' },
+            { label: 'Total Staff',  value: counts.total,     color: 'text-[#EDEFE9]' },
             { label: 'Active',       value: counts.active,    color: 'text-emerald-400' },
             { label: 'On Leave',     value: counts.onLeave,   color: 'text-amber-400' },
             { label: 'Probation',    value: counts.probation, color: 'text-blue-400' },
           ].map(s => (
-            <div key={s.label} className="bg-[#12121A] border border-[#1E1E2E] rounded-xl p-4">
+            <div key={s.label} className="card-glass rounded-xl p-4">
               <div className={`text-2xl font-bold ${s.color}`}>{s.value}</div>
-              <div className="text-xs text-[#5A5A72] mt-0.5">{s.label}</div>
+              <div className="text-xs text-[#66756A] mt-0.5">{s.label}</div>
             </div>
           ))}
         </div>
@@ -131,19 +131,19 @@ export default function StaffPage() {
         {/* Filters */}
         <div className="flex flex-col sm:flex-row gap-3">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#5A5A72]" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#66756A]" />
             <input
               type="text"
               placeholder="Search by name, ID, or email..."
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="w-full pl-9 pr-4 py-2.5 bg-[#12121A] border border-[#1E1E2E] rounded-lg text-sm text-[#F0F0F5] placeholder-[#5A5A72] focus:outline-none focus:border-[#F5C518]/40"
+              className="w-full pl-9 pr-4 py-2.5 card-glass rounded-lg text-sm text-[#EDEFE9] placeholder-[#66756A] focus:outline-none focus:border-[#C9A35C]/40"
             />
           </div>
           <select
             value={centreFilter}
             onChange={e => setCentre(e.target.value)}
-            className="px-3 py-2.5 bg-[#12121A] border border-[#1E1E2E] rounded-lg text-sm text-[#A0A0B8] focus:outline-none focus:border-[#F5C518]/40 min-w-[160px]"
+            className="px-3 py-2.5 card-glass rounded-lg text-sm text-[#A9B5A9] focus:outline-none focus:border-[#C9A35C]/40 min-w-[160px]"
           >
             <option value="">All Centres</option>
             {centres.map(c => (
@@ -153,7 +153,7 @@ export default function StaffPage() {
           <select
             value={statusFilter}
             onChange={e => setStatus(e.target.value)}
-            className="px-3 py-2.5 bg-[#12121A] border border-[#1E1E2E] rounded-lg text-sm text-[#A0A0B8] focus:outline-none focus:border-[#F5C518]/40 min-w-[140px]"
+            className="px-3 py-2.5 card-glass rounded-lg text-sm text-[#A9B5A9] focus:outline-none focus:border-[#C9A35C]/40 min-w-[140px]"
           >
             <option value="">All Status</option>
             <option value="active">Active</option>
@@ -165,14 +165,14 @@ export default function StaffPage() {
         </div>
 
         {/* Table */}
-        <div className="bg-[#12121A] border border-[#1E1E2E] rounded-xl overflow-hidden">
+        <div className="card-glass rounded-xl overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-[#1E1E2E]">
+                <tr className="border-b border-[#1B2A22]">
                   {['Staff', 'Role', 'Centre', 'Joined', 'Status', ''].map((h, i) => (
                     <th key={i} className={cn(
-                      'text-left px-5 py-3.5 text-xs font-semibold text-[#5A5A72] uppercase tracking-wider',
+                      'text-left px-5 py-3.5 text-xs font-semibold text-[#66756A] uppercase tracking-wider',
                       i === 1 && 'hidden sm:table-cell',
                       i === 2 && 'hidden md:table-cell',
                       i === 3 && 'hidden lg:table-cell',
@@ -183,22 +183,22 @@ export default function StaffPage() {
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#1E1E2E]">
+              <tbody className="divide-y divide-[#1B2A22]">
                 {loading ? (
                   Array.from({ length: 5 }).map((_, i) => (
                     <tr key={i} className="animate-pulse">
                       <td className="px-5 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-full bg-[#1E1E2E]" />
+                          <div className="w-9 h-9 rounded-full bg-[#1B2A22]" />
                           <div>
-                            <div className="h-3.5 w-32 bg-[#1E1E2E] rounded mb-1.5" />
-                            <div className="h-3 w-20 bg-[#1E1E2E] rounded" />
+                            <div className="h-3.5 w-32 bg-[#1B2A22] rounded mb-1.5" />
+                            <div className="h-3 w-20 bg-[#1B2A22] rounded" />
                           </div>
                         </div>
                       </td>
                       {[0,1,2,3].map(j => (
                         <td key={j} className="px-4 py-4 hidden sm:table-cell">
-                          <div className="h-3.5 w-24 bg-[#1E1E2E] rounded" />
+                          <div className="h-3.5 w-24 bg-[#1B2A22] rounded" />
                         </td>
                       ))}
                       <td className="px-4 py-4" />
@@ -206,7 +206,7 @@ export default function StaffPage() {
                   ))
                 ) : filtered.length === 0 ? (
                   <tr>
-                    <td colSpan={6} className="px-5 py-16 text-center text-[#5A5A72]">
+                    <td colSpan={6} className="px-5 py-16 text-center text-[#66756A]">
                       No staff found.
                     </td>
                   </tr>
@@ -217,36 +217,36 @@ export default function StaffPage() {
                     <tr
                       key={member.id}
                       onClick={() => router.push(`/staff/${member.id}`)}
-                      className="hover:bg-[#0D0D15]/60 transition-colors group cursor-pointer"
+                      className="hover:bg-[#0A130F]/60 transition-colors group cursor-pointer"
                     >
                       <td className="px-5 py-4">
                         <div className="flex items-center gap-3">
                           {member.photo_url ? (
-                            <img src={member.photo_url} alt="" className="w-9 h-9 rounded-full object-cover border border-[#1E1E2E]" />
+                            <img src={member.photo_url} alt="" className="w-9 h-9 rounded-full object-cover border border-[#1B2A22]" />
                           ) : (
-                            <div className="w-9 h-9 rounded-full bg-[#F5C518]/15 border border-[#F5C518]/20 flex items-center justify-center text-[#F5C518] text-xs font-bold flex-shrink-0">
+                            <div className="w-9 h-9 rounded-full bg-[#C9A35C]/15 border border-[#C9A35C]/20 flex items-center justify-center text-[#C9A35C] text-xs font-bold flex-shrink-0">
                               {getInitials(member.full_name)}
                             </div>
                           )}
                           <div>
-                            <div className="font-medium text-[#F0F0F5] group-hover:text-white">{member.full_name}</div>
-                            <div className="text-xs text-[#5A5A72] font-mono">{member.staff_id}</div>
+                            <div className="font-medium text-[#EDEFE9] group-hover:text-white">{member.full_name}</div>
+                            <div className="text-xs text-[#66756A] font-mono">{member.staff_id}</div>
                           </div>
                         </div>
                       </td>
                       <td className="px-4 py-4 hidden sm:table-cell">
-                        <div className="text-[#A0A0B8]">{member.designation?.title || '—'}</div>
-                        {member.department && <div className="text-xs text-[#5A5A72]">{member.department.name}</div>}
+                        <div className="text-[#A9B5A9]">{member.designation?.title || '—'}</div>
+                        {member.department && <div className="text-xs text-[#66756A]">{member.department.name}</div>}
                       </td>
                       <td className="px-4 py-4 hidden md:table-cell">
                         {member.centre ? (
-                          <div className="flex items-center gap-1.5 text-[#A0A0B8]">
-                            <MapPin className="w-3.5 h-3.5 text-[#5A5A72]" />
+                          <div className="flex items-center gap-1.5 text-[#A9B5A9]">
+                            <MapPin className="w-3.5 h-3.5 text-[#66756A]" />
                             {member.centre.city}
                           </div>
                         ) : '—'}
                       </td>
-                      <td className="px-4 py-4 hidden lg:table-cell text-[#A0A0B8]">
+                      <td className="px-4 py-4 hidden lg:table-cell text-[#A9B5A9]">
                         {member.date_of_joining ? formatDate(member.date_of_joining) : '—'}
                       </td>
                       <td className="px-4 py-4">
@@ -259,18 +259,18 @@ export default function StaffPage() {
                         <div className="relative">
                           <button
                             onClick={e => { e.stopPropagation(); setOpenMenu(openMenu === member.id ? null : member.id) }}
-                            className="p-1.5 rounded-lg text-[#5A5A72] hover:text-[#F0F0F5] hover:bg-[#1E1E2E] transition-colors opacity-0 group-hover:opacity-100"
+                            className="p-1.5 rounded-lg text-[#66756A] hover:text-[#EDEFE9] hover:bg-[#1B2A22] transition-colors opacity-0 group-hover:opacity-100"
                           >
                             <MoreVertical className="w-4 h-4" />
                           </button>
                           {openMenu === member.id && (
-                            <div className="absolute right-0 top-8 z-50 bg-[#1A1A2E] border border-[#2A2A3E] rounded-xl shadow-2xl w-44 py-1">
+                            <div className="absolute right-0 top-8 z-50 bg-[#1A1A2E] border border-[#27392E] rounded-xl shadow-2xl w-44 py-1">
                               <button onClick={() => router.push(`/staff/${member.id}`)}
-                                className="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm text-[#A0A0B8] hover:text-[#F0F0F5] hover:bg-[#F5C518]/5">
+                                className="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm text-[#A9B5A9] hover:text-[#EDEFE9] hover:bg-[#C9A35C]/5">
                                 <Eye className="w-4 h-4" /> View Profile
                               </button>
                               <button onClick={() => router.push(`/staff/${member.id}/edit`)}
-                                className="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm text-[#A0A0B8] hover:text-[#F0F0F5] hover:bg-[#F5C518]/5">
+                                className="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm text-[#A9B5A9] hover:text-[#EDEFE9] hover:bg-[#C9A35C]/5">
                                 <Edit2 className="w-4 h-4" /> Edit Staff
                               </button>
                             </div>
@@ -285,14 +285,14 @@ export default function StaffPage() {
           </div>
 
           {!loading && filtered.length > 0 && (
-            <div className="px-5 py-3 border-t border-[#1E1E2E] flex items-center justify-between">
-              <span className="text-xs text-[#5A5A72]">
+            <div className="px-5 py-3 border-t border-[#1B2A22] flex items-center justify-between">
+              <span className="text-xs text-[#66756A]">
                 Showing {filtered.length} of {staff.length} staff
               </span>
               {(centreFilter || statusFilter) && (
                 <button
                   onClick={() => { setCentre(''); setStatus('') }}
-                  className="text-xs text-[#F5C518] hover:underline"
+                  className="text-xs text-[#C9A35C] hover:underline"
                 >
                   Clear filters
                 </button>

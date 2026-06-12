@@ -34,7 +34,7 @@ function isExpired(date: string | null) {
 
 function StatusBadge({ status }: { status: string }) {
   const label = STATUS_LABELS[status] || status
-  const color = STATUS_COLORS[status] || 'text-[#5A5A72] bg-[#1A1A28]'
+  const color = STATUS_COLORS[status] || 'text-[#66756A] bg-[#12231C]'
   return (
     <span className={cn('inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium', color)}>
       {label}
@@ -82,65 +82,65 @@ function AssignModal({ staffList, certTypes, existing, onClose, onSuccess }: Ass
 
   return (
     <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="bg-[#0D0D15] border border-[#1E1E2E] rounded-2xl w-full max-w-lg shadow-2xl">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#1E1E2E]">
+      <div className="bg-[#0A130F] border border-[#1B2A22] rounded-2xl w-full max-w-lg shadow-2xl">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#1B2A22]">
           <div className="flex items-center gap-2">
-            <Award className="w-5 h-5 text-[#F5C518]" />
-            <h2 className="text-[#F0F0F5] font-semibold text-[15px]">
+            <Award className="w-5 h-5 text-[#C9A35C]" />
+            <h2 className="text-[#EDEFE9] font-semibold text-[15px]">
               {existing ? 'Update Certification' : 'Assign Certification'}
             </h2>
           </div>
-          <button onClick={onClose} className="text-[#3A3A55] hover:text-[#F0F0F5] transition-colors">
+          <button onClick={onClose} className="text-[#3D4B42] hover:text-[#EDEFE9] transition-colors">
             <X className="w-5 h-5" />
           </button>
         </div>
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-[#8B8BA0] text-xs font-medium mb-1.5">Staff Member <span className="text-red-400">*</span></label>
+              <label className="block text-[#A9B5A9] text-xs font-medium mb-1.5">Staff Member <span className="text-red-400">*</span></label>
               <select value={staffId} onChange={e => setStaffId(e.target.value)} disabled={!!existing}
-                className="w-full bg-[#0A0A12] border border-[#2A2A3E] rounded-lg px-3 py-2.5 text-[#C0C0D0] text-sm focus:outline-none focus:border-[#F5C518]/50 disabled:opacity-60" required>
+                className="w-full bg-[#060D0A] border border-[#27392E] rounded-lg px-3 py-2.5 text-[#C4CDC2] text-sm focus:outline-none focus:border-[#C9A35C]/50 disabled:opacity-60" required>
                 <option value="">Select staff…</option>
                 {staffList.map(s => <option key={s.id} value={s.id}>{s.full_name} ({s.staff_id})</option>)}
               </select>
             </div>
             <div>
-              <label className="block text-[#8B8BA0] text-xs font-medium mb-1.5">Certification <span className="text-red-400">*</span></label>
+              <label className="block text-[#A9B5A9] text-xs font-medium mb-1.5">Certification <span className="text-red-400">*</span></label>
               <select value={certId} onChange={e => setCertId(e.target.value)} disabled={!!existing}
-                className="w-full bg-[#0A0A12] border border-[#2A2A3E] rounded-lg px-3 py-2.5 text-[#C0C0D0] text-sm focus:outline-none focus:border-[#F5C518]/50 disabled:opacity-60" required>
+                className="w-full bg-[#060D0A] border border-[#27392E] rounded-lg px-3 py-2.5 text-[#C4CDC2] text-sm focus:outline-none focus:border-[#C9A35C]/50 disabled:opacity-60" required>
                 <option value="">Select cert…</option>
                 {certTypes.filter(c => c.is_active).map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
               </select>
             </div>
           </div>
           <div>
-            <label className="block text-[#8B8BA0] text-xs font-medium mb-1.5">Status</label>
+            <label className="block text-[#A9B5A9] text-xs font-medium mb-1.5">Status</label>
             <select value={status} onChange={e => setStatus(e.target.value)}
-              className="w-full bg-[#0A0A12] border border-[#2A2A3E] rounded-lg px-3 py-2.5 text-[#C0C0D0] text-sm focus:outline-none focus:border-[#F5C518]/50">
+              className="w-full bg-[#060D0A] border border-[#27392E] rounded-lg px-3 py-2.5 text-[#C4CDC2] text-sm focus:outline-none focus:border-[#C9A35C]/50">
               {CERT_STATUSES.map(s => <option key={s} value={s}>{STATUS_LABELS[s]}</option>)}
             </select>
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-[#8B8BA0] text-xs font-medium mb-1.5">Date Taken</label>
+              <label className="block text-[#A9B5A9] text-xs font-medium mb-1.5">Date Taken</label>
               <input type="date" value={takenDate} onChange={e => setTakenDate(e.target.value)}
-                className="w-full bg-[#0A0A12] border border-[#2A2A3E] rounded-lg px-3 py-2.5 text-[#C0C0D0] text-sm focus:outline-none focus:border-[#F5C518]/50" />
+                className="w-full bg-[#060D0A] border border-[#27392E] rounded-lg px-3 py-2.5 text-[#C4CDC2] text-sm focus:outline-none focus:border-[#C9A35C]/50" />
             </div>
             <div>
-              <label className="block text-[#8B8BA0] text-xs font-medium mb-1.5">Expiry Date</label>
+              <label className="block text-[#A9B5A9] text-xs font-medium mb-1.5">Expiry Date</label>
               <input type="date" value={expiryDate} onChange={e => setExpiryDate(e.target.value)}
-                className="w-full bg-[#0A0A12] border border-[#2A2A3E] rounded-lg px-3 py-2.5 text-[#C0C0D0] text-sm focus:outline-none focus:border-[#F5C518]/50" />
+                className="w-full bg-[#060D0A] border border-[#27392E] rounded-lg px-3 py-2.5 text-[#C4CDC2] text-sm focus:outline-none focus:border-[#C9A35C]/50" />
             </div>
           </div>
           <div>
-            <label className="block text-[#8B8BA0] text-xs font-medium mb-1.5">Certificate URL</label>
+            <label className="block text-[#A9B5A9] text-xs font-medium mb-1.5">Certificate URL</label>
             <input value={certUrl} onChange={e => setCertUrl(e.target.value)} placeholder="https://…"
-              className="w-full bg-[#0A0A12] border border-[#2A2A3E] rounded-lg px-3 py-2.5 text-[#C0C0D0] text-sm placeholder-[#3A3A55] focus:outline-none focus:border-[#F5C518]/50" />
+              className="w-full bg-[#060D0A] border border-[#27392E] rounded-lg px-3 py-2.5 text-[#C4CDC2] text-sm placeholder-[#3D4B42] focus:outline-none focus:border-[#C9A35C]/50" />
           </div>
           <div>
-            <label className="block text-[#8B8BA0] text-xs font-medium mb-1.5">Remarks</label>
+            <label className="block text-[#A9B5A9] text-xs font-medium mb-1.5">Remarks</label>
             <input value={remarks} onChange={e => setRemarks(e.target.value)} placeholder="Optional notes…"
-              className="w-full bg-[#0A0A12] border border-[#2A2A3E] rounded-lg px-3 py-2.5 text-[#C0C0D0] text-sm placeholder-[#3A3A55] focus:outline-none focus:border-[#F5C518]/50" />
+              className="w-full bg-[#060D0A] border border-[#27392E] rounded-lg px-3 py-2.5 text-[#C4CDC2] text-sm placeholder-[#3D4B42] focus:outline-none focus:border-[#C9A35C]/50" />
           </div>
           {error && (
             <div className="flex items-center gap-2 p-3 bg-red-500/10 border border-red-500/20 rounded-lg">
@@ -150,11 +150,11 @@ function AssignModal({ staffList, certTypes, existing, onClose, onSuccess }: Ass
           )}
           <div className="flex gap-3 pt-2">
             <button type="button" onClick={onClose}
-              className="flex-1 py-2.5 rounded-lg border border-[#2A2A3E] text-[#5A5A72] text-sm hover:text-[#C0C0D0] transition-colors">
+              className="flex-1 py-2.5 rounded-lg border border-[#27392E] text-[#66756A] text-sm hover:text-[#C4CDC2] transition-colors">
               Cancel
             </button>
             <button type="submit" disabled={saving}
-              className="flex-1 py-2.5 rounded-lg bg-[#F5C518] text-[#0A0A0F] text-sm font-semibold hover:bg-[#F5C518]/90 disabled:opacity-50 transition-colors flex items-center justify-center gap-2">
+              className="flex-1 py-2.5 rounded-lg bg-[#C9A35C] text-[#040A08] text-sm font-semibold hover:bg-[#C9A35C]/90 disabled:opacity-50 transition-colors flex items-center justify-center gap-2">
               {saving ? <><Loader2 className="w-4 h-4 animate-spin" />Saving…</> : (existing ? 'Update' : 'Assign')}
             </button>
           </div>
@@ -187,32 +187,32 @@ function AddCertTypeModal({ onClose, onSuccess }: { onClose: () => void; onSucce
 
   return (
     <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="bg-[#0D0D15] border border-[#1E1E2E] rounded-2xl w-full max-w-md shadow-2xl">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#1E1E2E]">
-          <h2 className="text-[#F0F0F5] font-semibold text-[15px] flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-[#F5C518]" />Add Certification Type
+      <div className="bg-[#0A130F] border border-[#1B2A22] rounded-2xl w-full max-w-md shadow-2xl">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#1B2A22]">
+          <h2 className="text-[#EDEFE9] font-semibold text-[15px] flex items-center gap-2">
+            <BookOpen className="w-5 h-5 text-[#C9A35C]" />Add Certification Type
           </h2>
-          <button onClick={onClose} className="text-[#3A3A55] hover:text-[#F0F0F5] transition-colors">
+          <button onClick={onClose} className="text-[#3D4B42] hover:text-[#EDEFE9] transition-colors">
             <X className="w-5 h-5" />
           </button>
         </div>
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           <div>
-            <label className="block text-[#8B8BA0] text-xs font-medium mb-1.5">Name <span className="text-red-400">*</span></label>
+            <label className="block text-[#A9B5A9] text-xs font-medium mb-1.5">Name <span className="text-red-400">*</span></label>
             <input value={name} onChange={e => setName(e.target.value)}
               placeholder="e.g. Prometric — IELTS Invigilator Cert"
-              className="w-full bg-[#0A0A12] border border-[#2A2A3E] rounded-lg px-3 py-2.5 text-[#C0C0D0] text-sm placeholder-[#3A3A55] focus:outline-none focus:border-[#F5C518]/50" required />
+              className="w-full bg-[#060D0A] border border-[#27392E] rounded-lg px-3 py-2.5 text-[#C4CDC2] text-sm placeholder-[#3D4B42] focus:outline-none focus:border-[#C9A35C]/50" required />
           </div>
           <div>
-            <label className="block text-[#8B8BA0] text-xs font-medium mb-1.5">Issuing Body</label>
+            <label className="block text-[#A9B5A9] text-xs font-medium mb-1.5">Issuing Body</label>
             <input value={issuingBody} onChange={e => setIssuingBody(e.target.value)}
               placeholder="e.g. Prometric, Pearson VUE, ETS, IELTS…"
-              className="w-full bg-[#0A0A12] border border-[#2A2A3E] rounded-lg px-3 py-2.5 text-[#C0C0D0] text-sm placeholder-[#3A3A55] focus:outline-none focus:border-[#F5C518]/50" />
+              className="w-full bg-[#060D0A] border border-[#27392E] rounded-lg px-3 py-2.5 text-[#C4CDC2] text-sm placeholder-[#3D4B42] focus:outline-none focus:border-[#C9A35C]/50" />
           </div>
           <div>
-            <label className="block text-[#8B8BA0] text-xs font-medium mb-1.5">Category</label>
+            <label className="block text-[#A9B5A9] text-xs font-medium mb-1.5">Category</label>
             <select value={category} onChange={e => setCategory(e.target.value)}
-              className="w-full bg-[#0A0A12] border border-[#2A2A3E] rounded-lg px-3 py-2.5 text-[#C0C0D0] text-sm focus:outline-none focus:border-[#F5C518]/50">
+              className="w-full bg-[#060D0A] border border-[#27392E] rounded-lg px-3 py-2.5 text-[#C4CDC2] text-sm focus:outline-none focus:border-[#C9A35C]/50">
               <option value="">Select category…</option>
               {CERT_CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
@@ -225,9 +225,9 @@ function AddCertTypeModal({ onClose, onSuccess }: { onClose: () => void; onSucce
           )}
           <div className="flex gap-3 pt-2">
             <button type="button" onClick={onClose}
-              className="flex-1 py-2.5 rounded-lg border border-[#2A2A3E] text-[#5A5A72] text-sm hover:text-[#C0C0D0] transition-colors">Cancel</button>
+              className="flex-1 py-2.5 rounded-lg border border-[#27392E] text-[#66756A] text-sm hover:text-[#C4CDC2] transition-colors">Cancel</button>
             <button type="submit" disabled={saving}
-              className="flex-1 py-2.5 rounded-lg bg-[#F5C518] text-[#0A0A0F] text-sm font-semibold hover:bg-[#F5C518]/90 disabled:opacity-50 transition-colors flex items-center justify-center gap-2">
+              className="flex-1 py-2.5 rounded-lg bg-[#C9A35C] text-[#040A08] text-sm font-semibold hover:bg-[#C9A35C]/90 disabled:opacity-50 transition-colors flex items-center justify-center gap-2">
               {saving ? <><Loader2 className="w-4 h-4 animate-spin" />Saving…</> : 'Add Certification'}
             </button>
           </div>
@@ -309,7 +309,7 @@ export default function CertificationsPage() {
   })
 
   return (
-    <div className="min-h-screen bg-[#080810] text-[#F0F0F5]">
+    <div className="min-h-screen bg-[#080810] text-[#EDEFE9]">
       {toast && (
         <div className={cn(
           'fixed top-5 right-5 z-50 flex items-center gap-2 px-4 py-3 rounded-xl border shadow-2xl text-sm font-medium',
@@ -333,8 +333,8 @@ export default function CertificationsPage() {
       {/* Header */}
       <div className="flex items-center justify-between px-8 pt-8 pb-6 border-b border-white/5">
         <div>
-          <h1 className="text-2xl font-bold text-white">Certification Tracker</h1>
-          <p className="text-[#5A5A72] text-sm mt-1">Manage staff certifications and compliance requirements</p>
+          <h1 className="font-display text-2xl font-bold text-white">Certification Tracker</h1>
+          <p className="text-[#66756A] text-sm mt-1">Manage staff certifications and compliance requirements</p>
         </div>
         {tab === 'staff' ? (
           <button onClick={() => setShowAssign(true)}
@@ -369,8 +369,8 @@ export default function CertificationsPage() {
                 <div className={cn('w-10 h-10 rounded-xl flex items-center justify-center mb-3', stat.bg)}>
                   <stat.icon className={cn('w-5 h-5', stat.color)} />
                 </div>
-                <div className="text-2xl font-bold text-white">{stat.value}</div>
-                <div className="text-[#5A5A72] text-sm mt-1">{stat.label}</div>
+                <div className="font-display text-2xl font-bold text-white">{stat.value}</div>
+                <div className="text-[#66756A] text-sm mt-1">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -381,7 +381,7 @@ export default function CertificationsPage() {
           {(['staff', 'types'] as const).map(t => (
             <button key={t} onClick={() => setTab(t)}
               className={cn('px-5 py-2 rounded-lg text-sm font-medium transition-colors',
-                tab === t ? 'bg-white/10 text-white' : 'text-[#5A5A72] hover:text-white')}>
+                tab === t ? 'bg-white/10 text-white' : 'text-[#66756A] hover:text-white')}>
               {t === 'staff' ? 'Staff Certifications' : 'Certification Types'}
             </button>
           ))}
@@ -393,23 +393,23 @@ export default function CertificationsPage() {
             {/* Filter bar */}
             <div className="flex gap-3 flex-wrap">
               <div className="relative flex-1 min-w-[200px]">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#5A5A72]" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#66756A]" />
                 <input value={search} onChange={e => setSearch(e.target.value)}
                   placeholder="Search by staff or certification…"
-                  className="w-full pl-10 pr-4 py-2.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-sm text-white placeholder-[#5A5A72] focus:outline-none focus:border-indigo-500/50" />
+                  className="w-full pl-10 pr-4 py-2.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-sm text-white placeholder-[#66756A] focus:outline-none focus:border-indigo-500/50" />
               </div>
               <select value={filterStaff} onChange={e => setFilterStaff(e.target.value)}
-                className="px-3 py-2.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-sm text-[#F0F0F5] focus:outline-none focus:border-indigo-500/50 min-w-[160px]">
+                className="px-3 py-2.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-sm text-[#EDEFE9] focus:outline-none focus:border-indigo-500/50 min-w-[160px]">
                 <option value="">All Staff</option>
                 {staffList.map(s => <option key={s.id} value={s.id}>{s.full_name}</option>)}
               </select>
               <select value={filterCert} onChange={e => setFilterCert(e.target.value)}
-                className="px-3 py-2.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-sm text-[#F0F0F5] focus:outline-none focus:border-indigo-500/50 min-w-[180px]">
+                className="px-3 py-2.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-sm text-[#EDEFE9] focus:outline-none focus:border-indigo-500/50 min-w-[180px]">
                 <option value="">All Certifications</option>
                 {certTypes.map(ct => <option key={ct.id} value={ct.id}>{ct.name}</option>)}
               </select>
               <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)}
-                className="px-3 py-2.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-sm text-[#F0F0F5] focus:outline-none focus:border-indigo-500/50 min-w-[150px]">
+                className="px-3 py-2.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-sm text-[#EDEFE9] focus:outline-none focus:border-indigo-500/50 min-w-[150px]">
                 <option value="">All Statuses</option>
                 {CERT_STATUSES.map(s => <option key={s} value={s}>{STATUS_LABELS[s]}</option>)}
               </select>
@@ -418,18 +418,18 @@ export default function CertificationsPage() {
             {/* Table */}
             <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl overflow-hidden">
               {loading ? (
-                <div className="p-12 text-center text-[#5A5A72]">Loading…</div>
+                <div className="p-12 text-center text-[#66756A]">Loading…</div>
               ) : filtered.length === 0 ? (
                 <div className="p-12 text-center">
-                  <Award className="w-10 h-10 text-[#2A2A3A] mx-auto mb-3" />
-                  <p className="text-[#5A5A72] text-sm">No certifications found</p>
+                  <Award className="w-10 h-10 text-[#283A2F] mx-auto mb-3" />
+                  <p className="text-[#66756A] text-sm">No certifications found</p>
                 </div>
               ) : (
                 <table className="w-full">
                   <thead>
                     <tr className="border-b border-white/[0.06]">
                       {['Staff', 'Certification', 'Status', 'Date Taken', 'Expiry', 'Actions'].map(h => (
-                        <th key={h} className="px-5 py-3 text-left text-xs font-semibold text-[#5A5A72] uppercase tracking-wider">{h}</th>
+                        <th key={h} className="px-5 py-3 text-left text-xs font-semibold text-[#66756A] uppercase tracking-wider">{h}</th>
                       ))}
                     </tr>
                   </thead>
@@ -438,12 +438,12 @@ export default function CertificationsPage() {
                       <tr key={sc.id} className="hover:bg-white/[0.02] transition-colors">
                         <td className="px-5 py-4">
                           <div className="text-sm font-medium text-white">{sc.staff?.full_name}</div>
-                          <div className="text-xs text-[#5A5A72]">{sc.staff?.staff_id}</div>
+                          <div className="text-xs text-[#66756A]">{sc.staff?.staff_id}</div>
                         </td>
                         <td className="px-5 py-4">
                           <div className="text-sm text-white">{sc.certification?.name}</div>
                           {sc.certification?.issuing_body && (
-                            <div className="text-xs text-[#5A5A72]">{sc.certification.issuing_body}</div>
+                            <div className="text-xs text-[#66756A]">{sc.certification.issuing_body}</div>
                           )}
                         </td>
                         <td className="px-5 py-4">
@@ -459,32 +459,32 @@ export default function CertificationsPage() {
                             )}
                           </div>
                         </td>
-                        <td className="px-5 py-4 text-sm text-[#9A9AB0]">
-                          {sc.taken_date ? fmtDate(sc.taken_date) : <span className="text-[#3A3A52]">—</span>}
+                        <td className="px-5 py-4 text-sm text-[#9FAEA2]">
+                          {sc.taken_date ? fmtDate(sc.taken_date) : <span className="text-[#3A4A3F]">—</span>}
                         </td>
-                        <td className="px-5 py-4 text-sm text-[#9A9AB0]">
+                        <td className="px-5 py-4 text-sm text-[#9FAEA2]">
                           {sc.expiry_date ? (
                             <span className={isExpired(sc.expiry_date) ? 'text-red-400' : isExpiringSoon(sc.expiry_date) ? 'text-orange-400' : ''}>
                               {fmtDate(sc.expiry_date)}
                             </span>
-                          ) : <span className="text-[#3A3A52]">—</span>}
+                          ) : <span className="text-[#3A4A3F]">—</span>}
                         </td>
                         <td className="px-5 py-4">
                           <div className="flex items-center gap-2">
                             {sc.certificate_url && (
                               <a href={sc.certificate_url} target="_blank" rel="noopener noreferrer"
-                                className="p-1.5 rounded-lg text-[#5A5A72] hover:text-indigo-400 hover:bg-indigo-500/10 transition-colors"
+                                className="p-1.5 rounded-lg text-[#66756A] hover:text-indigo-400 hover:bg-indigo-500/10 transition-colors"
                                 title="View Certificate">
                                 <ExternalLink className="w-4 h-4" />
                               </a>
                             )}
                             <button onClick={() => setEditCert(sc)}
-                              className="p-1.5 rounded-lg text-[#5A5A72] hover:text-white hover:bg-white/10 transition-colors"
+                              className="p-1.5 rounded-lg text-[#66756A] hover:text-white hover:bg-white/10 transition-colors"
                               title="Edit">
                               <Edit2 className="w-4 h-4" />
                             </button>
                             <button onClick={() => handleDelete(sc)} disabled={deletingId === sc.id}
-                              className="p-1.5 rounded-lg text-[#5A5A72] hover:text-red-400 hover:bg-red-500/10 transition-colors disabled:opacity-40"
+                              className="p-1.5 rounded-lg text-[#66756A] hover:text-red-400 hover:bg-red-500/10 transition-colors disabled:opacity-40"
                               title="Remove">
                               <Trash2 className="w-4 h-4" />
                             </button>
@@ -503,18 +503,18 @@ export default function CertificationsPage() {
         {tab === 'types' && (
           <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl overflow-hidden">
             {loading ? (
-              <div className="p-12 text-center text-[#5A5A72]">Loading…</div>
+              <div className="p-12 text-center text-[#66756A]">Loading…</div>
             ) : certTypes.length === 0 ? (
               <div className="p-12 text-center">
-                <Award className="w-10 h-10 text-[#2A2A3A] mx-auto mb-3" />
-                <p className="text-[#5A5A72] text-sm">No certification types yet</p>
+                <Award className="w-10 h-10 text-[#283A2F] mx-auto mb-3" />
+                <p className="text-[#66756A] text-sm">No certification types yet</p>
               </div>
             ) : (
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-white/[0.06]">
                     {['Name', 'Issuing Body', 'Category', 'Status'].map(h => (
-                      <th key={h} className="px-5 py-3 text-left text-xs font-semibold text-[#5A5A72] uppercase tracking-wider">{h}</th>
+                      <th key={h} className="px-5 py-3 text-left text-xs font-semibold text-[#66756A] uppercase tracking-wider">{h}</th>
                     ))}
                   </tr>
                 </thead>
@@ -522,15 +522,15 @@ export default function CertificationsPage() {
                   {certTypes.map(ct => (
                     <tr key={ct.id} className="hover:bg-white/[0.02] transition-colors">
                       <td className="px-5 py-4 text-sm font-medium text-white">{ct.name}</td>
-                      <td className="px-5 py-4 text-sm text-[#9A9AB0]">
-                        {ct.issuing_body || <span className="text-[#3A3A52]">—</span>}
+                      <td className="px-5 py-4 text-sm text-[#9FAEA2]">
+                        {ct.issuing_body || <span className="text-[#3A4A3F]">—</span>}
                       </td>
                       <td className="px-5 py-4">
                         {ct.category ? (
-                          <span className="px-2 py-1 bg-white/[0.06] rounded-lg text-xs text-[#9A9AB0]">
+                          <span className="px-2 py-1 bg-white/[0.06] rounded-lg text-xs text-[#9FAEA2]">
                             {ct.category}
                           </span>
-                        ) : <span className="text-[#3A3A52] text-sm">—</span>}
+                        ) : <span className="text-[#3A4A3F] text-sm">—</span>}
                       </td>
                       <td className="px-5 py-4">
                         <button onClick={() => handleToggleActive(ct)} disabled={togglingId === ct.id}
@@ -538,7 +538,7 @@ export default function CertificationsPage() {
                             'flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium transition-colors disabled:opacity-40',
                             ct.is_active
                               ? 'bg-green-500/10 text-green-400 hover:bg-green-500/20'
-                              : 'bg-white/[0.06] text-[#5A5A72] hover:bg-white/10'
+                              : 'bg-white/[0.06] text-[#66756A] hover:bg-white/10'
                           )}>
                           {ct.is_active ? <><CheckCircle className="w-3.5 h-3.5" /> Active</> : <><X className="w-3.5 h-3.5" /> Inactive</>}
                         </button>

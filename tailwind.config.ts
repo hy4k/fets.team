@@ -11,20 +11,27 @@ const config: Config = {
     extend: {
       colors: {
         fets: {
-          bg:        '#0A0A0F',
-          card:      '#12121A',
-          sidebar:   '#0D0D15',
-          border:    '#1E1E2E',
-          yellow:    '#F5C518',
-          'yellow-hover': '#E6B800',
-          text:      '#F0F0F5',
-          secondary: '#8B8BA0',
-          muted:     '#5A5A72',
-          subtle:    '#3A3A55',
+          bg:        '#040A08',
+          card:      '#0C1A16',
+          sidebar:   '#06100D',
+          border:    '#1B2A22',
+          yellow:    '#C9A35C',
+          'yellow-hover': '#E2C285',
+          text:      '#EDEFE9',
+          secondary: '#A9B5A9',
+          muted:     '#66756A',
+          subtle:    '#3D4B42',
+        },
+        brass: {
+          300: '#F0DCAE', 400: '#E2C285', 500: '#C9A35C', 600: '#A87F3D', 700: '#8A6630',
+        },
+        aurora: {
+          300: '#99F6E4', 400: '#5EEAD4', 500: '#2DD4BF', 600: '#14B8A6', 700: '#0D9488',
         },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Fraunces', 'Georgia', 'serif'],
       },
       borderRadius: {
         xl: '0.75rem',

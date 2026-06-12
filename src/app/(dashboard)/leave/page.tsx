@@ -92,7 +92,7 @@ function ApplyLeaveModal({ staffList, leaveTypes, onClose, onSuccess }: ApplyMod
         <div className="modal-header">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl flex items-center justify-center"
-              style={{ background: 'linear-gradient(135deg,#9B6DFF,#6D28D9)', boxShadow: '0 4px 16px rgba(109,40,217,0.45)' }}>
+              style={{ background: 'linear-gradient(135deg,#5EEAD4,#0D9488)', boxShadow: '0 4px 16px rgba(168,127,61,0.45)' }}>
               <Calendar className="w-4 h-4 text-white" />
             </div>
             <div>
@@ -144,8 +144,8 @@ function ApplyLeaveModal({ staffList, leaveTypes, onClose, onSuccess }: ApplyMod
           </div>
           {fromDate && toDate && (
             <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl"
-              style={{ background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.2)' }}>
-              <CalendarDays className="w-4 h-4" style={{ color: 'var(--violet-400)' }} />
+              style={{ background: 'rgba(201,163,92,0.1)', border: '1px solid rgba(201,163,92,0.2)' }}>
+              <CalendarDays className="w-4 h-4" style={{ color: 'var(--aurora-400)' }} />
               <span className="text-sm font-medium text-white">{days} day{days !== 1 ? 's' : ''}</span>
               <span className="text-sm" style={{ color: 'var(--text-muted)' }}>requested</span>
             </div>
@@ -215,7 +215,7 @@ function ReviewModal({ req, onClose, onSuccess }: { req: LeaveRequest; onClose: 
               {(['approved', 'rejected'] as const).map(a => (
                 <button key={a} type="button" onClick={() => setAction(a)}
                   className={cn('py-2.5 rounded-xl text-sm font-semibold transition-all duration-200',
-                    action === a ? 'text-white' : 'text-[#5A567A]'
+                    action === a ? 'text-white' : 'text-[#66756A]'
                   )}
                   style={action === a ? {
                     background: a === 'approved'
@@ -273,7 +273,7 @@ function AddLeaveTypeModal({ onClose, onSuccess }: { onClose: () => void; onSucc
       <div className="modal-panel" style={{ maxWidth: '440px' }}>
         <div className="modal-header">
           <h2 className="text-white font-semibold text-[15px] flex items-center gap-2">
-            <FileText className="w-4 h-4" style={{ color: 'var(--violet-400)' }} /> Add Leave Type
+            <FileText className="w-4 h-4" style={{ color: 'var(--aurora-400)' }} /> Add Leave Type
           </h2>
           <button onClick={onClose} className="p-2 rounded-xl hover:bg-white/5 transition-colors" style={{ color: 'var(--text-muted)' }}>
             <X className="w-4 h-4" />
@@ -409,7 +409,7 @@ export default function LeavePage() {
   })
 
   const statCards = [
-    { label: 'Total Requests',   value: stats.total,             cls: 'card-clay-violet', icon: Calendar,    color: '#A78BFA' },
+    { label: 'Total Requests',   value: stats.total,             cls: 'card-clay-violet', icon: Calendar,    color: '#5EEAD4' },
     { label: 'Pending Approval', value: stats.pending,           cls: 'card-clay-amber',  icon: Clock,       color: '#FBBF24' },
     { label: 'Approved (Month)', value: stats.approvedThisMonth, cls: 'card-clay-emerald',icon: CheckCircle, color: '#34D399' },
     { label: 'On Leave Today',   value: stats.onLeaveToday,      cls: 'card-clay-sky',    icon: UserCheck,   color: '#38BDF8' },
@@ -546,7 +546,7 @@ export default function LeavePage() {
                     <td style={{ color: 'var(--text-secondary)' }}>{r.leave_type?.name || '—'}</td>
                     <td style={{ color: 'var(--text-secondary)' }}>{fmtDate(r.from_date)}</td>
                     <td style={{ color: 'var(--text-secondary)' }}>{fmtDate(r.to_date)}</td>
-                    <td style={{ fontWeight: 600, color: 'var(--violet-400)' }}>{r.days}</td>
+                    <td style={{ fontWeight: 600, color: 'var(--aurora-400)' }}>{r.days}</td>
                     <td>
                       <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem',
                         maxWidth: '160px', display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
@@ -635,7 +635,7 @@ export default function LeavePage() {
                 const attnRecord = attendance.find(a => a.staff_id === s.id)
                 const statusColors: Record<string, string> = {
                   present: '#34D399', absent: '#F87171', late: '#FBBF24',
-                  half_day: '#60A5FA', holiday: '#A78BFA',
+                  half_day: '#60A5FA', holiday: '#5EEAD4',
                 }
                 return (
                   <div key={s.id} className="card-neuro" style={{ borderRadius: '14px', padding: '1.1rem 1.25rem',
@@ -704,7 +704,7 @@ export default function LeavePage() {
                 {leaveTypes.map(lt => (
                   <tr key={lt.id}>
                     <td><span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{lt.name}</span></td>
-                    <td><span style={{ fontWeight: 700, color: 'var(--violet-400)', fontSize: '1.05rem' }}>{lt.days_per_year ?? '—'}</span></td>
+                    <td><span style={{ fontWeight: 700, color: 'var(--aurora-400)', fontSize: '1.05rem' }}>{lt.days_per_year ?? '—'}</span></td>
                     <td>
                       {lt.is_paid
                         ? <span className="badge-success">Paid</span>

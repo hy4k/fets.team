@@ -32,33 +32,32 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0A0F] flex items-center justify-center relative overflow-hidden">
-      {/* Ambient glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#F5C518]/4 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-[#3B82F6]/3 rounded-full blur-[100px] pointer-events-none" />
+    <div className="min-h-screen bg-[#040A08] flex items-center justify-center relative overflow-hidden">
+      {/* Aurora veil */}
+      <div className="aurora-veil" aria-hidden />
 
       <div className="relative w-full max-w-[420px] px-6 py-8">
         {/* Logo */}
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-3 mb-8">
-            <div className="w-12 h-12 bg-[#F5C518] rounded-xl flex items-center justify-center shadow-lg shadow-[#F5C518]/20">
-              <Shield className="w-6 h-6 text-[#0A0A0F]" />
+            <div className="w-12 h-12 bg-[#C9A35C] rounded-xl flex items-center justify-center shadow-lg shadow-[#C9A35C]/20">
+              <Shield className="w-6 h-6 text-[#040A08]" />
             </div>
             <div className="text-left">
-              <div className="text-[#F5C518] font-bold text-xl tracking-[0.2em] leading-none">FETS</div>
-              <div className="text-[#5A5A72] text-[10px] tracking-[0.15em] uppercase mt-1">Internal OS</div>
+              <div className="text-[#C9A35C] font-bold text-xl tracking-[0.2em] leading-none">FETS</div>
+              <div className="text-[#66756A] text-[10px] tracking-[0.15em] uppercase mt-1">Internal OS</div>
             </div>
           </div>
-          <h1 className="text-[#F0F0F5] text-2xl font-bold">Welcome back</h1>
-          <p className="text-[#5A5A72] text-sm mt-1.5">Sign in to your FETS account</p>
+          <h1 className="font-display text-[#EDEFE9] text-[1.7rem] font-semibold">Welcome back</h1>
+          <p className="text-[#66756A] text-sm mt-1.5">Sign in to your FETS account</p>
         </div>
 
         {/* Login card */}
-        <div className="bg-[#12121A] border border-[#1E1E2E] rounded-2xl p-8 shadow-2xl">
+        <div className="card-neuro p-8">
           <form onSubmit={handleLogin} className="space-y-5">
             {/* Email */}
             <div className="space-y-1.5">
-              <label className="text-sm font-medium text-[#8B8BA0]">Email address</label>
+              <label className="text-sm font-medium text-[#A9B5A9]">Email address</label>
               <input
                 type="email"
                 value={email}
@@ -66,13 +65,13 @@ export default function LoginPage() {
                 required
                 autoComplete="email"
                 placeholder="your@fets.in"
-                className="w-full px-4 py-3 bg-[#0A0A0F] border border-[#1E1E2E] rounded-xl text-[#F0F0F5] placeholder-[#3A3A55] text-sm focus:outline-none focus:border-[#F5C518] focus:ring-1 focus:ring-[#F5C518]/30 transition-all"
+                className="w-full px-4 py-3 bg-[#040A08] border border-[#1B2A22] rounded-xl text-[#EDEFE9] placeholder-[#3D4B42] text-sm focus:outline-none focus:border-[#C9A35C] focus:ring-1 focus:ring-[#C9A35C]/30 transition-all"
               />
             </div>
 
             {/* Password */}
             <div className="space-y-1.5">
-              <label className="text-sm font-medium text-[#8B8BA0]">Password</label>
+              <label className="text-sm font-medium text-[#A9B5A9]">Password</label>
               <div className="relative">
                 <input
                   type={showPassword ? 'text' : 'password'}
@@ -81,12 +80,12 @@ export default function LoginPage() {
                   required
                   autoComplete="current-password"
                   placeholder="••••••••••"
-                  className="w-full px-4 py-3 pr-12 bg-[#0A0A0F] border border-[#1E1E2E] rounded-xl text-[#F0F0F5] placeholder-[#3A3A55] text-sm focus:outline-none focus:border-[#F5C518] focus:ring-1 focus:ring-[#F5C518]/30 transition-all"
+                  className="w-full px-4 py-3 pr-12 bg-[#040A08] border border-[#1B2A22] rounded-xl text-[#EDEFE9] placeholder-[#3D4B42] text-sm focus:outline-none focus:border-[#C9A35C] focus:ring-1 focus:ring-[#C9A35C]/30 transition-all"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#3A3A55] hover:text-[#8B8BA0] transition-colors"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#3D4B42] hover:text-[#A9B5A9] transition-colors"
                   tabIndex={-1}
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -106,7 +105,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 bg-[#F5C518] hover:bg-[#E6B800] disabled:opacity-60 disabled:cursor-not-allowed text-[#0A0A0F] font-semibold text-sm rounded-xl transition-all duration-200 flex items-center justify-center gap-2 mt-2 shadow-lg shadow-[#F5C518]/10"
+              className="w-full py-3 bg-[#C9A35C] hover:bg-[#E2C285] disabled:opacity-60 disabled:cursor-not-allowed text-[#040A08] font-semibold text-sm rounded-xl transition-all duration-200 flex items-center justify-center gap-2 mt-2 shadow-lg shadow-[#C9A35C]/10"
             >
               {loading ? (
                 <><Loader2 className="w-4 h-4 animate-spin" /> Signing in...</>
@@ -117,7 +116,7 @@ export default function LoginPage() {
           </form>
         </div>
 
-        <p className="text-center text-[#3A3A55] text-xs mt-8">
+        <p className="text-center text-[#3D4B42] text-xs mt-8">
           Forun Testing & Educational Services &middot; Authorized Access Only
         </p>
       </div>

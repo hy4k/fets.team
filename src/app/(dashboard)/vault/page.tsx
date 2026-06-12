@@ -33,7 +33,7 @@ function FileIcon({ mime }: { mime: string | null }) {
   if (!mime) return <File className="w-4 h-4" />
   if (mime.startsWith('image/')) return <Image className="w-4 h-4 text-blue-400" />
   if (mime === 'application/pdf') return <FileText className="w-4 h-4 text-red-400" />
-  return <File className="w-4 h-4 text-[#5A5A72]" />
+  return <File className="w-4 h-4 text-[#66756A]" />
 }
 
 // ─── Upload Modal ──────────────────────────────────────────────────────────────
@@ -94,14 +94,14 @@ function UploadModal({ staffList, onClose, onSuccess }: UploadModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="bg-[#0D0D15] border border-[#1E1E2E] rounded-2xl w-full max-w-lg shadow-2xl">
+      <div className="bg-[#0A130F] border border-[#1B2A22] rounded-2xl w-full max-w-lg shadow-2xl">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#1E1E2E]">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#1B2A22]">
           <div className="flex items-center gap-2">
-            <Upload className="w-5 h-5 text-[#F5C518]" />
-            <h2 className="text-[#F0F0F5] font-semibold text-[15px]">Upload Document</h2>
+            <Upload className="w-5 h-5 text-[#C9A35C]" />
+            <h2 className="text-[#EDEFE9] font-semibold text-[15px]">Upload Document</h2>
           </div>
-          <button onClick={onClose} className="text-[#3A3A55] hover:text-[#F0F0F5] transition-colors">
+          <button onClick={onClose} className="text-[#3D4B42] hover:text-[#EDEFE9] transition-colors">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -115,7 +115,7 @@ function UploadModal({ staffList, onClose, onSuccess }: UploadModalProps) {
             onDrop={handleDrop}
             className={cn(
               'border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-all',
-              dragging ? 'border-[#F5C518]/60 bg-[#F5C518]/5' : 'border-[#2A2A3E] hover:border-[#F5C518]/30 hover:bg-[#1A1A28]'
+              dragging ? 'border-[#C9A35C]/60 bg-[#C9A35C]/5' : 'border-[#27392E] hover:border-[#C9A35C]/30 hover:bg-[#12231C]'
             )}
           >
             <input
@@ -128,25 +128,25 @@ function UploadModal({ staffList, onClose, onSuccess }: UploadModalProps) {
             {selectedFile ? (
               <div className="flex items-center justify-center gap-2">
                 <FileIcon mime={selectedFile.type} />
-                <span className="text-[#C0C0D0] text-sm font-medium truncate max-w-[280px]">{selectedFile.name}</span>
-                <span className="text-[#5A5A72] text-xs">({formatBytes(selectedFile.size)})</span>
+                <span className="text-[#C4CDC2] text-sm font-medium truncate max-w-[280px]">{selectedFile.name}</span>
+                <span className="text-[#66756A] text-xs">({formatBytes(selectedFile.size)})</span>
               </div>
             ) : (
               <>
-                <Upload className="w-8 h-8 text-[#3A3A55] mx-auto mb-2" />
-                <p className="text-[#5A5A72] text-sm">Drop file here or <span className="text-[#F5C518]">browse</span></p>
-                <p className="text-[#3A3A55] text-xs mt-1">PDF, JPG, PNG, DOCX — max 50 MB</p>
+                <Upload className="w-8 h-8 text-[#3D4B42] mx-auto mb-2" />
+                <p className="text-[#66756A] text-sm">Drop file here or <span className="text-[#C9A35C]">browse</span></p>
+                <p className="text-[#3D4B42] text-xs mt-1">PDF, JPG, PNG, DOCX — max 50 MB</p>
               </>
             )}
           </div>
 
           {/* Staff member */}
           <div>
-            <label className="block text-[#8B8BA0] text-xs font-medium mb-1.5">Staff Member <span className="text-red-400">*</span></label>
+            <label className="block text-[#A9B5A9] text-xs font-medium mb-1.5">Staff Member <span className="text-red-400">*</span></label>
             <select
               value={staffId}
               onChange={(e) => setStaffId(e.target.value)}
-              className="w-full bg-[#0A0A12] border border-[#2A2A3E] rounded-lg px-3 py-2.5 text-[#C0C0D0] text-sm focus:outline-none focus:border-[#F5C518]/50"
+              className="w-full bg-[#060D0A] border border-[#27392E] rounded-lg px-3 py-2.5 text-[#C4CDC2] text-sm focus:outline-none focus:border-[#C9A35C]/50"
               required
             >
               <option value="">Select staff member…</option>
@@ -159,21 +159,21 @@ function UploadModal({ staffList, onClose, onSuccess }: UploadModalProps) {
           {/* Doc name + type row */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-[#8B8BA0] text-xs font-medium mb-1.5">Document Name <span className="text-red-400">*</span></label>
+              <label className="block text-[#A9B5A9] text-xs font-medium mb-1.5">Document Name <span className="text-red-400">*</span></label>
               <input
                 value={docName}
                 onChange={(e) => setDocName(e.target.value)}
                 placeholder="e.g. Offer Letter 2024"
-                className="w-full bg-[#0A0A12] border border-[#2A2A3E] rounded-lg px-3 py-2.5 text-[#C0C0D0] text-sm placeholder-[#3A3A55] focus:outline-none focus:border-[#F5C518]/50"
+                className="w-full bg-[#060D0A] border border-[#27392E] rounded-lg px-3 py-2.5 text-[#C4CDC2] text-sm placeholder-[#3D4B42] focus:outline-none focus:border-[#C9A35C]/50"
                 required
               />
             </div>
             <div>
-              <label className="block text-[#8B8BA0] text-xs font-medium mb-1.5">Document Type <span className="text-red-400">*</span></label>
+              <label className="block text-[#A9B5A9] text-xs font-medium mb-1.5">Document Type <span className="text-red-400">*</span></label>
               <select
                 value={docType}
                 onChange={(e) => setDocType(e.target.value)}
-                className="w-full bg-[#0A0A12] border border-[#2A2A3E] rounded-lg px-3 py-2.5 text-[#C0C0D0] text-sm focus:outline-none focus:border-[#F5C518]/50"
+                className="w-full bg-[#060D0A] border border-[#27392E] rounded-lg px-3 py-2.5 text-[#C4CDC2] text-sm focus:outline-none focus:border-[#C9A35C]/50"
                 required
               >
                 <option value="">Select type…</option>
@@ -184,12 +184,12 @@ function UploadModal({ staffList, onClose, onSuccess }: UploadModalProps) {
 
           {/* Notes */}
           <div>
-            <label className="block text-[#8B8BA0] text-xs font-medium mb-1.5">Notes (optional)</label>
+            <label className="block text-[#A9B5A9] text-xs font-medium mb-1.5">Notes (optional)</label>
             <input
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder="Any additional context…"
-              className="w-full bg-[#0A0A12] border border-[#2A2A3E] rounded-lg px-3 py-2.5 text-[#C0C0D0] text-sm placeholder-[#3A3A55] focus:outline-none focus:border-[#F5C518]/50"
+              className="w-full bg-[#060D0A] border border-[#27392E] rounded-lg px-3 py-2.5 text-[#C4CDC2] text-sm placeholder-[#3D4B42] focus:outline-none focus:border-[#C9A35C]/50"
             />
           </div>
 
@@ -199,7 +199,7 @@ function UploadModal({ staffList, onClose, onSuccess }: UploadModalProps) {
               onClick={() => setIsVisible(!isVisible)}
               className={cn(
                 'w-10 h-5 rounded-full transition-colors relative',
-                isVisible ? 'bg-[#F5C518]' : 'bg-[#2A2A3E]'
+                isVisible ? 'bg-[#C9A35C]' : 'bg-[#27392E]'
               )}
             >
               <div className={cn(
@@ -207,7 +207,7 @@ function UploadModal({ staffList, onClose, onSuccess }: UploadModalProps) {
                 isVisible ? 'translate-x-5' : 'translate-x-0.5'
               )} />
             </div>
-            <span className="text-[#8B8BA0] text-sm">
+            <span className="text-[#A9B5A9] text-sm">
               {isVisible ? 'Visible to employee' : 'Admin only'}
             </span>
           </label>
@@ -224,14 +224,14 @@ function UploadModal({ staffList, onClose, onSuccess }: UploadModalProps) {
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 py-2.5 rounded-lg border border-[#2A2A3E] text-[#5A5A72] text-sm hover:text-[#C0C0D0] hover:border-[#3A3A55] transition-colors"
+              className="flex-1 py-2.5 rounded-lg border border-[#27392E] text-[#66756A] text-sm hover:text-[#C4CDC2] hover:border-[#3D4B42] transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={uploading}
-              className="flex-1 py-2.5 rounded-lg bg-[#F5C518] text-[#0A0A0F] text-sm font-semibold hover:bg-[#F5C518]/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+              className="flex-1 py-2.5 rounded-lg bg-[#C9A35C] text-[#040A08] text-sm font-semibold hover:bg-[#C9A35C]/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
             >
               {uploading ? <><Loader2 className="w-4 h-4 animate-spin" />Uploading…</> : <>Upload</>}
             </button>
@@ -314,7 +314,7 @@ export default function VaultPage() {
     .slice(0, 3)
 
   return (
-    <div className="min-h-screen bg-[#080810] text-[#F0F0F5]">
+    <div className="min-h-screen bg-[#080810] text-[#EDEFE9]">
       {/* Toast */}
       {toast && (
         <div className={cn(
@@ -340,25 +340,25 @@ export default function VaultPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-[#F5C518]/10 rounded-xl flex items-center justify-center">
-              <Archive className="w-5 h-5 text-[#F5C518]" />
+            <div className="w-10 h-10 bg-[#C9A35C]/10 rounded-xl flex items-center justify-center">
+              <Archive className="w-5 h-5 text-[#C9A35C]" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-[#F0F0F5]">Document Vault</h1>
-              <p className="text-[#5A5A72] text-xs mt-0.5">Secure storage for all staff documents</p>
+              <h1 className="text-xl font-bold text-[#EDEFE9]">Document Vault</h1>
+              <p className="text-[#66756A] text-xs mt-0.5">Secure storage for all staff documents</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={load}
-              className="p-2 text-[#3A3A55] hover:text-[#F5C518] hover:bg-[#1A1A28] rounded-lg transition-colors"
+              className="p-2 text-[#3D4B42] hover:text-[#C9A35C] hover:bg-[#12231C] rounded-lg transition-colors"
               title="Refresh"
             >
               <RefreshCw className={cn('w-4 h-4', loading && 'animate-spin')} />
             </button>
             <button
               onClick={() => setShowUpload(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-[#F5C518] text-[#0A0A0F] rounded-lg text-sm font-semibold hover:bg-[#F5C518]/90 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-[#C9A35C] text-[#040A08] rounded-lg text-sm font-semibold hover:bg-[#C9A35C]/90 transition-colors"
             >
               <Plus className="w-4 h-4" />
               Upload Document
@@ -368,42 +368,42 @@ export default function VaultPage() {
 
         {/* Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <div className="bg-[#0D0D15] border border-[#1E1E2E] rounded-xl p-4">
-            <div className="text-[#5A5A72] text-xs font-medium mb-1">Total Documents</div>
-            <div className="text-2xl font-bold text-[#F0F0F5]">{stats.total}</div>
+          <div className="bg-[#0A130F] border border-[#1B2A22] rounded-xl p-4">
+            <div className="text-[#66756A] text-xs font-medium mb-1">Total Documents</div>
+            <div className="font-display text-2xl font-bold text-[#EDEFE9]">{stats.total}</div>
           </div>
-          <div className="bg-[#0D0D15] border border-[#1E1E2E] rounded-xl p-4">
-            <div className="text-[#5A5A72] text-xs font-medium mb-1">Visible to Staff</div>
-            <div className="text-2xl font-bold text-green-400">{stats.visibleToStaff}</div>
+          <div className="bg-[#0A130F] border border-[#1B2A22] rounded-xl p-4">
+            <div className="text-[#66756A] text-xs font-medium mb-1">Visible to Staff</div>
+            <div className="font-display text-2xl font-bold text-green-400">{stats.visibleToStaff}</div>
           </div>
-          <div className="bg-[#0D0D15] border border-[#1E1E2E] rounded-xl p-4">
-            <div className="text-[#5A5A72] text-xs font-medium mb-1">Admin Only</div>
-            <div className="text-2xl font-bold text-[#F5C518]">{stats.total - stats.visibleToStaff}</div>
+          <div className="bg-[#0A130F] border border-[#1B2A22] rounded-xl p-4">
+            <div className="text-[#66756A] text-xs font-medium mb-1">Admin Only</div>
+            <div className="font-display text-2xl font-bold text-[#C9A35C]">{stats.total - stats.visibleToStaff}</div>
           </div>
-          <div className="bg-[#0D0D15] border border-[#1E1E2E] rounded-xl p-4">
-            <div className="text-[#5A5A72] text-xs font-medium mb-1">Top Type</div>
-            <div className="text-sm font-semibold text-[#C0C0D0] truncate">
+          <div className="bg-[#0A130F] border border-[#1B2A22] rounded-xl p-4">
+            <div className="text-[#66756A] text-xs font-medium mb-1">Top Type</div>
+            <div className="text-sm font-semibold text-[#C4CDC2] truncate">
               {topTypes[0]?.[0] || '—'}
             </div>
-            {topTypes[0] && <div className="text-xs text-[#5A5A72]">{topTypes[0][1]} doc{topTypes[0][1] !== 1 ? 's' : ''}</div>}
+            {topTypes[0] && <div className="text-xs text-[#66756A]">{topTypes[0][1]} doc{topTypes[0][1] !== 1 ? 's' : ''}</div>}
           </div>
         </div>
 
         {/* Filters */}
         <div className="flex flex-wrap gap-3">
           <div className="relative flex-1 min-w-[200px]">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#3A3A55]" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#3D4B42]" />
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search document name…"
-              className="w-full pl-9 pr-4 py-2.5 bg-[#0D0D15] border border-[#1E1E2E] rounded-lg text-[#C0C0D0] text-sm placeholder-[#3A3A55] focus:outline-none focus:border-[#F5C518]/40"
+              className="w-full pl-9 pr-4 py-2.5 bg-[#0A130F] border border-[#1B2A22] rounded-lg text-[#C4CDC2] text-sm placeholder-[#3D4B42] focus:outline-none focus:border-[#C9A35C]/40"
             />
           </div>
           <select
             value={filterStaff}
             onChange={(e) => setFilterStaff(e.target.value)}
-            className="bg-[#0D0D15] border border-[#1E1E2E] rounded-lg px-3 py-2.5 text-[#C0C0D0] text-sm focus:outline-none focus:border-[#F5C518]/40 min-w-[180px]"
+            className="bg-[#0A130F] border border-[#1B2A22] rounded-lg px-3 py-2.5 text-[#C4CDC2] text-sm focus:outline-none focus:border-[#C9A35C]/40 min-w-[180px]"
           >
             <option value="">All Staff Members</option>
             {staffList.map(s => <option key={s.id} value={s.id}>{s.full_name}</option>)}
@@ -411,7 +411,7 @@ export default function VaultPage() {
           <select
             value={filterType}
             onChange={(e) => setFilterType(e.target.value)}
-            className="bg-[#0D0D15] border border-[#1E1E2E] rounded-lg px-3 py-2.5 text-[#C0C0D0] text-sm focus:outline-none focus:border-[#F5C518]/40 min-w-[180px]"
+            className="bg-[#0A130F] border border-[#1B2A22] rounded-lg px-3 py-2.5 text-[#C4CDC2] text-sm focus:outline-none focus:border-[#C9A35C]/40 min-w-[180px]"
           >
             <option value="">All Document Types</option>
             {DOC_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
@@ -419,7 +419,7 @@ export default function VaultPage() {
           {(filterStaff || filterType || search) && (
             <button
               onClick={() => { setSearch(''); setFilterStaff(''); setFilterType('') }}
-              className="flex items-center gap-1.5 px-3 py-2.5 text-[#5A5A72] hover:text-[#F0F0F5] text-sm transition-colors"
+              className="flex items-center gap-1.5 px-3 py-2.5 text-[#66756A] hover:text-[#EDEFE9] text-sm transition-colors"
             >
               <X className="w-3.5 h-3.5" /> Clear
             </button>
@@ -427,19 +427,19 @@ export default function VaultPage() {
         </div>
 
         {/* Table */}
-        <div className="bg-[#0D0D15] border border-[#1E1E2E] rounded-xl overflow-hidden">
+        <div className="bg-[#0A130F] border border-[#1B2A22] rounded-xl overflow-hidden">
           {loading ? (
             <div className="flex items-center justify-center h-48">
-              <Loader2 className="w-6 h-6 text-[#F5C518] animate-spin" />
+              <Loader2 className="w-6 h-6 text-[#C9A35C] animate-spin" />
             </div>
           ) : docs.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-48 gap-3">
-              <Archive className="w-10 h-10 text-[#2A2A3E]" />
-              <p className="text-[#3A3A55] text-sm">No documents found</p>
+              <Archive className="w-10 h-10 text-[#27392E]" />
+              <p className="text-[#3D4B42] text-sm">No documents found</p>
               {!filterStaff && !filterType && !search && (
                 <button
                   onClick={() => setShowUpload(true)}
-                  className="text-[#F5C518] text-sm hover:underline"
+                  className="text-[#C9A35C] text-sm hover:underline"
                 >
                   Upload the first document
                 </button>
@@ -449,46 +449,46 @@ export default function VaultPage() {
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-[#1E1E2E]">
+                  <tr className="border-b border-[#1B2A22]">
                     {['Document', 'Type', 'Staff Member', 'Size', 'Uploaded', 'Visibility', 'Actions'].map(h => (
-                      <th key={h} className="text-left text-[#3A3A55] text-[11px] font-semibold uppercase tracking-wider px-4 py-3">
+                      <th key={h} className="text-left text-[#3D4B42] text-[11px] font-semibold uppercase tracking-wider px-4 py-3">
                         {h}
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#1E1E2E]">
+                <tbody className="divide-y divide-[#1B2A22]">
                   {docs.map(doc => (
-                    <tr key={doc.id} className="hover:bg-[#1A1A28]/50 transition-colors group">
+                    <tr key={doc.id} className="hover:bg-[#12231C]/50 transition-colors group">
                       {/* Document name */}
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-2.5">
-                          <div className="w-8 h-8 bg-[#1A1A28] rounded-lg flex items-center justify-center shrink-0">
+                          <div className="w-8 h-8 bg-[#12231C] rounded-lg flex items-center justify-center shrink-0">
                             <FileIcon mime={doc.mime_type} />
                           </div>
                           <div>
-                            <div className="text-[#C0C0D0] text-sm font-medium">{doc.doc_name}</div>
-                            {doc.notes && <div className="text-[#3A3A55] text-xs truncate max-w-[180px]">{doc.notes}</div>}
+                            <div className="text-[#C4CDC2] text-sm font-medium">{doc.doc_name}</div>
+                            {doc.notes && <div className="text-[#3D4B42] text-xs truncate max-w-[180px]">{doc.notes}</div>}
                           </div>
                         </div>
                       </td>
                       {/* Type */}
                       <td className="px-4 py-3">
-                        <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-[#1A1A28] text-[#8B8BA0] text-xs">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-[#12231C] text-[#A9B5A9] text-xs">
                           {doc.doc_type}
                         </span>
                       </td>
                       {/* Staff */}
                       <td className="px-4 py-3">
-                        <div className="text-[#C0C0D0] text-sm">{doc.staff?.full_name || '—'}</div>
+                        <div className="text-[#C4CDC2] text-sm">{doc.staff?.full_name || '—'}</div>
                         {doc.staff?.staff_id && (
-                          <div className="text-[#3A3A55] text-xs">{doc.staff.staff_id}</div>
+                          <div className="text-[#3D4B42] text-xs">{doc.staff.staff_id}</div>
                         )}
                       </td>
                       {/* Size */}
-                      <td className="px-4 py-3 text-[#5A5A72] text-sm">{formatBytes(doc.file_size)}</td>
+                      <td className="px-4 py-3 text-[#66756A] text-sm">{formatBytes(doc.file_size)}</td>
                       {/* Date */}
-                      <td className="px-4 py-3 text-[#5A5A72] text-sm">{formatDate(doc.created_at)}</td>
+                      <td className="px-4 py-3 text-[#66756A] text-sm">{formatDate(doc.created_at)}</td>
                       {/* Visibility */}
                       <td className="px-4 py-3">
                         <button
@@ -498,7 +498,7 @@ export default function VaultPage() {
                             'flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-md transition-colors',
                             doc.is_visible_to_employee
                               ? 'bg-green-500/10 text-green-400 hover:bg-green-500/20'
-                              : 'bg-[#2A2A3E] text-[#5A5A72] hover:bg-[#3A3A55]'
+                              : 'bg-[#27392E] text-[#66756A] hover:bg-[#3D4B42]'
                           )}
                         >
                           {togglingId === doc.id
@@ -515,7 +515,7 @@ export default function VaultPage() {
                             onClick={() => handleDownload(doc)}
                             disabled={downloading === doc.id}
                             title="Download"
-                            className="p-1.5 text-[#3A3A55] hover:text-[#F5C518] hover:bg-[#F5C518]/10 rounded-md transition-colors disabled:opacity-50"
+                            className="p-1.5 text-[#3D4B42] hover:text-[#C9A35C] hover:bg-[#C9A35C]/10 rounded-md transition-colors disabled:opacity-50"
                           >
                             {downloading === doc.id
                               ? <Loader2 className="w-4 h-4 animate-spin" />
@@ -526,7 +526,7 @@ export default function VaultPage() {
                             onClick={() => handleDelete(doc)}
                             disabled={deleting === doc.id}
                             title="Delete"
-                            className="p-1.5 text-[#3A3A55] hover:text-red-400 hover:bg-red-500/10 rounded-md transition-colors disabled:opacity-50"
+                            className="p-1.5 text-[#3D4B42] hover:text-red-400 hover:bg-red-500/10 rounded-md transition-colors disabled:opacity-50"
                           >
                             {deleting === doc.id
                               ? <Loader2 className="w-4 h-4 animate-spin" />
@@ -545,7 +545,7 @@ export default function VaultPage() {
 
         {/* Footer count */}
         {docs.length > 0 && (
-          <p className="text-[#3A3A55] text-xs text-right">
+          <p className="text-[#3D4B42] text-xs text-right">
             Showing {docs.length} document{docs.length !== 1 ? 's' : ''}
           </p>
         )}

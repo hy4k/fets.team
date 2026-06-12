@@ -39,7 +39,7 @@ function Field({ label, value, onChange, placeholder, type = 'text' }:
       <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
         className="w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-1"
         style={{
-          background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(124,58,237,0.2)',
+          background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(201,163,92,0.2)',
           color: 'var(--text-primary)', outline: 'none',
         }} />
     </div>
@@ -49,10 +49,10 @@ function Field({ label, value, onChange, placeholder, type = 'text' }:
 function CardBox({ children, title, icon: Icon }: { children: React.ReactNode; title?: string; icon?: any }) {
   return (
     <div className="rounded-2xl p-5 mb-5"
-      style={{ background: 'linear-gradient(135deg,rgba(124,58,237,0.07),rgba(109,40,217,0.03))', border: '1px solid rgba(124,58,237,0.12)', boxShadow: '0 4px 24px rgba(0,0,0,0.3)' }}>
+      style={{ background: 'linear-gradient(135deg,rgba(201,163,92,0.07),rgba(168,127,61,0.03))', border: '1px solid rgba(201,163,92,0.12)', boxShadow: '0 4px 24px rgba(0,0,0,0.3)' }}>
       {title && (
         <div className="flex items-center gap-2 mb-4">
-          {Icon && <Icon className="w-4 h-4" style={{ color: 'var(--violet-400)' }} />}
+          {Icon && <Icon className="w-4 h-4" style={{ color: 'var(--aurora-400)' }} />}
           <h3 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>{title}</h3>
         </div>
       )}
@@ -65,7 +65,7 @@ function SaveBtn({ onClick, busy }: { onClick: () => void; busy: boolean }) {
   return (
     <button onClick={onClick} disabled={busy}
       className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all mt-4 hover:opacity-90 disabled:opacity-50"
-      style={{ background: 'linear-gradient(135deg,#9B6DFF,#6D28D9)', color: 'white', boxShadow: '0 4px 16px rgba(109,40,217,0.4)' }}>
+      style={{ background: 'linear-gradient(135deg,#5EEAD4,#0D9488)', color: 'white', boxShadow: '0 4px 16px rgba(168,127,61,0.4)' }}>
       {busy ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
       {busy ? 'Saving…' : 'Save Changes'}
     </button>
@@ -120,7 +120,7 @@ function DocsTab({ settings, onSave }: { settings: Record<string, string>; onSav
           <Field label="Next Counter Value"       value={form.doc_number_counter} onChange={set('doc_number_counter')} type="number" placeholder="1000" />
         </div>
         <p className="text-xs mt-2" style={{ color: 'var(--text-ghost)' }}>
-          Generated documents will be numbered <strong style={{ color: 'var(--violet-300)' }}>{form.doc_number_prefix}/YYYY/{form.doc_number_counter}</strong>
+          Generated documents will be numbered <strong style={{ color: 'var(--aurora-300)' }}>{form.doc_number_prefix}/YYYY/{form.doc_number_counter}</strong>
         </p>
       </CardBox>
       <CardBox title="Branding Asset URLs" icon={FileText}>
@@ -179,13 +179,13 @@ function LeaveTypesTab({ onToast }: { onToast: (msg: string, ok: boolean) => voi
         <p className="text-xs" style={{ color: 'var(--text-ghost)' }}>{types.length} leave types configured</p>
         <button onClick={openNew}
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all hover:opacity-90"
-          style={{ background: 'rgba(124,58,237,0.2)', color: 'var(--violet-300)', border: '1px solid rgba(124,58,237,0.3)' }}>
+          style={{ background: 'rgba(201,163,92,0.2)', color: 'var(--aurora-300)', border: '1px solid rgba(201,163,92,0.3)' }}>
           <Plus className="w-3.5 h-3.5" /> Add Leave Type
         </button>
       </div>
 
       {showForm && (
-        <div className="mb-4 p-4 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(124,58,237,0.2)' }}>
+        <div className="mb-4 p-4 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(201,163,92,0.2)' }}>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-3">
             <Field label="Name" value={form.name} onChange={v => setForm(f => ({ ...f, name: v }))} placeholder="e.g. Annual Leave" />
             <Field label="Days / Year" value={String(form.days_per_year)} onChange={v => setForm(f => ({ ...f, days_per_year: Number(v) }))} type="number" placeholder="21" />
@@ -204,7 +204,7 @@ function LeaveTypesTab({ onToast }: { onToast: (msg: string, ok: boolean) => voi
           <div className="flex gap-2">
             <button onClick={handleSave} disabled={busy}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold disabled:opacity-50"
-              style={{ background: 'linear-gradient(135deg,#9B6DFF,#6D28D9)', color: 'white' }}>
+              style={{ background: 'linear-gradient(135deg,#5EEAD4,#0D9488)', color: 'white' }}>
               {busy ? <RefreshCw className="w-3 h-3 animate-spin" /> : <Check className="w-3 h-3" />}
               {editing ? 'Update' : 'Create'}
             </button>
@@ -217,16 +217,16 @@ function LeaveTypesTab({ onToast }: { onToast: (msg: string, ok: boolean) => voi
         <div className="space-y-2">
           {types.map((t: any) => (
             <div key={t.id} className="flex items-center justify-between px-4 py-3 rounded-xl"
-              style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(124,58,237,0.08)' }}>
+              style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(201,163,92,0.08)' }}>
               <div className="flex items-center gap-3">
                 <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{t.name}</span>
-                <span className="text-xs px-2 py-0.5 rounded-lg" style={{ background: t.is_paid ? 'rgba(16,185,129,0.12)' : 'rgba(245,158,11,0.12)', color: t.is_paid ? '#34D399' : '#FCD34D' }}>
+                <span className="text-xs px-2 py-0.5 rounded-lg" style={{ background: t.is_paid ? 'rgba(16,185,129,0.12)' : 'rgba(245,158,11,0.12)', color: t.is_paid ? '#34D399' : '#F0DCAE' }}>
                   {t.is_paid ? 'Paid' : 'Unpaid'}
                 </span>
                 <span className="text-xs" style={{ color: 'var(--text-ghost)' }}>{t.days_per_year} days/yr</span>
               </div>
               <div className="flex items-center gap-1">
-                <button onClick={() => openEdit(t)} className="p-1.5 rounded-lg hover:opacity-80" style={{ color: 'var(--violet-400)' }}><Pencil className="w-3.5 h-3.5" /></button>
+                <button onClick={() => openEdit(t)} className="p-1.5 rounded-lg hover:opacity-80" style={{ color: 'var(--aurora-400)' }}><Pencil className="w-3.5 h-3.5" /></button>
                 <button onClick={() => handleDelete(t.id, t.name)} className="p-1.5 rounded-lg hover:opacity-80" style={{ color: '#FB7185' }}><Trash2 className="w-3.5 h-3.5" /></button>
               </div>
             </div>
@@ -268,13 +268,13 @@ function CentresTab({ onToast }: { onToast: (msg: string, ok: boolean) => void }
         <p className="text-xs" style={{ color: 'var(--text-ghost)' }}>{centres.length} centres</p>
         <button onClick={openNew}
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:opacity-90"
-          style={{ background: 'rgba(124,58,237,0.2)', color: 'var(--violet-300)', border: '1px solid rgba(124,58,237,0.3)' }}>
+          style={{ background: 'rgba(201,163,92,0.2)', color: 'var(--aurora-300)', border: '1px solid rgba(201,163,92,0.3)' }}>
           <Plus className="w-3.5 h-3.5" /> Add Centre
         </button>
       </div>
 
       {showForm && (
-        <div className="mb-4 p-4 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(124,58,237,0.2)' }}>
+        <div className="mb-4 p-4 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(201,163,92,0.2)' }}>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
             <Field label="Centre Name" value={form.name}    onChange={set('name')}    placeholder="Calicut Centre" />
             <Field label="City"        value={form.city}    onChange={set('city')}    placeholder="Calicut" />
@@ -285,7 +285,7 @@ function CentresTab({ onToast }: { onToast: (msg: string, ok: boolean) => void }
           <div className="flex gap-2">
             <button onClick={handleSave} disabled={busy}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold disabled:opacity-50"
-              style={{ background: 'linear-gradient(135deg,#9B6DFF,#6D28D9)', color: 'white' }}>
+              style={{ background: 'linear-gradient(135deg,#5EEAD4,#0D9488)', color: 'white' }}>
               {busy ? <RefreshCw className="w-3 h-3 animate-spin" /> : <Check className="w-3 h-3" />}
               {editing ? 'Update' : 'Create'}
             </button>
@@ -298,12 +298,12 @@ function CentresTab({ onToast }: { onToast: (msg: string, ok: boolean) => void }
         <div className="space-y-2">
           {centres.map((c: any) => (
             <div key={c.id} className="flex items-center justify-between px-4 py-3 rounded-xl"
-              style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(124,58,237,0.08)' }}>
+              style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(201,163,92,0.08)' }}>
               <div>
                 <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{c.name}</span>
                 <span className="ml-2 text-xs" style={{ color: 'var(--text-ghost)' }}>{c.city}{c.address ? ` · ${c.address}` : ''}</span>
               </div>
-              <button onClick={() => openEdit(c)} className="p-1.5 rounded-lg hover:opacity-80" style={{ color: 'var(--violet-400)' }}>
+              <button onClick={() => openEdit(c)} className="p-1.5 rounded-lg hover:opacity-80" style={{ color: 'var(--aurora-400)' }}>
                 <Pencil className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -375,7 +375,7 @@ function UsersTab({ onToast }: { onToast: (msg: string, ok: boolean) => void }) 
   const syncColor = (state: SyncState): React.CSSProperties => {
     if (state === 'done' || state === 'exists') return { background: 'rgba(16,185,129,0.12)', color: '#34D399', border: '1px solid rgba(16,185,129,0.25)' }
     if (state === 'error')  return { background: 'rgba(244,63,94,0.1)', color: '#FB7185', border: '1px solid rgba(244,63,94,0.2)' }
-    return { background: 'rgba(234,179,8,0.1)', color: '#FCD34D', border: '1px solid rgba(234,179,8,0.25)' }
+    return { background: 'rgba(234,179,8,0.1)', color: '#F0DCAE', border: '1px solid rgba(234,179,8,0.25)' }
   }
 
   const linked   = staff.filter(s => s.user_id)
@@ -389,11 +389,11 @@ function UsersTab({ onToast }: { onToast: (msg: string, ok: boolean) => void }) 
       </p>
       <div className="grid grid-cols-2 gap-3 mb-5">
         <div className="rounded-xl px-4 py-3 text-center" style={{ background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.15)' }}>
-          <div className="text-2xl font-bold" style={{ color: '#34D399' }}>{linked.length}</div>
+          <div className="font-display text-2xl font-bold" style={{ color: '#34D399' }}>{linked.length}</div>
           <div className="text-xs mt-0.5" style={{ color: 'var(--text-ghost)' }}>Linked</div>
         </div>
         <div className="rounded-xl px-4 py-3 text-center" style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.15)' }}>
-          <div className="text-2xl font-bold" style={{ color: '#FCD34D' }}>{unlinked.length}</div>
+          <div className="font-display text-2xl font-bold" style={{ color: '#F0DCAE' }}>{unlinked.length}</div>
           <div className="text-xs mt-0.5" style={{ color: 'var(--text-ghost)' }}>Unlinked</div>
         </div>
       </div>
@@ -402,12 +402,12 @@ function UsersTab({ onToast }: { onToast: (msg: string, ok: boolean) => void }) 
         <div className="space-y-2">
           {staff.map((s: any) => (
             <div key={s.id} className="rounded-xl px-4 py-3"
-              style={{ background: 'rgba(255,255,255,0.03)', border: `1px solid ${s.user_id ? 'rgba(16,185,129,0.15)' : 'rgba(124,58,237,0.08)'}` }}>
+              style={{ background: 'rgba(255,255,255,0.03)', border: `1px solid ${s.user_id ? 'rgba(16,185,129,0.15)' : 'rgba(201,163,92,0.08)'}` }}>
               <div className="flex items-center justify-between gap-3">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{s.full_name}</span>
-                    <span className="text-xs px-1.5 py-0.5 rounded" style={{ background: 'rgba(124,58,237,0.1)', color: 'var(--violet-300)' }}>{s.staff_id}</span>
+                    <span className="text-xs px-1.5 py-0.5 rounded" style={{ background: 'rgba(201,163,92,0.1)', color: 'var(--aurora-300)' }}>{s.staff_id}</span>
                     {s.user_id && <CheckCircle className="w-3.5 h-3.5" style={{ color: '#34D399' }} />}
                   </div>
                   <div className="text-xs mt-0.5" style={{ color: 'var(--text-ghost)' }}>
@@ -424,7 +424,7 @@ function UsersTab({ onToast }: { onToast: (msg: string, ok: boolean) => void }) 
                       </button>
                     : <button onClick={() => { setLinking(l => l === s.id ? null : s.id); setEmailInput('') }}
                         className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-medium hover:opacity-80"
-                        style={{ background: 'rgba(124,58,237,0.15)', color: 'var(--violet-300)', border: '1px solid rgba(124,58,237,0.25)' }}>
+                        style={{ background: 'rgba(201,163,92,0.15)', color: 'var(--aurora-300)', border: '1px solid rgba(201,163,92,0.25)' }}>
                         <Link2 className="w-3 h-3" /> Link Account
                       </button>
                   }
@@ -445,10 +445,10 @@ function UsersTab({ onToast }: { onToast: (msg: string, ok: boolean) => void }) 
                     placeholder="Enter staff member's login email…"
                     onKeyDown={e => e.key === 'Enter' && handleLink(s.id)}
                     className="flex-1 rounded-xl px-3 py-2 text-sm focus:outline-none"
-                    style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(124,58,237,0.25)', color: 'var(--text-primary)' }} />
+                    style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(201,163,92,0.25)', color: 'var(--text-primary)' }} />
                   <button onClick={() => handleLink(s.id)} disabled={busy || !emailInput.trim()}
                     className="px-3 py-2 rounded-xl text-xs font-semibold disabled:opacity-50"
-                    style={{ background: 'linear-gradient(135deg,#9B6DFF,#6D28D9)', color: 'white' }}>
+                    style={{ background: 'linear-gradient(135deg,#5EEAD4,#0D9488)', color: 'white' }}>
                     {busy ? <RefreshCw className="w-3 h-3 animate-spin" /> : 'Link'}
                   </button>
                   <button onClick={() => setLinking(null)} className="px-2 py-2 rounded-xl text-xs" style={{ color: 'var(--text-ghost)' }}>✕</button>
@@ -497,8 +497,8 @@ export default function SettingsPage() {
       {/* Page header */}
       <div className="flex items-center gap-3 mb-6">
         <div className="w-8 h-8 rounded-xl flex items-center justify-center"
-          style={{ background: 'linear-gradient(135deg,rgba(124,58,237,0.3),rgba(109,40,217,0.2))', border: '1px solid rgba(124,58,237,0.2)' }}>
-          <Building2 className="w-4 h-4" style={{ color: 'var(--violet-400)' }} />
+          style={{ background: 'linear-gradient(135deg,rgba(201,163,92,0.3),rgba(168,127,61,0.2))', border: '1px solid rgba(201,163,92,0.2)' }}>
+          <Building2 className="w-4 h-4" style={{ color: 'var(--aurora-400)' }} />
         </div>
         <div>
           <h1 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>Admin Settings</h1>
@@ -508,7 +508,7 @@ export default function SettingsPage() {
 
       {/* Tab bar */}
       <div className="flex gap-1 mb-6 overflow-x-auto pb-1"
-        style={{ borderBottom: '1px solid rgba(124,58,237,0.1)' }}>
+        style={{ borderBottom: '1px solid rgba(201,163,92,0.1)' }}>
         {TABS.map(t => {
           const Icon = t.icon
           const active = tab === t.id
@@ -516,8 +516,8 @@ export default function SettingsPage() {
             <button key={t.id} onClick={() => setTab(t.id)}
               className="flex items-center gap-2 px-4 py-2.5 rounded-t-xl text-sm font-medium transition-all duration-200 whitespace-nowrap"
               style={active ? {
-                background: 'linear-gradient(135deg,rgba(124,58,237,0.2),rgba(109,40,217,0.1))',
-                borderBottom: '2px solid var(--violet-500)', color: 'var(--text-primary)',
+                background: 'linear-gradient(135deg,rgba(201,163,92,0.2),rgba(168,127,61,0.1))',
+                borderBottom: '2px solid var(--aurora-500)', color: 'var(--text-primary)',
               } : {
                 background: 'transparent', borderBottom: '2px solid transparent', color: 'var(--text-ghost)',
               }}>
@@ -531,7 +531,7 @@ export default function SettingsPage() {
       {/* Tab content */}
       {settings === null ? (
         <div className="flex items-center justify-center py-24">
-          <RefreshCw className="w-6 h-6 animate-spin" style={{ color: 'var(--violet-400)' }} />
+          <RefreshCw className="w-6 h-6 animate-spin" style={{ color: 'var(--aurora-400)' }} />
         </div>
       ) : (
         <>

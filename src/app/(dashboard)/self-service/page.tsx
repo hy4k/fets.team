@@ -52,12 +52,12 @@ function StatusBadge({ status }: { status: string }) {
     approved:  { bg: 'rgba(16,185,129,0.15)', text: '#34D399', icon: CheckCircle },
     paid:      { bg: 'rgba(16,185,129,0.15)', text: '#34D399', icon: CheckCircle },
     generated: { bg: 'rgba(16,185,129,0.15)', text: '#34D399', icon: CheckCircle },
-    pending:   { bg: 'rgba(245,158,11,0.15)',  text: '#FCD34D', icon: Clock },
-    draft:     { bg: 'rgba(245,158,11,0.15)',  text: '#FCD34D', icon: Clock },
+    pending:   { bg: 'rgba(245,158,11,0.15)',  text: '#F0DCAE', icon: Clock },
+    draft:     { bg: 'rgba(245,158,11,0.15)',  text: '#F0DCAE', icon: Clock },
     inactive:  { bg: 'rgba(244,63,94,0.12)',   text: '#FB7185', icon: XCircle },
     rejected:  { bg: 'rgba(244,63,94,0.12)',   text: '#FB7185', icon: XCircle },
   }
-  const s = map[status?.toLowerCase()] ?? { bg: 'rgba(124,58,237,0.12)', text: '#A78BFA', icon: AlertCircle }
+  const s = map[status?.toLowerCase()] ?? { bg: 'rgba(201,163,92,0.12)', text: '#5EEAD4', icon: AlertCircle }
   const Icon = s.icon
   return (
     <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg text-[11px] font-semibold"
@@ -72,8 +72,8 @@ function CardBox({ children, className = '' }: { children: React.ReactNode; clas
   return (
     <div className={`rounded-2xl p-5 ${className}`}
       style={{
-        background: 'linear-gradient(135deg, rgba(124,58,237,0.07) 0%, rgba(109,40,217,0.03) 100%)',
-        border: '1px solid rgba(124,58,237,0.12)',
+        background: 'linear-gradient(135deg, rgba(201,163,92,0.07) 0%, rgba(168,127,61,0.03) 100%)',
+        border: '1px solid rgba(201,163,92,0.12)',
         boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
       }}>
       {children}
@@ -84,8 +84,8 @@ function CardBox({ children, className = '' }: { children: React.ReactNode; clas
 function StatCard({ value, label, color }: { value: string | number; label: string; color: string }) {
   return (
     <div className="rounded-xl px-4 py-3 text-center"
-      style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(124,58,237,0.1)' }}>
-      <div className="text-2xl font-bold" style={{ color }}>{value}</div>
+      style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(201,163,92,0.1)' }}>
+      <div className="font-display text-2xl font-bold" style={{ color }}>{value}</div>
       <div className="text-xs mt-0.5" style={{ color: 'var(--text-ghost)' }}>{label}</div>
     </div>
   )
@@ -95,8 +95,8 @@ function StatCard({ value, label, color }: { value: string | number; label: stri
 
 function ProfileTab({ profile }: { profile: MyProfile }) {
   const InfoRow = ({ icon: Icon, label, value }: { icon: any; label: string; value: string | null }) => (
-    <div className="flex items-center gap-3 py-2.5 border-b" style={{ borderColor: 'rgba(124,58,237,0.06)' }}>
-      <Icon className="w-4 h-4 shrink-0" style={{ color: 'var(--violet-400)' }} />
+    <div className="flex items-center gap-3 py-2.5 border-b" style={{ borderColor: 'rgba(201,163,92,0.06)' }}>
+      <Icon className="w-4 h-4 shrink-0" style={{ color: 'var(--aurora-400)' }} />
       <span className="text-xs w-32 shrink-0" style={{ color: 'var(--text-ghost)' }}>{label}</span>
       <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{value || '—'}</span>
     </div>
@@ -108,19 +108,19 @@ function ProfileTab({ profile }: { profile: MyProfile }) {
       <CardBox>
         <div className="flex items-center gap-5">
           <div className="w-20 h-20 rounded-2xl flex items-center justify-center shrink-0 overflow-hidden"
-            style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.3), rgba(109,40,217,0.2))', border: '2px solid rgba(124,58,237,0.2)' }}>
+            style={{ background: 'linear-gradient(135deg, rgba(201,163,92,0.3), rgba(168,127,61,0.2))', border: '2px solid rgba(201,163,92,0.2)' }}>
             {profile.photo_url
               ? <img src={profile.photo_url} alt="" className="w-full h-full object-cover" />
-              : <User className="w-9 h-9" style={{ color: 'var(--violet-400)' }} />
+              : <User className="w-9 h-9" style={{ color: 'var(--aurora-400)' }} />
             }
           </div>
           <div className="flex-1 min-w-0">
             <h2 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>{profile.full_name}</h2>
-            <p className="text-sm mt-0.5" style={{ color: 'var(--violet-400)' }}>{profile.designation?.title || profile.designation_text || 'Staff'}</p>
+            <p className="text-sm mt-0.5" style={{ color: 'var(--aurora-400)' }}>{profile.designation?.title || profile.designation_text || 'Staff'}</p>
             <div className="flex items-center gap-3 mt-2">
               <StatusBadge status={profile.status} />
               <span className="text-xs px-2 py-0.5 rounded-lg"
-                style={{ background: 'rgba(124,58,237,0.1)', color: 'var(--violet-300)' }}>
+                style={{ background: 'rgba(201,163,92,0.1)', color: 'var(--aurora-300)' }}>
                 {profile.staff_id}
               </span>
             </div>
@@ -172,9 +172,9 @@ function LeaveTab() {
     <div className="space-y-5">
       {stats && (
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <StatCard value={stats.total}            label="Total Requests"   color="#A78BFA" />
+          <StatCard value={stats.total}            label="Total Requests"   color="#5EEAD4" />
           <StatCard value={stats.approved}          label="Approved"         color="#34D399" />
-          <StatCard value={stats.pending}           label="Pending"          color="#FCD34D" />
+          <StatCard value={stats.pending}           label="Pending"          color="#F0DCAE" />
           <StatCard value={stats.totalApprovedDays} label="Approved Days"    color="#60A5FA" />
         </div>
       )}
@@ -186,7 +186,7 @@ function LeaveTab() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr style={{ borderBottom: '1px solid rgba(124,58,237,0.1)' }}>
+                  <tr style={{ borderBottom: '1px solid rgba(201,163,92,0.1)' }}>
                     {['Leave Type', 'From', 'To', 'Days', 'Status', 'Remarks'].map(h => (
                       <th key={h} className="text-left pb-3 pr-4 text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-ghost)' }}>{h}</th>
                     ))}
@@ -194,13 +194,13 @@ function LeaveTab() {
                 </thead>
                 <tbody>
                   {requests.map((r: any) => (
-                    <tr key={r.id} style={{ borderBottom: '1px solid rgba(124,58,237,0.04)' }}>
+                    <tr key={r.id} style={{ borderBottom: '1px solid rgba(201,163,92,0.04)' }}>
                       <td className="py-2.5 pr-4 font-medium" style={{ color: 'var(--text-primary)' }}>
                         {r.leave_type?.name ?? '—'}
                       </td>
                       <td className="py-2.5 pr-4" style={{ color: 'var(--text-secondary)' }}>{fmtDate(r.start_date)}</td>
                       <td className="py-2.5 pr-4" style={{ color: 'var(--text-secondary)' }}>{fmtDate(r.end_date)}</td>
-                      <td className="py-2.5 pr-4" style={{ color: 'var(--violet-300)' }}>{r.days ?? '—'}</td>
+                      <td className="py-2.5 pr-4" style={{ color: 'var(--aurora-300)' }}>{r.days ?? '—'}</td>
                       <td className="py-2.5 pr-4"><StatusBadge status={r.status} /></td>
                       <td className="py-2.5 pr-4 max-w-[160px] truncate" style={{ color: 'var(--text-ghost)' }}>{r.hr_notes || r.reason || '—'}</td>
                     </tr>
@@ -234,7 +234,7 @@ function DocumentsTab() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {docs.map((d: any) => (
                 <div key={d.id} className="rounded-xl p-4 transition-all"
-                  style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(124,58,237,0.1)' }}>
+                  style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(201,163,92,0.1)' }}>
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-semibold truncate" style={{ color: 'var(--text-primary)' }}>
@@ -249,7 +249,7 @@ function DocumentsTab() {
                         <div className="flex items-center gap-2">
                           <a href={`/documents/${d.id}`} target="_blank"
                             className="flex items-center gap-1 text-[11px] px-2 py-1 rounded-lg hover:opacity-80 transition-opacity"
-                            style={{ background: 'rgba(124,58,237,0.15)', color: 'var(--violet-300)' }}>
+                            style={{ background: 'rgba(201,163,92,0.15)', color: 'var(--aurora-300)' }}>
                             <Download className="w-3 h-3" /> View
                           </a>
                           <a href={`/verify/${d.verification_id}`} target="_blank"
@@ -290,7 +290,7 @@ function PayslipsTab() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr style={{ borderBottom: '1px solid rgba(124,58,237,0.1)' }}>
+                  <tr style={{ borderBottom: '1px solid rgba(201,163,92,0.1)' }}>
                     {['Period', 'Basic Salary', 'Status', 'Payment Date', 'Mode', 'Payslip'].map(h => (
                       <th key={h} className="text-left pb-3 pr-4 text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-ghost)' }}>{h}</th>
                     ))}
@@ -298,8 +298,8 @@ function PayslipsTab() {
                 </thead>
                 <tbody>
                   {payslips.map((p: any) => (
-                    <tr key={p.id} style={{ borderBottom: '1px solid rgba(124,58,237,0.04)' }}>
-                      <td className="py-2.5 pr-4 font-semibold" style={{ color: 'var(--violet-300)' }}>
+                    <tr key={p.id} style={{ borderBottom: '1px solid rgba(201,163,92,0.04)' }}>
+                      <td className="py-2.5 pr-4 font-semibold" style={{ color: 'var(--aurora-300)' }}>
                         {MONTHS[p.month] ?? p.month} {p.year}
                       </td>
                       <td className="py-2.5 pr-4 font-medium" style={{ color: 'var(--text-primary)' }}>{fmtMoney(p.basic_salary)}</td>
@@ -311,7 +311,7 @@ function PayslipsTab() {
                           ? (
                             <a href={`/documents/${p.payslip_doc_id}`} target="_blank"
                               className="flex items-center gap-1 text-[11px] px-2 py-1 rounded-lg w-fit hover:opacity-80 transition-opacity"
-                              style={{ background: 'rgba(124,58,237,0.15)', color: 'var(--violet-300)' }}>
+                              style={{ background: 'rgba(201,163,92,0.15)', color: 'var(--aurora-300)' }}>
                               <Download className="w-3 h-3" /> Download
                             </a>
                           )
@@ -379,13 +379,13 @@ function LettersTab() {
               onChange={e => setForm(f => ({ ...f, letter_type: e.target.value }))}
               className="w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none"
               style={{
-                background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(124,58,237,0.2)',
+                background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(201,163,92,0.2)',
                 color: 'var(--text-primary)', borderRadius: '12px',
               }}
             >
-              <option value="" style={{ background: '#1A0A3E' }}>Select letter type…</option>
+              <option value="" style={{ background: '#0D2018' }}>Select letter type…</option>
               {LETTER_TYPES.map(t => (
-                <option key={t} value={t} style={{ background: '#1A0A3E' }}>{LETTER_LABELS[t]}</option>
+                <option key={t} value={t} style={{ background: '#0D2018' }}>{LETTER_LABELS[t]}</option>
               ))}
             </select>
           </div>
@@ -397,7 +397,7 @@ function LettersTab() {
               placeholder="e.g. Visa application, bank loan…"
               className="w-full rounded-xl px-3 py-2.5 text-sm focus:outline-none"
               style={{
-                background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(124,58,237,0.2)',
+                background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(201,163,92,0.2)',
                 color: 'var(--text-primary)',
               }}
             />
@@ -407,7 +407,7 @@ function LettersTab() {
           onClick={handleSubmit}
           disabled={isPending}
           className="mt-4 flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 hover:opacity-90 disabled:opacity-50"
-          style={{ background: 'linear-gradient(135deg, #9B6DFF, #6D28D9)', color: 'white', boxShadow: '0 4px 16px rgba(109,40,217,0.4)' }}
+          style={{ background: 'linear-gradient(135deg, #5EEAD4, #0D9488)', color: 'white', boxShadow: '0 4px 16px rgba(168,127,61,0.4)' }}
         >
           {isPending ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
           {isPending ? 'Submitting…' : 'Submit Request'}
@@ -423,7 +423,7 @@ function LettersTab() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr style={{ borderBottom: '1px solid rgba(124,58,237,0.1)' }}>
+                  <tr style={{ borderBottom: '1px solid rgba(201,163,92,0.1)' }}>
                     {['Letter Type', 'Reason', 'Status', 'HR Notes', 'Requested', 'Document'].map(h => (
                       <th key={h} className="text-left pb-3 pr-4 text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--text-ghost)' }}>{h}</th>
                     ))}
@@ -431,7 +431,7 @@ function LettersTab() {
                 </thead>
                 <tbody>
                   {requests.map((r: any) => (
-                    <tr key={r.id} style={{ borderBottom: '1px solid rgba(124,58,237,0.04)' }}>
+                    <tr key={r.id} style={{ borderBottom: '1px solid rgba(201,163,92,0.04)' }}>
                       <td className="py-2.5 pr-4 font-medium" style={{ color: 'var(--text-primary)' }}>{LETTER_LABELS[r.letter_type] ?? r.letter_type}</td>
                       <td className="py-2.5 pr-4 max-w-[140px] truncate" style={{ color: 'var(--text-secondary)' }}>{r.reason || '—'}</td>
                       <td className="py-2.5 pr-4"><StatusBadge status={r.status} /></td>
@@ -441,7 +441,7 @@ function LettersTab() {
                         {r.generated_doc_id
                           ? <a href={`/documents/${r.generated_doc_id}`} target="_blank"
                               className="flex items-center gap-1 text-[11px] px-2 py-1 rounded-lg w-fit hover:opacity-80"
-                              style={{ background: 'rgba(124,58,237,0.15)', color: 'var(--violet-300)' }}>
+                              style={{ background: 'rgba(201,163,92,0.15)', color: 'var(--aurora-300)' }}>
                               <Download className="w-3 h-3" /> View
                             </a>
                           : <span className="text-xs" style={{ color: 'var(--text-ghost)' }}>—</span>
@@ -464,7 +464,7 @@ function LettersTab() {
 function LoadingSpinner() {
   return (
     <div className="flex items-center justify-center py-16">
-      <RefreshCw className="w-6 h-6 animate-spin" style={{ color: 'var(--violet-400)' }} />
+      <RefreshCw className="w-6 h-6 animate-spin" style={{ color: 'var(--aurora-400)' }} />
     </div>
   )
 }
@@ -500,7 +500,7 @@ export default function SelfServicePage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-96">
-        <RefreshCw className="w-8 h-8 animate-spin" style={{ color: 'var(--violet-400)' }} />
+        <RefreshCw className="w-8 h-8 animate-spin" style={{ color: 'var(--aurora-400)' }} />
       </div>
     )
   }
@@ -526,8 +526,8 @@ export default function SelfServicePage() {
       <div className="mb-6">
         <div className="flex items-center gap-3 mb-1">
           <div className="w-8 h-8 rounded-xl flex items-center justify-center"
-            style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.3), rgba(109,40,217,0.2))', border: '1px solid rgba(124,58,237,0.2)' }}>
-            <Star className="w-4 h-4" style={{ color: 'var(--violet-400)' }} />
+            style={{ background: 'linear-gradient(135deg, rgba(201,163,92,0.3), rgba(168,127,61,0.2))', border: '1px solid rgba(201,163,92,0.2)' }}>
+            <Star className="w-4 h-4" style={{ color: 'var(--aurora-400)' }} />
           </div>
           <div>
             <h1 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>My Portal</h1>
@@ -540,7 +540,7 @@ export default function SelfServicePage() {
 
       {/* Tab bar */}
       <div className="flex gap-1 mb-6 overflow-x-auto pb-1"
-        style={{ borderBottom: '1px solid rgba(124,58,237,0.1)' }}>
+        style={{ borderBottom: '1px solid rgba(201,163,92,0.1)' }}>
         {TABS.map(t => {
           const Icon = t.icon
           const active = tab === t.id
@@ -548,8 +548,8 @@ export default function SelfServicePage() {
             <button key={t.id} onClick={() => setTab(t.id)}
               className="flex items-center gap-2 px-4 py-2.5 rounded-t-xl text-sm font-medium transition-all duration-200 whitespace-nowrap"
               style={active ? {
-                background: 'linear-gradient(135deg, rgba(124,58,237,0.2), rgba(109,40,217,0.1))',
-                borderBottom: '2px solid var(--violet-500)',
+                background: 'linear-gradient(135deg, rgba(201,163,92,0.2), rgba(168,127,61,0.1))',
+                borderBottom: '2px solid var(--aurora-500)',
                 color: 'var(--text-primary)',
               } : {
                 background: 'transparent',
