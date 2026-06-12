@@ -3,13 +3,13 @@
 import { Bell, Command } from 'lucide-react'
 
 interface HeaderProps {
-  title: string
+  title?: string
   subtitle?: string
   actions?: React.ReactNode
   action?: React.ReactNode  // alias
 }
 
-export default function Header({ title, subtitle, actions, action }: HeaderProps) {
+export default function Header({ title, actions, action }: HeaderProps) {
   const headerActions = actions ?? action
 
   const openPalette = () => {
@@ -20,25 +20,33 @@ export default function Header({ title, subtitle, actions, action }: HeaderProps
     <header className="sticky top-0 z-40 px-6 pt-4 pb-3"
       style={{
         background: 'linear-gradient(180deg, rgba(4,10,8,0.88) 60%, rgba(4,10,8,0))',
-        backdropFilter: 'blur(14px) saturate(1.2)',
-        WebkitBackdropFilter: 'blur(14px) saturate(1.2)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
       }}>
-      <div className="flex items-center gap-4 max-w-[1600px] mx-auto">
-        {/* Brand mark */}
-        <div className="hidden sm:flex w-9 h-9 rounded-xl items-center justify-center shrink-0"
-          style={{
-            background: 'linear-gradient(135deg, #E2C285 0%, #A87F3D 100%)',
-            boxShadow: '0 4px 16px rgba(201,163,92,0.4), inset 0 1px 0 rgba(255,255,255,0.25)',
-          }}>
-          <span className="font-display font-semibold text-[13px]" style={{ color: '#120D04' }}>F</span>
+      <div className="flex items-center gap-3 max-w-[1600px] mx-auto">
+
+        {/* Brand */}
+        <div className="flex items-center gap-2.5 shrink-0">
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center"
+            style={{
+              background: 'linear-gradient(135deg, #E2C285 0%, #A87F3D 100%)',
+              boxShadow: '0 3px 12px rgba(201,163,92,0.35), inset 0 1px 0 rgba(255,255,255,0.25)',
+            }}>
+            <span className="font-display font-semibold text-[15px] leading-none" style={{ color: '#120D04' }}>f</span>
+          </div>
+          <span className="font-display text-[17px] font-semibold tracking-tight text-[#EDEFE9]">
+            fets<span style={{ color: 'var(--brass-400)' }}>.team</span>
+          </span>
         </div>
 
-        <div className="flex-1 min-w-0">
-          <h1 className="font-display text-lg font-semibold text-[#EDEFE9] truncate leading-tight">{title}</h1>
-          {subtitle && (
-            <p className="text-xs text-[#66756A] mt-0.5 truncate">{subtitle}</p>
-          )}
-        </div>
+        {/* Page context */}
+        {title && title !== 'Dashboard' && (
+          <span className="text-sm truncate min-w-0" style={{ color: 'var(--text-muted)' }}>
+            <span className="mx-1.5" style={{ color: 'var(--text-ghost)' }}>/</span>{title}
+          </span>
+        )}
+
+        <div className="flex-1" />
 
         <div className="flex items-center gap-2.5 shrink-0">
           {/* Palette trigger */}

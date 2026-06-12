@@ -149,3 +149,30 @@ export async function getRecentActivity(): Promise<RecentActivity[]> {
   if (error || !data) return []
   return data as RecentActivity[]
 }
+
+// ─── Certification status breakdown (dashboard donut) ───────────
+export interface CertBreakdown {
+  total: number
+  passed: number
+  inProgress: number
+  notStarted: number
+  expired: number
+}
+
+export async function getCertBreakdown(): Promise<CertBreakdown> {
+  const supabase = await createClient()
+  const { data } = await (supabase as any)
+    .from('staff_certifications')
+    .select('status, expiry_date')
+  const today = new Date().toISOString().slice(0, 10)
+  const rows = (data || []) as Array<{ status: string; expiry_date: string | null }>
+  const expired = rows.filter(r => r.expiry_date && r.expiry_date < today && r.status !== 'renewed')
+  const rest = rows.filter(r => !expired.includes(r))
+  return {
+    total: rows.length,
+    passed: rest.filter(r => r.status === 'passed' || r.status === 'renewed').length,
+    inProgress: rest.filter(r => ['in_progress', 'scheduled', 'active'].includes(r.status)).length,
+    notStarted: rest.filter(r => !['passed', 'renewed', 'in_progress', 'scheduled', 'active'].includes(r.status)).length,
+    expired: expired.length,
+  }
+}
